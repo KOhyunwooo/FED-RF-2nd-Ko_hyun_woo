@@ -6,112 +6,108 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- 탭에 출력되는 타이틀 -->
         <title>네이버 요약뉴스</title>
-    
-    <!-- css 인터널 방식 코드 -->
-    <style>
-        /* 웹폰트 구글 cdn(content delivery network) */
-        @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Nanum+Gothic:wght@700&family=Noto+Sans+KR:wght@700&display=swap');
-       
-       
+
+        <!-- css 인터널 방식 코드 -->
+        <style>
+            /* 웹폰트 구글 cdn(content delivery network) */
+            @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Nanum+Gothic:wght@700&family=Noto+Sans+KR:wght@700&display=swap");
 
             /* 
             font-family: 'Nanum Gothic', sans-serif;
             font-family: 'Nanum Gothic Coding', monospace;
             font-family: 'Noto Sans KR', sans-serif; 
             */
-        /* css코딩구역 */
-              
-       /* css 설정 코딩방식 
+            /* css코딩구역 */
+
+            /* css 설정 코딩방식 
        선택자(위치){속성:값;}
        */
 
-
-        /* css박스모델
+            /* css박스모델
         -모든 html요소는 사각형으로 되어있고 가로(width),세로(height),패딩(padding),마진(margin),보더(border)의 속성으로 구성됨
          ->기본 박스 디자인은 가로,세로크기를 줄 경우 패딩과 보더는 팍스크기에 포함되지 않는다.
          박스모델 5가지 세팅*/
-        /* 가로크기-기본값auto
+            /* 가로크기-기본값auto
         블록의 기본값은 부모박스 채우기
         인라인의 기본값은 내용물만큼 */
-    
-        /* 공통디자인:클래스를 주로 사용함! */
-        .part{width: 750px;
-            /* 세로크기-기본값은 auto이다. */
-            
-           
-            border: 1px solid #000;
-            /* 보더 모서리 둥글게 */
-            border: radius 20px;
-            padding: 50px;
-    
-    /* 박스가 패딩, 보더를 포함하는 설정 bxb*/
-    box-sizing: border-box;
-/* content-box가 기본값임 */
-/* box-sizing:content-box; */
-/* 마진
+
+            /* 공통디자인:클래스를 주로 사용함! */
+            .part {
+                width: 750px;
+                /* 세로크기-기본값은 auto이다. */
+
+                border: 1px solid #000;
+                /* 보더 모서리 둥글게 */
+                border-radius: 20px;
+                padding: 50px;
+
+                /* 박스가 패딩, 보더를 포함하는 설정 bxb*/
+                box-sizing: border-box;
+                /* content-box가 기본값임 */
+                /* box-sizing:content-box; */
+                /* 마진
     margin: 수치;(4방향모두)
     margin: 수치 수치(위아래 양쪽)     
     margin: 수치 수치 수치 (위 양쪽 아래)
     margin: 수치 수치 수치 수치(위 오른 아래 왼)
     auto로 두면 좌우 마진이 같게한다.*/
-margin:20px auto;
-/* 패딩
+                margin: 20px auto;
+                /* 패딩
     padding: 수치;(4방향모두)
     padding: 수치 수치(위아래 양쪽)     
     padding: 수치 수치 수치 (위 양쪽 아래)
     padding: 수치 수치 수치 수치(위 오른 아래 왼)*/
-    
-    
-     }     
+            }
 
-        
-        
-       /* 메인이미지 크기 변경하기 */
-    main#main-area img{width: 100%;}
+            /* 메인이미지 크기 변경하기 */
+            main#main-area img {
+                width: 100%;
+            }
 
-/* 상단영역, 하단영역공통-콤마(,)는 그룹선택자 */
-header.part,footer.part{
-    text-align: center;}
-    /* 상단영역 */
-    #top-area{
-        background-color: #1aff8d;
-        font-family: 'Noto Sans KR', sans-serif;
-    }
-    /* 하단영역 */
-    #info-area{background-color: #a0a0a0;
-        font-family: 'Nanum Gothic Coding', monospace;
+            /* 상단영역, 하단영역공통-콤마(,)는 그룹선택자 */
+            header.part,
+            footer.part {
+                text-align: center;
+            }
+            /* 상단영역 */
+            #top-area {
+                background-color: #1aff8d;
+                font-family: "Noto Sans KR", sans-serif;
+            }
+            /* 하단영역 */
+            #info-area {
+                background-color: #a0a0a0;
+                font-family: "Nanum Gothic Coding", monospace;
+            }
 
-    }
+            /* 주소요소 */
+            #info-area address {
+                /* 이탤릭해제:fsn */
+                font-style: normal;
+                color: blanchedalmond;
+            }
+            /* 타이틀*/
+            .title {
+                font-family: "Nanum Gothic";
+            }
 
-    /* 주소요소 */
-    #info-area address{
-        /* 이탤릭해제:fsn */
-        font-style:normal;
-        color: blanchedalmond;
-    }
-    /* 타이틀*/
-    .title{font-family: 'Nanum Gothic'} 
+            /* 메뉴링크 */
+            .menu a {
+                color: #000;
+                text-decoration: none;
+                /* 글자크기 */
+                font-size: 24px;
+            }
 
-
-    /* 메뉴링크 */
-    .menu a{
-        color: #000;
-        text-decoration: none;
-        /* 글자크기 */
-        font-size: 24px;
-    }
-    
-    /* 메뉴링크 오버시 
+            /* 메뉴링크 오버시 
         :hover는 가상클래스(마우스 오버시)*/
-    .menu a+a:hover{
-        text-decoration:overline;
-        text-decoration-style: wavy;
-        color: rgb(10, 117, 0);
-        }
+            .menu a + a:hover {
+                text-decoration: overline;
+                text-decoration-style: wavy;
+                color: rgb(10, 117, 0);
+            }
 
-
-        
-        /* [선택자들]
+            /* [선택자들]
     1.타입선택자:태그명
     2.아이디/클래스 선택자: 요소이름
     3.종속선택자: 요소명+이름 ex)h1#my
@@ -121,51 +117,41 @@ header.part,footer.part{
     7.형제 선택자: 플러스(+)
         예)a+a
     */
-
-
-
-    </style>
-    
+        </style>
     </head>
-    
-    
+
     <body>
         <!-- 1.상단영역 :제목, 메뉴 -->
-        <header id="top-area" class="part">                      
+        <header id="top-area" class="part">
             <!-- 1-1.타이틀 -->
             <h1 class="tit">네이버 요약뉴스</h1>
-            
+
             <!-- 1-2.메뉴 -->
             <div class="menu">
                 <a href="#">
-                    <img src="./images/image.png" alt="네이버로고" style="width: 35px;vertical-align: middle;">
+                    <img src="./images/image.png" alt="네이버로고" style="width: 35px; vertical-align: middle" />
                     <!-- style 속성으로 개별요소에 css를 설정할 수 있다! 이런방식을 인라인 방식이라고 함 -->
                 </a>
-                <a href="">정치</a>|
-                <a href="">경제</a>|
-                <a href="">사회</a>|
-                <a href="">IT/과학</a>|
+                <a href="">정치</a>| <a href="">경제</a>| <a href="">사회</a>| <a href="">IT/과학</a>|
                 <a href="">TV/연예</a>
-            
+            </div>
         </header>
 
         <!-- 2.메인영역 : 컨텐츠 -->
         <main id="main-area" class="part">
-            <img src="./images/main_news.avif" alt="메인이미지">
+            <img src="./images/main_news.avif" alt="메인이미지" />
         </main>
-
 
         <!-- 3.하단영역 :회사정보 -->
         <footer id="info-area" class="part">
-        <!-- address:주소, 전화번호, 대표자 등을 포함하는 시멘틱 태그 -->
-        <address>
-            서울시 강남구 역삼동 119대호B 8F <br>
-            대표: KO <br>
-            전화: 010-1234-5678
-        </address>
-    </footer>
-<div id="top"></div>
-
+            <!-- address:주소, 전화번호, 대표자 등을 포함하는 시멘틱 태그 -->
+            <address>
+                서울시 강남구 역삼동 119대호B 8F <br />
+                대표: KO <br />
+                전화: 010-1234-5678
+            </address>
+        </footer>
+        <div id="top"></div>
 
         <div id="r" class="p"></div>
         <!-- 
@@ -252,16 +238,5 @@ header.part,footer.part{
 
 
         -->
-        </body>
+    </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
