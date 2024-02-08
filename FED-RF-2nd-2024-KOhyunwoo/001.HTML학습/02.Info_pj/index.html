@@ -6,25 +6,83 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- 탭에 출력되는 타이틀 -->
         <title>네이버 요약뉴스</title>
+    
+    <!-- css 인터널 방식 코드 -->
+    <style>
+       /* css코딩구역 */
+       
+       
+       /* css 설정 코딩방식 
+       선택자(위치){속성:값;}
+       */
+
+
+        /* css박스모델
+        -모든 html요소는 사각형으로 되어있고 가로(width),세로(height),패딩(padding),마진(margin),보더(border)의 속성으로 구성됨
+         ->기본 박스 디자인은 가로,세로크기를 줄 경우 패딩과 보더는 팍스크기에 포함되지 않는다.
+         박스모델 5가지 세팅*/
+        /* 가로크기-기본값auto
+        블록의 기본값은 부모박스 채우기
+        인라인의 기본값은 내용물만큼 */
+    
+        /* 공통디자인:클래스를 주로 사용함! */
+        .part{width: 750px;
+            /* 세로크기-기본값은 auto이다. */
+            
+           
+            border: 1px solid #000;
+        padding: 50px;
+    
+    /* 박스가 패딩, 보더를 포함하는 설정 bxb*/
+    box-sizing: border-box;
+/* content-box가 기본값임 */
+/* box-sizing:content-box; */
+/* 마진
+    margin: 수치;(4방향모두)
+    margin: 수치 수치(위아래 양쪽)     
+    margin: 수치 수치 수치 (위 양쪽 아래)
+    margin: 수치 수치 수치 수치(위 오른 아래 왼)
+    auto로 두면 좌우 마진이 같게한다.*/
+margin:20px auto;
+/* 패딩
+    padding: 수치;(4방향모두)
+    padding: 수치 수치(위아래 양쪽)     
+    padding: 수치 수치 수치 (위 양쪽 아래)
+    padding: 수치 수치 수치 수치(위 오른 아래 왼)*/
+}  
+
+        
+        
+       /* 메인이미지 크기 변경하기 */
+    main#main-area img{width: 100%;}
+
+
+
+
+    </style>
+    
     </head>
+    
+    
     <body>
         <!-- 1.상단영역 :제목, 메뉴 -->
-        <div id="header "class="part">
-        <!-- 1-1.타이틀 -->
-        <h1 class="tit">네이버 요약뉴스</h1>
-        
-
-      
-    
-        <!-- 1-2.메뉴 -->
-        <div class="menu">
-            <a href="#"><img src="./images/image.png" alt="네이버로고"></a>
-            <a href="">정치</a>
-            <a href="">경제</a>
-            <a href="">사회</a>
-            <a href="">IT/과학</a>
-            <a href="">TV/연예</a>
-        </div>
+        <header id="top-area" class="part">                      
+            <!-- 1-1.타이틀 -->
+            <h1 class="tit">네이버 요약뉴스</h1>
+            
+            <!-- 1-2.메뉴 -->
+            <div class="menu">
+                <a href="#">
+                    <img src="./images/image.png" alt="네이버로고" style="width: 35px;vertical-align: middle;">
+                    <!-- style 속성으로 개별요소에 css를 설정할 수 있다! 이런방식을 인라인 방식이라고 함 -->
+                </a>
+                <a href="">정치</a>
+                <a href="">경제</a>
+                <a href="">사회</a>
+                <a href="">IT/과학</a>
+                <a href="">TV/연예</a>
+            
+        </header>
 
         <!-- 2.메인영역 : 컨텐츠 -->
         <main id="main-area" class="part">
@@ -34,6 +92,12 @@
 
         <!-- 3.하단영역 :회사정보 -->
         <footer id="info-area" class="part"></footer>
+        <!-- address:주소, 전화번호, 대표자 등을 포함하는 시멘틱 태그 -->
+        <address>
+            서울시 강남구 역삼동 119대호B 8F <br>
+            대표: KO <br>
+            전화: 010-1234-5678
+        </address>
 
 <div id="top"></div>
 
@@ -41,6 +105,16 @@
         <div id="r" class="p"></div>
         <!-- 
             
+        [이름규칙]
+        1.파스칼 케이스:js에서 
+         PascalCase->단어마다 대문자
+        2.캐믈 케이스:js에서
+         camelCase-> 첫단어 빼고 단어마다 대문자
+        3.스네이크 케이스:파일명/폴더명
+         snake_case-> 모두소문자이고 단어사이 언더바
+        4.케밥 케이스: 요소명
+         kebab-case-> 모두소문자이고 단어사이 데쉬
+
         [요소 명명법]
         1.아이디는 #, 클래스는. 
         2. 이름은 구체적으로 만들고
@@ -115,3 +189,14 @@
         -->
         </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
