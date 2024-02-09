@@ -1,4 +1,9 @@
 코드 미리보기가 안나옴
 
-FED-RF-2024 : 2일차 - 2.Info PJ 1편 : 메인페이지
-1:25:53
+#id.class 줄 자체를 바꾸고 싶을떄 어떻게 하는지
+
+border: 1px solid 검정색선택하는 네모가 안나옴
+bd라고 치면 나옴
+
+https://www.youtube.com/watch?v=bT-84iDJYFc&t=3108s
+
