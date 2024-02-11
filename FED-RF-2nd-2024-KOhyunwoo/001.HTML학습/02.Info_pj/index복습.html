@@ -5,12 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>네이버 요약뉴스</title>
   
+    
     <style>
+
       /* CSS 코딩구역(위에서 내려보는 느낌이라서 head에 넣는다) */
       /* CSS 설정 코딩 방식: 선택자{속성:값; } */
 
+
+
+      
+
       /* 공통 디자인: 클래스를 주로 사용함! */
       .part{
+
+
+        
        width: 750px;
        
        border: 3px solid #00ae46;
@@ -23,14 +32,17 @@
        }
       main#main-area img{width: 100%;}
 
+
+
       /* 상단영역, 하단영역공통-콤마(,)는 그룹선택자 */
       header.part,footer.part{
+        
         color: #00ae46;
         text-align: center;
       }
 
-
       /* 상단영역 */
+      /* bgc : background-color: */
       #top-area{
         background-color: #cdffcd;
       }
@@ -39,12 +51,48 @@
         background-color: #8a8a8a;
         text-decoration: underline dotted;
         font-weight: bolder;
+        
       }
+
+
+
+
+      /* 하이퍼링크 부분은 선택자_a로 다시 설정해야됨 */
+      .menu a{
+        color: rgb(183, 161, 104);
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        font-size: 25px;
+        
+        
+        
+      }
+      /* 하이퍼링크부분(메뉴링크) 오버시(마우스 갖다 댈때) 
+      선택자_a:hover{} */
+      .menu a+a:hover{
+        text-decoration: line-through;
+        text-decoration-style: wavy;
+        text-decoration-color: rgb(255, 52, 245);
+        color: black;
+        
+      }
+
+      
+
+
+
 
     </style>
   
   </head>
   
+
+
+
+
+
+
+
 
 
 
@@ -58,10 +106,10 @@
         <!-- 1-2. 메뉴 -->
         <div class="menu">
             <a href="#"><img src="./images/image.png" alt="네이버 로고" style="width: 50px; vertical-align: middle;"></a>          
-            <a href="">정치</a>
-            <a href="">경제</a>
-            <a href="">사회</a>
-            <a href="">IT/과학</a>
+            <a href="">정치</a> |
+            <a href="">경제</a> |
+            <a href="">사회</a> |
+            <a href="">IT/과학</a> |
             <a href="">TV/연예</a>
         </div>
     </header>

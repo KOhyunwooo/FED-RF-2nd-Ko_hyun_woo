@@ -5,5 +5,4 @@
 border: 1px solid 검정색선택하는 네모가 안나옴
 bd라고 치면 나옴
 
-https://www.youtube.com/watch?v=bT-84iDJYFc&t=3108s
-
+https://youtu.be/bT-84iDJYFc?t=5677
