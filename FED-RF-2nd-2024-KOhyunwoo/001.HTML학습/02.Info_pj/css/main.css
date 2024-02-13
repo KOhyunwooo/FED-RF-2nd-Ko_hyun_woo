@@ -1,0 +1,12 @@
+/* Info PJ 메인페이지용  CSS - main.css */
+
+/* 공통 외부css 불러오기 */
+@import url(./common.css);
+
+
+/* 메인용 css 코드구역 */
+
+/* 메인이미지 크기 변경하기 */
+main#main-area img {
+    width: 100%;
+}

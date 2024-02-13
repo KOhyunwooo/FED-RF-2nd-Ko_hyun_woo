@@ -1,0 +1,127 @@
+/* Info Pj 공통 CSS - common.css */
+
+        /* 웹폰트 구글 cdn(content delivery network) */
+        @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Nanum+Gothic:wght@700&family=Noto+Sans+KR:wght@700&display=swap&family=Noto+Sans+KR:wght@100..900&family=Stylish&display=swap");
+        /* 
+        font-family: 'Nanum Gothic', sans-serif;
+        font-family: 'Nanum Gothic Coding', monospace;
+        font-family: 'Noto Sans KR', sans-serif; 
+        
+        font-family: "Nanum Pen Script", cursive;
+        font-family: "Stylish", serif;
+        font-family: "Noto Sans KR", sans-serif;
+
+        */
+            
+/* css코딩구역 */
+
+/* css 설정 코딩방식 
+       선택자(위치){속성:값;}
+       */
+
+/* css박스모델
+        -모든 html요소는 사각형으로 되어있고 
+        가로(width),세로(height),패딩(padding),마진(margin),보더(border)의 속성으로 구성됨
+         ->기본 박스 디자인은 가로,세로크기를 줄 경우 패딩과 보더는 팍스크기에 포함되지 않는다.
+         */
+/* 박스모델 5가지 세팅 */
+/* 가로크기-기본값auto
+        블록의 기본값은 부모박스 채우기
+        인라인의 기본값은 내용물만큼 */
+
+/* 공통디자인:클래스를 주로 사용함! */
+.part {
+    width: 750px;
+    /* 세로크기-기본값은 auto이다. */
+
+    border: 1px solid #000;
+    /* 보더 모서리 둥글게 */
+    border-radius: 20px;
+
+    /* 박스가 패딩, 보더를 포함하는 설정 bxb*/
+    box-sizing: border-box;
+    /* content-box가 기본값임 */
+    /* box-sizing:content-box; */
+
+    margin: 20px auto;
+    /* 마진
+                margin: 수치;(4방향모두)
+                margin: 수치 수치(위아래 양쪽)     
+                margin: 수치 수치 수치 (위 양쪽 아래)
+                margin: 수치 수치 수치 수치(위 오른 아래 왼)
+                auto로 두면 좌우 마진이 같게한다.*/
+
+    padding: 50px;
+    /* 패딩
+                padding: 수치;(4방향모두)
+                padding: 수치 수치(위아래 양쪽)     
+                padding: 수치 수치 수치 (위 양쪽 아래)
+                padding: 수치 수치 수치 수치(위 오른 아래 왼)*/
+}
+
+
+/* 상단영역, 하단영역공통-콤마(,)는 그룹선택자 */
+header.part,
+footer.part {
+    text-align: center;
+}
+/* 상단영역 */
+#top-area {
+    background-color: #1aff8d;
+    font-family: "Noto Sans KR", sans-serif;
+    }
+
+
+/* 하단영역 */
+#info-area {
+    background-color: #a0a0a0;
+    font-family: "Nanum Gothic Coding", monospace;
+    font-size: 20px;
+}
+
+/* 주소요소 */
+#info-area address {
+    /* 이탤릭해제:fsn */
+    font-style: normal;
+    color: blanchedalmond;
+}
+
+/* 타이틀*/
+.title {
+    font-family: "Nanum Gothic";
+}
+h2.tit{margin: 10px;}
+/* 메뉴링크 */
+.menu a {
+    color: #000;
+    text-decoration: none;
+    /* 글자크기 */
+    font-size: 24px;
+}
+
+/* 메뉴링크 오버시 
+        :hover는 가상클래스(마우스 오버시)*/
+.menu a + a:hover {
+    text-decoration: overline;
+    text-decoration-style: wavy;
+    color: rgb(255, 166, 0);
+}
+
+/* [선택자들]
+    1.타입선택자:태그명
+    2.아이디/클래스 선택자: 요소이름
+    3.종속선택자: 요소명+이름 ex)h1#my
+    4.자손선택자: 띄어쓰기
+    5.직계자식 선택자: 꺽쇠(>)
+    6.그룹 선택자: 콤마(,)
+    7.형제 선택자: 플러스(+)
+        예)a+a
+        
+    */
+header h2 {
+    color: rgb(255, 124, 124);
+    font-size: 50px;
+    text-shadow: 5px 5px 10px #000;
+}
+
+nav a img{vertical-align: -10px; width: 35px;}
