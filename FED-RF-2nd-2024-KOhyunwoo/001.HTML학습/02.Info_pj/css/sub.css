@@ -13,14 +13,14 @@ h2.sub-title{
 
     
     /* 글자색:c */
-    color: rgb(73, 164, 245);
+    /* color: rgb(72, 140, 199); */
    
     /* 글자크기: font-size(fz) */
     font-size: 20px;
     
     /* 글자두께: font-weight(fw) */
     /* 글자두께: font-weight:bold(fwb) */
-    font-weight: normal;
+    font-weight: bold;
     
     /* 글자체:font-family
     -콤마로 구분된 글자체는 대체체임
@@ -73,11 +73,11 @@ h2.sub-title{
 }
 
  /* 배경이미지:bgi */
- .sub-title.a1{background-image: url(../images/titbg1.jpg);}
- .sub-title.a2{background-image: url(../images/titbg2.jpg);}
- .sub-title.a3{background-image: url(../images/titbg3.jpg);}
- .sub-title.a4{background-image: url(../images/titbg4.jpg);}
- .sub-title.a5{background-image: url(../images/titbg5.jpg);}
+ .sub-title.a1{background-image: url(../images/titbg1.jpg);color: #ff0101;}
+ .sub-title.a2{background-image: url(../images/titbg2.jpg);color: #00ffd5;}
+ .sub-title.a3{background-image: url(../images/titbg3.jpg);color: #09ff00;}
+ .sub-title.a4{background-image: url(../images/titbg4.jpg);color: #ae00ff;}
+ .sub-title.a5{background-image: url(../images/titbg5.jpg);color: #00d9ff;}
  
 
 

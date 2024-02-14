@@ -51,7 +51,7 @@
                 margin: 수치 수치 수치 수치(위 오른 아래 왼)
                 auto로 두면 좌우 마진이 같게한다.*/
 
-    padding: 50px;
+    padding: 5px 50px;
     /* 패딩
                 padding: 수치;(4방향모두)
                 padding: 수치 수치(위아래 양쪽)     
