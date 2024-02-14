@@ -5,138 +5,15 @@
         <!-- 뷰포트viewport: 모바일 기기에서 실제 픽셀을 맞춰주는메타설정 -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <!-- 탭에 출력되는 타이틀 -->
-        <title>네이버 요약뉴스</title>
+        <title>TV/연예 뉴스</title>
 
         <!-- css 인터널 방식 코드 -->
-        <style>
-            /* 웹폰트 구글 cdn(content delivery network) */
-            @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Nanum+Gothic:wght@700&family=Noto+Sans+KR:wght@700&display=swap");
+        <style></style>
 
-            /* 
-            font-family: 'Nanum Gothic', sans-serif;
-            font-family: 'Nanum Gothic Coding', monospace;
-            font-family: 'Noto Sans KR', sans-serif; 
-            */
-            /* css코딩구역 */
+        <!-- 익스터널 방식 코드 -->
+        <link rel="stylesheet" href="./css/sub.css">
 
-            /* css 설정 코딩방식 
-       선택자(위치){속성:값;}
-       */
-
-            /* css박스모델
-        -모든 html요소는 사각형으로 되어있고 
-        가로(width),세로(height),패딩(padding),마진(margin),보더(border)의 속성으로 구성됨
-         ->기본 박스 디자인은 가로,세로크기를 줄 경우 패딩과 보더는 팍스크기에 포함되지 않는다.
-         */
-            /* 박스모델 5가지 세팅 */
-            /* 가로크기-기본값auto
-        블록의 기본값은 부모박스 채우기
-        인라인의 기본값은 내용물만큼 */
-
-            /* 공통디자인:클래스를 주로 사용함! */
-            .part {
-                width: 750px;
-                /* 세로크기-기본값은 auto이다. */
-
-                border: 1px solid #000;
-                /* 보더 모서리 둥글게 */
-                border-radius: 20px;
-
-                /* 박스가 패딩, 보더를 포함하는 설정 bxb*/
-                box-sizing: border-box;
-                /* content-box가 기본값임 */
-                /* box-sizing:content-box; */
-
-                margin: 20px auto;
-                /* 마진
-                margin: 수치;(4방향모두)
-                margin: 수치 수치(위아래 양쪽)     
-                margin: 수치 수치 수치 (위 양쪽 아래)
-                margin: 수치 수치 수치 수치(위 오른 아래 왼)
-                auto로 두면 좌우 마진이 같게한다.*/
-
-                padding: 50px;
-                /* 패딩
-                padding: 수치;(4방향모두)
-                padding: 수치 수치(위아래 양쪽)     
-                padding: 수치 수치 수치 (위 양쪽 아래)
-                padding: 수치 수치 수치 수치(위 오른 아래 왼)*/
-            }
-
-            /* 메인이미지 크기 변경하기 */
-            main#main-area img {
-                width: 100%;
-            }
-
-            /* 상단영역, 하단영역공통-콤마(,)는 그룹선택자 */
-            header.part,
-            footer.part {
-                text-align: center;
-            }
-            /* 상단영역 */
-            #top-area {
-            background-color: #1aff8d;
-            font-family: "Noto Sans KR", sans-serif;
-            }
-
-            /* 하단영역 */
-            #info-area {
-            background-color: #a0a0a0;
-            font-family: "Nanum Gothic Coding", monospace;
-            font-size: 20px;
-            }
-
-            /* 주소요소 */
-            #info-area address {
-            /* 이탤릭해제:fsn */
-            font-style: normal;
-            color: blanchedalmond;
-            }
-
-            /* 타이틀*/
-            .title {
-                font-family: "Nanum Gothic";
-            }
-
-            /* 메뉴링크 */
-            .menu a {
-                color: #000;
-                text-decoration: none;
-                /* 글자크기 */
-                font-size: 24px;
-            }
-
-            /* 메뉴링크 오버시 
-        :hover는 가상클래스(마우스 오버시)*/
-            .menu a + a:hover {
-                text-decoration: overline;
-                text-decoration-style: wavy;
-                color: rgb(255, 166, 0);
-            }
-
-            /* [선택자들]
-    1.타입선택자:태그명
-    2.아이디/클래스 선택자: 요소이름
-    3.종속선택자: 요소명+이름 ex)h1#my
-    4.자손선택자: 띄어쓰기
-    5.직계자식 선택자: 꺽쇠(>)
-    6.그룹 선택자: 콤마(,)
-    7.형제 선택자: 플러스(+)
-        예)a+a
-        
-    */
-            header h2 {
-                color: rgb(255, 124, 124);
-                font-size: 50px;
-                text-shadow: 5px 5px 10px #000;
-            }
-
-            nav a img {
-                vertical-align: -10px;
-                width: 35px;
-            }
-        </style>
-    </head>
+</head>
 
     <body>
         <!-- 1.상단영역 :제목, 메뉴 -->
@@ -147,10 +24,12 @@
             <!-- 1-2.메뉴 -->
             <nav class="menu">
                 <a href="./index.html">
-                    <img src="./images/image.png" alt="네이버로고" " />
+                    <img src="./images/image.png" alt="네이버로고" />
                     <!-- style 속성으로 개별요소에 css를 설정할 수 있다! 이런방식을 인라인 방식이라고 함 -->
                 </a>
-                <a href="sub1.html">정치</a>| <a href="sub2.html">경제</a>| <a href="sub3.html">사회</a>|
+                <a href="sub1.html">정치</a>| 
+                <a href="sub2.html">경제</a>| 
+                <a href="sub3.html">사회</a>| 
                 <a href="sub4.html">IT/과학</a>|
                 <a href="sub5.html">TV/연예</a>
             </nav>
@@ -158,7 +37,61 @@
 
         <!-- 2.메인영역 : 컨텐츠 -->
         <main id="main-area" class="part">
-            <img src="./images/main_news.avif" alt="메인이미지" />
+         
+           
+            <!-- 2-1.서브타이틀 -->
+            <h2 class="sub-title a5">TV/연예 뉴스</h2>
+            <!-- 2-2.언론사로고 -->
+            <div class="press-logo">
+            
+            </div>
+            <!-- 2-3.기사제목 -->
+            <h3 class="article-title">
+                
+            </h3>
+            <!-- 2-4.기사사진 -->
+
+            <figure class="article-picture">
+                <!-- 이미지 -->
+                <!-- 이미지설명 -->
+
+                <figcaption>
+                    
+                </figcaption>
+            </figure>
+            <!-- 
+                [figure요소]
+                -이미지나 표를 포함하는 박스요소
+                -이미지설명은 하위요소인 figcaption을 사용함
+                (설명이 필요없으면 생략한다!)
+             -->
+
+            <!-- 2-5.기사 내용 -->
+            <section class="contents">
+
+            </section>
+            <!-- 
+                [p요소:문단(paragraphs)]
+                -문단을 구분하기 위한 요소
+                -주의: 내부에 div와 가은 block요소를 넣을 수 없다.
+             -->
+
+
+             <!-- 2-6. 기자정보 -->
+             <div class="reporter">
+
+             </div>
+
+             <!-- 2-7. 기사원문 -->
+             <h5 class="article-link">
+                <a href="" target="_blank">기사원문</a>
+             </h5>
+
+
+
+            
+        
+        
         </main>
 
         <!-- 3.하단영역 :회사정보 -->

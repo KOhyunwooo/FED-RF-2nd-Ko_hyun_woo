@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>네이버 요약뉴스</title>
+  
+    
+    <style>
+
+
+
+
+      /* CSS 코딩구역(위에서 내려보는 느낌이라서 head에 넣는다) */
+      /* CSS 설정 코딩 방식: 선택자{속성:값; } */
+
+
+
+      
+
+      /* 공통 디자인: 클래스를 주로 사용함! */
+      .part{        
+       width: 750px;
+       border-radius: 20px;
+       /* 박스가 패딩, 보더를 포함하는 설정: bxb -> box-sizing: border-box; */
+       box-sizing: border-box;
+       /* 마진:0px auto 가 제대로 안될때 width값이 제대로 설정됐는지 확인해야함 */
+       margin: 20px  auto;
+       padding: 50px;
+       }
+      main#main-area img{width: 100%;}
+
+
+
+      /* 상단영역, 하단영역공통-콤마(,)는 그룹선택자 */
+      header.part,footer.part{
+        
+        color: #00ae46;
+        text-align: center;
+      }
+
+      /* 상단영역 */
+      /* bgc : background-color: */
+      #top-area{
+        background-color: #cdffcd;
+      }
+      /* 하단영역 */
+      #info-area{
+        background-color: #8a8a8a;
+        text-decoration: underline dotted;
+        font-weight: bolder;              
+      }
+      /* info-area부분 글자기울임 취소
+      address는 기본옵션이 기울임임 */
+      #info-area address{
+        font-style: normal;
+      }
+
+
+
+
+      /* 하이퍼링크 부분은 선택자_a로 다시 설정해야됨 */
+      .menu a{
+        color: rgb(183, 161, 104);
+        text-decoration: underline;
+        text-decoration-style: dotted;
+        font-size: 25px;
+        
+        
+        
+      }
+      /* 하이퍼링크부분(메뉴링크) 오버시(마우스 갖다 댈때) 
+      선택자_a:hover{} */
+      .menu a+a:hover{
+        text-decoration: line-through;
+        text-decoration-style: wavy;
+        text-decoration-color: rgb(255, 52, 245);
+        color: black;
+        
+      }
+
+      header img {
+        vertical-align: -17px;
+        width: 50px;
+      }
+
+      .title { text-shadow: 2px 2px 5px #1cffa0;}
+
+
+
+
+    </style>
+  
+  </head>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <body>
+    <!-- 1.상단영역: 제목, 메뉴 -->
+    <header id="top-area" class="part">
+        <!-- 1-1. 타이틀 -->
+        <h1 class="title">네이버 요약뉴스</h1>
+        <!-- 1-2. 메뉴 -->
+        <div class="menu">
+            <a href="./index연습.html"><img src="../images/image.png" alt="네이버 로고" ></a>          
+            <a href="">정치</a> |
+            <a href="">경제</a> |
+            <a href="">사회</a> |
+            <a href="">IT/과학</a> |
+            <a href="">TV/연예</a>
+        </div>
+    </header>
+
+
+
+    
+
+    <!-- 2.메인영역: 컨텐츠 -->
+    <main id="main-area" class="part">
+        <img src="../images/main_news.avif" alt="메인이미지">
+    </main>
+
+
+
+
+
+    <!-- 3.하단영역: 회사정보 -->
+    <footer id="info-area" class="part">
+      <!-- 주소, 전화번호, 대표자 등을 포함하는 시멘틱 태그 --> 
+      
+      <address>
+        
+        서울시 강남구 역삼동 119 대호B 8f <br>
+        대표: KO <br>
+        전화: 010-1234-5678
+      </address>
+      
+    </footer>
+
+
+    
+  </body>
+</html>
