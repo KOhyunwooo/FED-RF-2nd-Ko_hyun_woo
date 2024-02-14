@@ -1,3 +1,9 @@
+@charset "utf-8";
+/* 맨위에 utf-8 인코딩 설정 필수!
+- 외부 css파일은 자체적으로 처리되므로 
+인코딩형식을 따로 지정해 줘야 한다.*/
+
+
 /* Info PJ 서브페이지용 css - sub.css */
 
 /* 공통 외부css 불러오기 */
@@ -7,7 +13,13 @@
     html파일에서 link 방식으로 불러올 필요가 없다!
     이것의 잇점은 웹요청(https request) 이 줄어들어
     html의 렌더링 속도가 향상된다! 
+
 */
+/* 서브페이지 글씨체 지정하기 */
+#main-area{
+    font-family: "Noto Sans KR", sans-serif;
+}
+
 /* 서브페이지 타이틀 */
 h2.sub-title{
 
@@ -50,7 +62,8 @@ h2.sub-title{
     /* 배경색:background-color(bgc) */
     background-color: #ffffff00;
     
-        /* 배경이미지:bgi */
+        /* 배경이미지 : bgi -> 개별적으로줌! */
+    /* background-image: url(../images/titbg4.jpg); */
 
       
         /* 배경 반복여부 */
@@ -78,6 +91,68 @@ h2.sub-title{
  .sub-title.a3{background-image: url(../images/titbg3.jpg);color: #09ff00;}
  .sub-title.a4{background-image: url(../images/titbg4.jpg);color: #ae00ff;}
  .sub-title.a5{background-image: url(../images/titbg5.jpg);color: #00d9ff;}
+ 
+
+
+/* 언론사 로고 */
+.press-logo img{height: 32px;}
+/* 이미지는 가로or세로 */
+
+
+/* 기사 타이틀 */
+.article-title{
+    color: #111;
+    font-size: 30px;
+    margin: 0 15px;
+    padding: 8px 0 5px       
+}
+
+ /* 기사 이미지 박스 */
+ figure.article-picture{
+    margin: 20px 0;
+ }
+
+ /* 기사 이미지 (박스 안에 들어가게함)*/
+ .article-picture img{
+    margin-bottom: 14px;
+    width: 100%;
+    
+ }
+
+
+
+/* 기사 이미지 설명 */
+figure.article-picture figcaption{
+    /* tac-글자중앙정려 */
+    text-align: center;
+    padding: 0 5px;
+}
+
+/* 기사 이미지 설명 글자크기변경 */
+figcaption small{
+    font-size: 15px;
+    /* small에 글자크기가 지정되어 있으므로
+    여기에서 글자크기를 변경해야 반영된다. */
+}
+
+
+/* 기사내용 */
+section.contents p{
+    color: #303030;
+    /* 글자크기:fz */
+    font-size: 17px;
+    
+    /* 줄간격:lh 
+        line-height 줄간격은 글자의 중앙에서
+        위아래 높이값을 말하며 글자는 중앙에 흐른다.
+        단위는 없을 경우 글자크기의 배수로 셋팅됨*/
+
+    line-height: 1.56;
+}
+
+
+
+
  
 
 

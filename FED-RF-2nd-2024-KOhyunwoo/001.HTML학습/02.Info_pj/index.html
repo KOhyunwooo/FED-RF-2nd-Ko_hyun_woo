@@ -37,7 +37,6 @@
             .part {
                 width: 750px;
                 /* 세로크기-기본값은 auto이다. */
-
                 border: 1px solid #000;
                 /* 보더 모서리 둥글게 */
                 border-radius: 20px;
@@ -46,16 +45,14 @@
                 box-sizing: border-box;
                 /* content-box가 기본값임 */
                 /* box-sizing:content-box; */
-
-                margin: 5px auto;
+                margin: 20px auto;
                 /* 마진
                 margin: 수치;(4방향모두)
                 margin: 수치 수치(위아래 양쪽)     
                 margin: 수치 수치 수치 (위 양쪽 아래)
                 margin: 수치 수치 수치 수치(위 오른 아래 왼)
                 auto로 두면 좌우 마진이 같게한다.*/
-
-                padding: 5px;
+                padding: 0px;
                 /* 패딩
                 padding: 수치;(4방향모두)
                 padding: 수치 수치(위아래 양쪽)     
@@ -66,8 +63,9 @@
             /* 메인이미지 크기 변경하기 */
             main#main-area img {
                 width: 100%;
+                border-radius: 20px;
             }
-
+            
             /* 상단영역, 하단영역공통-콤마(,)는 그룹선택자 */
             header.part,
             footer.part {
@@ -130,6 +128,7 @@
                 color: rgb(255, 124, 124);
                 font-size: 50px;
                 text-shadow: 5px 5px 10px #000;
+                margin: 10px;
             }
 
             nav a img {
