@@ -154,5 +154,57 @@ section.contents p{
 
 
  
+/* 인라인 인용구(<q>) 디자인 변경*/
+.contents q{
+    font-weight: bold;
+}
+
+/* mark요소 디자인 변경 */
+.contents mark{
+display: block;
+/* 크기요소는 인라인(display:inline)일때 적용안됨! */
+width: 65%;
+/* 크기를 가진 블록요소 중앙정렬-마영오 margin: 0 auto;*/
+margin: 15px auto;
+border: 5px dotted #000;
+
+/* 글자 중앙정렬:tac */
+text-align: center;
+
+/* 박스 디자인 변경 */
+padding: 20px 50px;
+border-top: 2px solid gray;
+border-bottom: 2px solid gray;
+
+/* 배경색 */
+background-color: #afafaf;
+
+/* 글자색 */
+color: #ff893a;
+
+/* 글자체: 웹폰트 */
+font-family: "Stylish", serif;;
+
+font-size: 25px;
+
+}
 
 
+
+/* 인용구 박스 */
+.quote-box{
+    border-top: 2px dashed #ccc;
+    border-bottom: 2px dashed #ccc;
+    margin: 20px 0;    
+}
+/* 인용구 제목 */
+.quote-box h4{
+    font-size: 15px;
+    border: 2px solid #000;
+    border-radius: 15px;
+    width: 300px;
+    text-align: center;
+    padding: 10px
+
+    
+}

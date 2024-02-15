@@ -33,7 +33,13 @@
 
 /* 공통디자인:클래스를 주로 사용함! */
 .part {
-    width: 750px;
+    /* 최대 가로크기로 유동적인 사이즈 만들기 */
+    max-width: 1000px;
+    /* 최대크기 1000px을 유지하다가 화면 또는 부모박스가 이 크기보다 작아지면 
+    자동으로 auto로 전환되어 가로스크롤이 안생기고 크기가 화면에 적응된다 */
+
+
+
     /* 세로크기-기본값은 auto이다. */
 
     border: 1px solid #000;
@@ -78,7 +84,7 @@ footer.part {
 #info-area {
     background-color: #a0a0a0;
     font-family: "Nanum Gothic Coding", monospace;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 /* 주소요소 */

@@ -1,18 +1,161 @@
 <!DOCTYPE html>
-<html lang="KO">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>01-1.배경연습</title>
     <style>
+      /* 초기화 */
+      html,
+      body,
+      h1 {
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+        /* 
+                보이는 화면만큼 높이값을 줄때
+                100%의 의미는?
+                body는 html을 기준함
+                html은 무엇을 기준하는가?
+                보이는 화면을 기준한다!(window)
+                그래서 보이는 화면만큼 확장된다!
+            */
+      }
 
-    </style>
-</head>
-<body>
-    <div class="wrap">
-        <h1>01-1.배경넣기 연습</h1>
+      /* 타이틀 */
+      h1{
+        padding: 50px;
+        text-align: center;/* tac */
+      }
+      /* body요소안에 배경넣기 */
+      body{
+        /* html에 배경을 넣지 말자! 전체배경은 body에! */
+
+        /* 1. 배경색 : bgc */
+        background-color: pink;
+
+
+
+        /* 2. 배경이미지 : bgi -> url(경로)
+        -> 기본적으로 반복됨! */
+        background-image: url(./imgs/bg_logo_a_01.png);
+
+
+
+        /* 3. 배경 반복여부 : bgr 
+            값 : 
+            repeat-x : x축반복
+            repeat-y : y축반복
+            repeat : 모든축반복(기본값)
+            no-repeat : 반복안함
+        */
+        background-repeat: no-repeat;
+
+
+
+        /* 4. 화면고정 : bga
+        배경고정값은 fixed
+        고정의 의미는 스크롤시
+        보이는 화면 기준으로 배경을 고정함 */
+        background-attachment: fixed;
+
+
+
+        /* 5. 배경위치 : bgp
+        값: 가로 세로
+        1. 가로방향 : left, center, right
+        2. 세로방향 : top, center, bottom
+        - 수치값 : px, %, em 등 여러단위 사용가능
+        -> %는 기준점이 이미지의 중앙이다!(50%는 정중앙)
+
+        -> 방향별 개별속성은?
+        background-position-x: 값;
+        background-position-y: 값;
         
+        */
+        background-position: right bottom;
+        /* background-position: center; */
+        /* background-position: 100px 200px; */
+        /* background-position: 50% 60%; */
+
+
+
+        /* 6. 배경이미지 크기 : bgz -> 가로 세로
+            정해진값 :
+            1. contain  - 이미지가 화면을 채우고 모두보임
+            2. cover - 이미지가 박스를 모두 채움
+                        (잘리는 부분이 있을 수 있음)
+            3. 수치값 - 가로, 세로 중 하나만 주면 이미지가 비율유지함            
+        */
+        /* background-size: contain; */
+        /* background-size: cover; */
+        background-size: 200px;
+        /* background-size: 200px auto; */
+        /* background-size: auto 500px; */
+        /* background-size: 100px 400px; */
+
+
+
+        
+        /* 
+            [ 배경 한꺼번에 쓰기 ]
+            background : 배경색 이미지 반복 고정 위치/크기
+            background : 색 이 반 고 윙/크
+
+            -> 주의사항!
+            위에서 개별배경 셋팅을 하고
+            아래쪽에서 한꺼번에 셋팅하는 배경속성을 쓰면
+            위에서 개별셋팅한 배경속성이 초기화된다!
+        */
+      }
+      /* body아래 .wrap박스 */
+      .wrap{
+        height: 100%;
+        /* 높이값을 body에 채움! */
+
+        /* 
+          배경 한번에 쓰기를 사용하면 
+          여러개의 배경이미지를 넣을 수 있다!
+          background: 색이반고윙/크,색이반고윙/크,...;
+
+          ((특징))
+          -> 위쪽에 셋팅된 배경이미지가 위에 위치함!
+          -> 위치값의 가로는 left, 세로는 center가 기본값이다!
+          -> 위치나 크기의 특정값을 쓰지 않으면 기본값 적용됨
+          -> 위치값을 0을 쓰면 기본값인 left center가 적용됨
+          -> 위치값을 %로쓰면 설정박스의 %위치를 이미지 중심을
+          기준으로 위치하게됨
+        */
+        background: 
+        /* 도깨비이름 */
+        url(./imgs/d01.png) no-repeat 50% 60%/150px,
+        /* 도깨비 */
+        url(./imgs/dc1.png) no-repeat center/400px,
+        /* 지은탁이름 */
+        url(./imgs/d02.png) no-repeat 88% 13%/90px,
+        /* 지은탁 */
+        url(./imgs/dc2.png) no-repeat right top/250px,
+        /* 저승사자이름 */
+        url(./imgs/d03.png) no-repeat 11% 100%/70px,
+        /* 저승사자 */
+        url(./imgs/dc3.png) no-repeat left bottom/300px,
+        /* 써니이름 */
+        url(./imgs/d04.png) no-repeat 5% 10%/100px,
+        /* 써니 */
+        url(./imgs/dc4.png) no-repeat left top/200px,
+        /* 포스터 */
+        url(./imgs/bg_mainvisual.jpg) no-repeat 0/50%,
+        /* 배경꽃 */
+        url(./imgs/eachBG.jpg) no-repeat 50% top/40% 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>01-1.배경넣기 연습</h1>
     </div>
-    
-</body>
+  </body>
 </html>
