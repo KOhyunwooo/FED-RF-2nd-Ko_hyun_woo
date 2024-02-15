@@ -11,13 +11,7 @@ body {
 body {
 
 
-    background: url(../images/aaa.jpg) no-repeat center/ 100% ;
-    
-    background-image: linear-gradient(
-        to bottom,
-        rgb(146, 255, 182),
-        rgba(80, 255, 109, 0.719)
-    );
+    background: url(../images/matrix.webp) no-repeat center/ 100% ;
 
     
 }
