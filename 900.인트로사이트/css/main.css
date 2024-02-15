@@ -11,8 +11,10 @@ body {
 body {
 
 
-    background: url(../images/matrix.webp) no-repeat center/ 100% ;
-
+   
+background: 
+url(../images/matrix.webp) no-repeat 50% top/40% 100%,
+        linear-gradient(to bottom, rgb(175, 255, 190), rgb(103, 255, 125));
     
 }
 /* background-image: 
@@ -32,4 +34,8 @@ body {
     margin: 0 auto;
     padding: 20px;
     text-align: center;
+}
+
+h1{
+    color: #fffb00;
 }
