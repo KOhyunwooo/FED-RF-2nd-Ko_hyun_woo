@@ -1,21 +1,23 @@
 @charset "utf-8";
 
-
-
 /* 인트로 사이트 메인css-main.css */
 
-
-
-html,body{
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
-    
 }
-body{
-    background-image: 
-    linear-gradient(to bottom, rgb(146, 255, 182),rgba(80, 255, 109, 0.719));
+body {
+    background-image: linear-gradient(
+        to bottom,
+        rgb(146, 255, 182),
+        rgba(80, 255, 109, 0.719)
+    );
+    background: url(../images/matrix.webp) no-repeat center/ 100% ;
 }
+/* background-image: 
+    linear-gradient(to bottom,rgb(205, 255, 227),rgb(247, 206, 255)); */
 /* 
     [선형 그라데이션]    
     background-image:
@@ -24,13 +26,11 @@ body{
     to top, to left, to right, to bottom
 */
 
-.wrap{
+.wrap {
     border: 2px dashed #ff7c77;
     border-radius: 20px;
     width: 600px;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
-
-
 }
