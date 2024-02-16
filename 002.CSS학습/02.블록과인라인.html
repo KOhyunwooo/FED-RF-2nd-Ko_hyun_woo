@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02. 블록과 인라인</title>
+    <style>
+        /* 타이틀 */
+        .tit{
+            text-align: center;
+            border: 5px dotted orange;
+            background-color: lightblue;
+        }
+
+        /* 
+            선택자 별(*)은 모든의 의미!
+            그래서 모든 요소를 선택함!
+            .ele * : 클래스ele 하위 모든 요소들 선택
+        */
+        .ele *{
+            /* 박스모델의 기본속성 디자인주기 */
+            width: 200px;
+            height: 150px;
+            border: 10px solid blue;
+            margin: 20px;
+            padding: 20px;
+
+        }
+
+        /**********************************************************
+        
+            [css의 display속성이란?]
+
+            -브라우저에서 화면에 요소를 어떻게 보이게
+            할지 결정해 주는 속성
+            -요소의 역할은 내용구분!
+
+            -요소의 display는 크게 2가지! inline요소와 block요소!
+
+            1.block 요소
+            (1) 표현법: 
+                display: block;
+
+            (2) 기본적으로 block 인 요소들
+                h1~h6, dib, p, figure, header, nav,...
+
+            (3) 특징:
+                1)옆에 다른요소가 올 수 없다!(블록킹!)
+                
+                2)내용을 구분하는 그룹화요소다!
+                
+                3)박스모델 디자인 속성이 모두 적용된다
+                :width, height, padding, border, margin
+                
+                4)가로크기를 주지 않으면 부모박스 끝까지 간다!
+                ->width: auto;
+                
+                5)세로크기를 주지 않으면 내용만큼 늘어난다!
+                ->height: auto;
+                
+                6)위, 아래간 블록요소 마진은 중첩된다
+                ->큰 마진이 작은 마진을 포함한다!
+                
+                7)박스의 지정된 가로, 세로 크기는 컨텐츠영역의 
+                크기 이므로 보더와 패딩을 주면 박스크기가 늘어남!
+                ->이런박스를 컨텐트 박스(content-box)라고 함!
+                
+                [보더와 패딩을 박스크기에 포함여부 결정속성]
+                ->>>>>>>>>>>>box-sizing 속성!!!
+                
+                1)box-sizing: border-box; (bxb)
+                ->크기를 지정한 바긋에 대한 패딩과 보더를 
+                포함시킴(즉, 크기가 늘어나지 않음!)
+                
+                2)box-sizing: content-box; (bxc)
+                크기를 지정한 박스에 패딩과 보더를 주면 늘어남!
+
+
+
+            ___________________________________________________________
+
+            2.inline 요소
+            (1) 표현법:
+                dispaly:inline;
+
+            (2) 기본적으로 inline인 요소들:
+                a, img, span, b, i, em, strong, q, ...
+
+            (3) 특징:
+                1) 인라인요소는 블록요소를 포함할 수 없다!
+                ex) <span><div></div></span>
+                ->주의: 인라인을 블록으로 출신을 변경해도
+                원래 인라인이면 블록을 쌀 수 없다!
+
+                예외) a요소는 쌀수있음 -> 원래는 블록요소를 
+                싸면 안되는데 개발자들이 하도 많이 싸서 
+                허용으로 규칙이 변경됨
+
+                2)width, height 크기가 적용안됨!
+                ->내용만큼 늘어남
+
+                3)margin은 양쪽만 적용됨!
+                ->위,아래 마진은 적용되지 않는다!
+                
+                4)padding은 디자인상 모두 적용되지만
+                실제로 다른 인라인 요소를 위, 아래 패딩으로 밀지 못한다.
+
+                참고) 인라인요소의 위, 아래 간격은
+                'line-height'로 설정함!
+
+                [예외 인라인 요소 : img]
+                ->이미지는 인라인 요소지만
+                wdith, height, margin, padding, border
+                모두 적용되고 실제로 다른요소에 영향을 미침
+                (이미지는 기본적으로 자체비율을 가지고 있어서
+                한쪽크기만 주면 나머지는 자동으로 설정됨!)
+
+                [display를 숨기는 방법]
+                display: none; (dn)
+                ->태그는 그대로 있고 화면 출력만 안됨!
+
+            ________________________________________________________
+                     [초기화나 변경셋팅이 필요없는 순수태그]
+                     1. 블록 대표주자: div
+                     2. 인라인 대표주자: span
+            ________________________________________________________
+            
+            3. inline-block 요소
+            (1) 표현법: 
+                display: inline-block; (dib)
+            (2) 기본적으로 inline-block 인 요소들
+                button, input 등
+            (3) 
+                1)인라인처럼 한줄에 온다
+                2)블록처럼 박스모델속성이 적용된다!
+                참고)button 요소인 경우
+                box-sizing: border-box; 가 기본 적용된다.
+            ________________________________________________________
+            [기타 display]
+            1. table: 테이블 요소
+            2. flex: 유동적인 레이아웃 요소
+            3. grid: 그리드 레이아웃 요소
+            
+
+
+
+
+
+         **********************************************************/
+
+
+
+         /* 보더박스로 변경하기 */
+         .bxb{
+            box-sizing: border-box;
+            
+         }
+
+    </style>
+
+</head>
+
+<body>
+    <h1 class="tit">02. 블록과 인라인</h1>
+    <h2 class="tit">인라인 요소들</h2>
+    <div class="ele">
+        <a href="#">나는 a다!</a>
+        <img src="./imgs/blogo.png" alt="로고"title="나는img다!">
+        <span>나는span이다!</span>
+        <b>나는b다!</b>
+        <button>
+            나는 botton이다! 나는 인라인인가?
+        </button>
+        <i>나는i다</i>
+        <em>나는em이다!</em>
+        <strong>나는 strong이다!</strong>
+
+    </div>
+
+    <h2 class="tit">블록 요소들</h2>
+    <div class="ele">
+        <h1>나는h1이다!</h1>
+        <h4 class="bxb">나는h4이다!</h4>
+        <div>나는div이다!</div>
+        <p>나는p이다!</p>
+        <header>나는header다!</header>
+        <blockquote>나는blockquote이다!</blockquote>
+
+        
+
+    </div>
+</body>
+</html>

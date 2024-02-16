@@ -108,6 +108,24 @@
                     <ins>표피보다 세포간 및 세포내 공간</ins>에서
                     미세·나노플라스틱이 관찰됐다.
                 </p>
+                <!-- 유튜브 동영상 박스 -->
+                <div class="mvbox">
+                    <iframe  src="https://www.youtube.com/embed/Cq0IEvbYvmk" title="독도 선착장의 거친 파도입니다   독도 구경 많이  하세요"></iframe> 
+                    <!-- 
+                        [iframe 요소]
+                        - inline frame
+                        - 한 웹 페이지 안에 다른 시스템의 웹을 불러올 수 있는 요소.
+                        - 필수속성 : src-시스템 경로
+                        - 주의 : css설정으로 디자인을 변경할것!
+                        (그렇지 않으면 width,height,frameborder이 웹표준 검사시 이런 부분에 
+                        권고 메시지를 검출한다!)
+                     -->
+
+
+                </div>
+
+
+
 
                 <p>
                     이는 미세·나노플라스틱이 외부에서 유입된 것이 아닌 수확한
@@ -132,7 +150,7 @@
                 </p>
 
                 <p>
-                    이 연구는 과학기술정보통신부와 교육부, 한국연구재단이
+                    이 연구는 <abbr title="과학기술정통부">과기정통부와</abbr> 교육부, 한국연구재단이
                     추진하는 중견연구사업 및 이공분야학문후속세대양성사업으로
                     수행됐으며, 환경과학분야 국제학술지 저널 오브 해저드스
                     머티리얼스<sub>Journal of Hazardous Materials</sub>
@@ -147,7 +165,7 @@
              -->
 
              <!-- 2-5.5 -->
-             <article class="quote-box">
+             <article class="quote-box bd-box">
                 <h4>
                     참고자료: 멘델의 유전법칙
                 </h4>
@@ -175,10 +193,10 @@
             보통 css디자인 요소로 사용하지는 않음! -->
 
             <!-- 주해영역 -->
-            <article class="desc">
-                <h5>
+            <article class="desc bd-box">
+                <h4>
                     주해
-                </h5>
+                </h4>
                 <p>
                     ①미세 플라스틱(microplastic)은 플라스틱 제품이 분해되는 과정에서 생긴 길이가 1nm(나노미터) ~ 5mm 크기의 미세한 플라스틱 조각을 말한다.<br><br>
                     ②(논문명 Evidence of parental transfer of nanoplastics in pea
@@ -186,6 +204,29 @@
                 </p>
             </article>
 
+
+
+
+
+
+            <!-- 오늘의 작품&느낌 부분 -->
+            <article class="work">
+                <h4>오늘의 작품&amp; 느낌</h4>
+                <figure>
+                    <img src="./images/img_the_scream.jpg" alt="뭉크의 절규">
+                    <figcaption>
+                        뭉크의 &lt;<cite>절규</cite>&gt;
+                    </figcaption>
+                </figure>
+
+            </article>
+            <!-- 
+                [html요소에서 특수문자 처리]
+                & 엔퍼센트 :&amp;
+                < 여는꺽쇠 &lt; (lt는 less than ~보다 작음)
+                > 닫는꺽쇠 &gt; (gt 는 greater than ~보다 큰)
+
+             -->
 
 
 
@@ -263,10 +304,12 @@
 
       3. 줄임말 인용
       <abbr>
+          - abbreviation
           - 줄임말의 원래 뜻을 표시하는 요소
           - 필수속성 ->> title 속성 -> 툴팁으로 원래뜻을 표시
       (참고: title 툴팁속성은 어느요소든 사용가능함!)
-          - 기본디자인 : 점선 밑줄
+          - 기본디자인 : 점선 밑줄(text-decoration: underline dotted;)
+          - 마우스 갖다대면 title값에 내용을 알려줌
 
       4. 주소인용
       <address>

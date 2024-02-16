@@ -8,18 +8,21 @@ body {
     padding: 0;
     height: 100%;
 }
+
+
 body {
-
-
-   
 background: 
 url(../images/matrix.webp) no-repeat 50% top/40% 100%,
-        linear-gradient(to bottom, rgb(175, 255, 190), rgb(103, 255, 125));
+linear-gradient(to bottom, rgb(175, 255, 190), rgb(103, 255, 125));
     
+
+
 }
 /* background-image: 
     linear-gradient(to bottom,rgb(205, 255, 227),rgb(247, 206, 255)); */
-/* 
+
+
+    /* 
     [선형 그라데이션]    
     background-image:
     linear-gradient(방향,색1,색2,색3,...) 
