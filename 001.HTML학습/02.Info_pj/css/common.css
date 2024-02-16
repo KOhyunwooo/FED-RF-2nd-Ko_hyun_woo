@@ -3,7 +3,7 @@
 /* Info Pj 공통 CSS - common.css */
 
         /* 웹폰트 구글 cdn(content delivery network) */
-        @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Nanum+Gothic:wght@700&family=Noto+Sans+KR:wght@700&display=swap&family=Noto+Sans+KR:wght@100..900&family=Stylish&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Nanum+Gothic:wght@700&family=Noto+Sans+KR:wght@700&display=swap&family=Noto+Sans+KR:wght@100..900&family=Stylish&display=swap&family=Black+And+White+Picture&display=swap&family=Gugi&display=swap");
         /* 
         font-family: 'Nanum Gothic', sans-serif;
         font-family: 'Nanum Gothic Coding', monospace;
@@ -12,7 +12,8 @@
         font-family: "Nanum Pen Script", cursive;
         font-family: "Stylish", serif;
         font-family: "Noto Sans KR", sans-serif;
-
+        font-family: "Black And White Picture", system-ui;
+        font-family: "Gugi", sans-serif;
         */
             
 /* css코딩구역 */

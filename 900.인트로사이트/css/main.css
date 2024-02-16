@@ -1,19 +1,40 @@
 @charset "utf-8";
 
-/* 인트로 사이트 메인css-main.css */
 
-html,
-body {
+/* 스크롤 애니메이션 셋팅 */
+html{
+    scroll-behavior: smooth;
+    /* html즉, root에 부드러운 스크롤 설정을 하면 
+    이동시 스크롤 애니메이션이 연출된다!  */
+    
+}
+
+/* 마진 패딩 초기화 */
+html,body,h1,h2,h3,p{
     margin: 0;
     padding: 0;
+}
+
+
+
+/* 인트로 사이트 메인css-main.css */
+
+html,body,.page{
+/* 높이값 보이는 화면 기준 채우기 */
     height: 100%;
 }
 
 
 body {
-background: 
+
+/* 배경 */
+background: url(../images/matrix.webp) no-repeat fixed center/cover;
+
+
+/* 배경 */
+/* background: 
 url(../images/matrix.webp) no-repeat 50% top/40% 100%,
-linear-gradient(to bottom, rgb(175, 255, 190), rgb(103, 255, 125));
+linear-gradient(to bottom, rgb(175, 255, 190), rgb(103, 255, 125)); */
     
 
 
@@ -30,7 +51,21 @@ linear-gradient(to bottom, rgb(175, 255, 190), rgb(103, 255, 125));
     to top, to left, to right, to bottom
 */
 
-.wrap {
+/* 메뉴박스 */
+.menu{
+    width: 600px;
+    margin: 0 auto;
+    background-color: rgba(135, 206, 250, 0.425);
+    padding: 15px;
+}
+
+/* 메뉴 하위 h1,h2옆으로 흐르게 display변경하기 */
+.menu> *{
+    display: inline;
+}
+
+/* 컨텐츠 박스 */
+.link-box{
     border: 2px dashed #ff7c77;
     border-radius: 20px;
     width: 600px;
@@ -41,4 +76,9 @@ linear-gradient(to bottom, rgb(175, 255, 190), rgb(103, 255, 125));
 
 h1{
     color: #fffb00;
+}
+
+h2 a,span{
+    color: #ffffff;
+    
 }

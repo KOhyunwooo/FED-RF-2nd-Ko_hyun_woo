@@ -1,4 +1,7 @@
 @charset "utf-8";
+
+
+
 /* 맨위에 utf-8 인코딩 설정 필수!
 - 외부 css파일은 자체적으로 처리되므로 
 인코딩형식을 따로 지정해 줘야 한다.*/
@@ -64,7 +67,7 @@ h2.sub-title{
     
         /* 배경이미지 : bgi -> 개별적으로줌! */
     /* background-image: url(../images/titbg4.jpg); */
-
+    background-repeat: no-repeat;
       
         /* 배경 반복여부 */
 
@@ -345,4 +348,92 @@ text-align: right;
  /* box-shedow(bsh): x y blur (spread) color; */   
 
  
+}
+
+
+/* 오늘의 작품 느낌 */
+.work{
+/* 글자크기, 글자 정렬은 자식요소로 상속됨 */
+text-align: center;
+
+
+/* 선형그라데이션:linear-gradient
+linear-gradient(방향,색1,색2,...)
+linear-gradient(방향,색1 몇%, 색2 몇%,...)  
+linear-gradient(각도,색1 몇%, 색2 몇%,...)  
+-옵션: 
+1. 방향:to top, to bottom, to left, to right
+2. 각도: 각도deg
+3. 콤마로 나열된 색상 뒤에 %수치를 쓰면 비율조정가능
+*/
+
+/* background-image: linear-gradient(45deg, red 5%,blue 50%, blue 55%,yellow); */
+background-image: linear-gradient(45deg, rgb(255, 112, 136) 10%,rgb(195, 255, 190) 40%, rgb(195, 255, 190) 60%, rgb(255, 129, 255) 90%);
+
+/* padding */
+padding: 5px;
+/* 
+    부모박스에 패딩이 없는 상태에서
+    첫번째 자식 블록박스의 마진은
+    부모 바깥쪽으로 나가서 셋팅된다!
+    이유는 마진은 바깥쪽으로 셋팅하는 개념이고
+    부모가 이를 세팅하지 않았다면
+    첫번쨰 블록박스에서 마진을 셋팅할 수 있도록
+    기본설계 되어 있다!
+    ->패딩을 주는 순간 자식의 마진은
+    패딩의 내부공간을 밀게된다!
+*/
+
+border: 10px dotted #9567ff;
+
+/* 배경 관련 표시 영역지정 background-clip: 
+    값:border-box; 보더 영역까지 표시(기본값)
+    값:padding-box; 패딩 영역까지 표시
+    값:content-box; 내용 영역까지 표시 */
+background-clip: border-box;
+
+/* 배경 관련 시작 영역지정 background-origin: 
+    값: border-box; 보더 영역부터시작
+    값: padding-box; 패딩 영역부터시작(기본값)
+    값: content-box; 내용 영역부터시작 */
+background-origin: padding-box;
+
+/* 배경 반복 제거 */
+background-repeat: no-repeat;/* brn */
+
+box-shadow: inset 0 0 10px #555;
+}
+
+/*오늘의 작품 타이틀 */
+.work h4{
+    font-family: "Black And White Picture", system-ui;
+    font-weight: normal;/* fwn */
+    font-size: 28px;/* fz28 */
+    color: 333px;
+    margin: 10px;
+    /* 부모에 패딩없는 상태에서
+    첫번째 자식마지은 부모바깥으로 나감! 
+    참고) 마지막 자식블록요소도
+    부모박스하단마진은 바깥으로 나감*/
+
+    padding: 10px;
+    
+
+
+
+}
+figure2 figcaption{
+    font-family: "Gugi", sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    
+}
+figure2 figcaption cite{
+    font-style: normal;
+}
+
+/* 액자틀 */
+figure2 img{
+    border: 13px ridge gold;
+    
 }

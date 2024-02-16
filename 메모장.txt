@@ -10,7 +10,7 @@ https://youtu.be/bT-84iDJYFc?t=5677
 https://www.w3schools.com/\
 
 
-figcaption 폰트 사이즈 안바뀜 :<small>에 묶여있어서 그럼.
+figcaption 폰트 사이즈 안바뀜 :<small>에 묶여있어서 그럼. 더 자세히 써야됨
 
 
 
