@@ -228,10 +228,169 @@
 
              -->
 
+             <!-- bdo 웹상에서 반대로 써야될때
+                <bdo dir="rtl"> 이렇게 쓰면 반대방향으로 출력된다. -->
+             <bdo dir="rtl">우리나라대한민국만세</bdo>
 
 
 
-        </main>
+
+
+
+
+             <!-- 
+                [순서없는 리스트: ul]
+                unorderde list
+                
+                
+                (참고: 블릿옵션
+                https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_ul_type_css)
+
+
+                [순서있는 리스트: ol]
+                orderd list
+                (참고: 순서표시옵션https://www.w3schools.com/tags/tryit.asp?filename=tryhtml_ol_type_all_css
+                )
+
+                [ul/ol 공통사항]
+                -하위필수요소:li(개별리스트)
+                -주의:하위에 li이외의 블록요소나
+                그 어떤요소도 직계자식으로 사용할 수 없다!
+                예)<ul><li></li><div></div></ul>
+
+              -->
+
+              <!-- 주요뉴스:ul -->
+              <article class="main-news news-box">
+                <h3>주요뉴스</h3>
+                
+                
+                <!-- <ul style="list-style-type: square;"> 
+                    list-style이 들어가면 .css에서 list-style: none; 이 들어가지 않음 -->
+                    <ul>
+                    <li>
+                        <a href="https://www.inews24.com/view/1685881" target="_blank">"1500만원만 내세요"…미분양 해소 '안간힘'</a>
+                    </li>
+                    <li>
+                        <a href="https://www.inews24.com/view/1686160" target="_blank">"'서울의 봄' 불법 유출본 확산에…제작·배급사 "법적 책임 물을 것"</a>
+                    </li>
+                    <li>
+                        <a href="https://www.inews24.com/view/1686096" target="_blank">공시지원금 인상에 불법보조금까지...'성지'에선 갤24가 8만원</a>
+                    </li>
+                </ul>
+              </article>
+
+              <!-- 랭킹뉴스:ol -->
+              <article class="rank-news news-box">
+                <h3>랭킹뉴스</h3>
+                <ol style="list-style-type: upper-roman;" start="3" reversed>
+                    <!-- ol은 start로 시작번호 지정옵션, reversed를 주면 역순으로 순서를 보여준다! -->
+                    
+                        <li><a href="https://n.news.naver.com/mnews/ranking/article/031/0000813542?ntype=RANKING" target="_blank">1. 한동훈 "개혁신당, 돈때문에 모였나…이혼하면 보조금 사기"</a></li>
+                        <li><a href="https://n.news.naver.com/mnews/ranking/article/031/0000813564?ntype=RANKING" target="_blank">2. 김경율, 카이스트 강제 퇴장 "우발적 아냐…사전 준비한 듯"</a></li>
+                        <li><a href="https://n.news.naver.com/mnews/ranking/article/031/0000813532?ntype=RANKING" target="_blank">3. 아파트 '깡통전세' 거래비중 20%↑…"전북·충북 등 지방 주의"</a></li>
+                    
+                </ol>
+              </article>
+        <!-- 
+            [용어정의 리스트:dl]
+            dl > dt+dd
+            ___________
+            dl: 용어리스트
+            (defines the description list)
+            dt: 용어정의
+            (defines the term)
+            dd: 용어설명
+            (discription each term)
+            _____________________
+            주의- dl은 반드시 자식요소로 dt와 dd가 반드시 한번이상 사용되어야 함!!!
+                - dt와 dd는 형제관계임!(자식아님!)
+         -->
+
+         <!-- 분야별 뉴스:dl -->
+         <article class="sec-news news-box">
+            <h3>분야별뉴스</h3>
+            <dl>
+                <!-- 경제파트 -->
+                <dt>경제</dt>
+                <dd>
+                    <a href="https://n.news.naver.com/mnews/article/123/0002327763" target="_blank">국세청, '혁신 벤처·원천기술' R&D 세액공제 우선심사</a>
+                </dd>
+                <dd>
+                    <a href="https://n.news.naver.com/mnews/article/448/0000448370" target="_blank">삼성그룹 통합 초기업 노조 닻 올렸다…4개 기업 노조 1만6000명</a>
+                </dd>
+                
+
+                <!-- 사회파트 -->
+                <dt>사회</dt>
+                <dd>
+                    <a href="https://n.news.naver.com/mnews/article/003/0012378452" target="_blank">"폐지수집 노인들, 삶 개선"…전수조사 실시 등[곡성소식]</a>
+                </dd>
+                <dd>
+                    <a href="https://n.news.naver.com/mnews/article/014/0005143886" target="_blank">부산시, 2024부산세계탁구선수권대회 감염병 예방 대비</a>
+                </dd>
+                
+                <!-- TV/연예파트 -->
+                <dt>TV/연예파트</dt>
+                <dd>
+                    <a href="https://entertain.naver.com/read?oid=241&aid=0003330621" target="_blank">르세라핌 “‘이지’, 내면 집중해 새로운 시도…첫 소절 듣고 ‘됐다’ 생각”</a>
+                </dd>
+                <dd>
+                    <a href="https://entertain.naver.com/read?oid=076&aid=0004111483" target="_blank">'내 남편과 결혼해줘' 송하윤의 얼굴은 몇 개일까</a>
+                </dd>
+            </dl>
+        </article>
+
+        
+    
+    <!-- 테이블 요소 :table 
+    table> tbody >tr >td
+
+    ->tbody는 안쓰고 tr부터 구현해도
+    브라우저가 자동으로 그려준다!
+
+    주의)table > tr로 직계선택하게 되면
+    위와 같은 구조적인 이유로 선택되지 않는다!
+
+    _________________________________________
+
+    ((가장 간단한 테이블 작성시 필수요소 3가지))
+        table: 테이블 박스 부모요소
+        tr: 테이블 행요소(talbe row)
+        td: 테이블 데이터요소(table data)
+  
+     -->
+
+     <!-- 사진뉴스: table -->
+        <article class="photo-news news-box">
+        <h3>사진뉴스</h3>
+     <!-- 3행 3열 테이블 구성하기 -->
+        <!-- <table border="1"> -->
+        <table>
+            <tr>
+                <td>1</td>
+                <td><a href="https://n.news.naver.com/mnews/article/277/0005381449" target="_blank">더 커지고 디지털도 강화…벤츠 CLE 쿠페 신형 韓상륙</a></td>
+                <td><img src="images/pnews1.jpg" alt="pnews1"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><a href="https://n.news.naver.com/mnews/article/015/0004950082" target="_blank">"스토리텔링과 소비자 경험 확대가 와인 시장 회복의 핵심"</a></td>
+                <td><img src="images/pnews2.jpg" alt="pnews2"></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><a href="https://n.news.naver.com/mnews/hotissue/article/021/0002621920?type=series&cid=2001464" target="_blank">산을 내려가는 시시포스도 쉽지 않다고… 숲과 바람이 속삭였다</a></td>
+                <td><img src="images/pnews3.jpg" alt="pnews3"></td>
+            </tr>
+        </table>
+
+        </article>
+    </main>
+
+
+
+
+        
 
         <!-- 3.하단영역 :회사정보 -->
         <footer id="info-area" class="part">
@@ -339,11 +498,9 @@
       1) 정보에 대한 의미있는 별도의 컨트롤이 가능함!
       2) DB서버에서 데이터 수집 및 분석시에 활용하여
       더 정교한 데이터 검색이 되도록 할 수 있다!
-
-
-
-
    -->
+
+
         
     </body>
 </html>

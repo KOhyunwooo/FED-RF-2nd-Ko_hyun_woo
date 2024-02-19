@@ -31,7 +31,7 @@ body {
 /* 배경은 body에다가 주기*/
 background-blend-mode: color-dodge;
 background: url(../images/matrix.webp) no-repeat fixed center/cover,
-linear-gradient(to right, rgb(207, 252, 224) 10%,rgb(255, 144, 144) 30%,rgb(148, 153, 255) 70%, rgb(207, 252, 224) 90%);
+linear-gradient(to right, rgb(207, 252, 224) 10%,rgb(255, 144, 144) 55%, rgb(207, 252, 224) 90%);
 
 /* 배경 */
 /* background: 
