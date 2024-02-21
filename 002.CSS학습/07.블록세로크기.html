@@ -93,12 +93,12 @@
             세로축-> overflow-y: ;(oy)
 
         */
-        /* 1. */
+        /* 1. overflow: visible (ovv)*/
         .ov1{
             overflow: visible;/* ovv */
             /* 설정값 안줘도 기본값임! */
         }
-        /* 2. */
+        /* 2.overflow: hidden (oh)  */
         .ov2{
             overflow: hidden;/* ov */
             /* 추가로 넘치는 자식만 숨기는게 아니고
@@ -106,7 +106,7 @@
             마진값을 포함시킬때도 사용할 수 있따 */
         }
 
-        /* 3. */
+        /* 3.overflow-y: scroll (oys) */
         .ov3{
             /* overflow: scroll; 
                 -전체설정에 주면 x,y축 스크롤바 트랙이 모두 생성됨
@@ -115,14 +115,14 @@
             overflow-y: scroll;/* oys */               
         }
         
-        /* 4. 
+        /* 4. overflow: auto (ova)
         -내용이 박스보다 많아지면 자동으로 
         세로방향 스크롤바 트랙이 표시된다!(방향별 셋팅 불필요!)
         */
         .ov4{
             overflow: auto;/* ova */
         }
-                
+
 
     </style>
 

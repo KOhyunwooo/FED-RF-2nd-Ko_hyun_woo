@@ -12,10 +12,18 @@ html{
 
 
 /* 마진, 패딩 초기화 */
-html,body,h1,h2,h3,p{
+html,body,h1,h2,h3,p,ul,ol{
     margin: 0;
     padding: 0;
 }
+
+ul,ol{
+    /* 리스트스타일 없앰 */
+    list-style: none;
+    border-radius: 10%;
+    background-color: #5fff0280;
+}
+
 
 
 
@@ -27,7 +35,7 @@ html,body,.page{
 }
 
 
-body {
+#pg1 {
 /* 배경은 body에다가 주기*/
 background-blend-mode: color-dodge;
 background: url(../images/matrix.webp) no-repeat fixed center/cover,
@@ -39,6 +47,26 @@ url(../images/matrix.webp) no-repeat 50% top/40% 100%,
 linear-gradient(to bottom, rgb(175, 255, 190), rgb(103, 255, 125)); */
 }
 
+#pg2{
+    background: url(../images/2pgbg.jpg) no-repeat fixed center/cover;
+}
+
+/* 상단영역 */
+.top-area{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff5d;
+    /* 패딩: 위아래만 */
+    padding: 20px 0;
+    /* 상단박스 맨위!  */
+    z-index: 999;    
+}
+/* 로고박스 */
+.logo{
+    text-align: center;
+
+}
 
 /* background-image: 
     linear-gradient(to bottom,rgb(205, 255, 227),rgb(247, 206, 255)); */
@@ -58,9 +86,39 @@ linear-gradient(to bottom, rgb(175, 255, 190), rgb(103, 255, 125)); */
     background-color: #ffa0bb7b;
     border-radius: 33px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 0;
     text-align: center;
 }
+/* clear설정 */
+.menu ul::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/* 각 리스트 */
+.menu li{
+    /* 블록요소 옆으로 흐르게 */
+    float: left;
+    width: 50%;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+/* 메뉴a요소: 글자색 변경, 밑줄 없앰 */
+.menu a{
+    color: #000;
+    text-decoration: none;
+}
+
+/* 메뉴 오버시 */
+.menu a:hover{
+    color: #5fff02;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+}
+
+
 /* 메뉴 하위 h1, h2옆으로 흐르게 display 변경하기 
 ???어디가 적용된지 정확히 모름*/
 .menu> *{
@@ -69,6 +127,11 @@ linear-gradient(to bottom, rgb(175, 255, 190), rgb(103, 255, 125)); */
 
 /* 컨텐츠 박스 */
 .link-box{
+    position: relative;
+    top: 40%;
+
+
+
     border: 2px dashed #000;
     border-radius: 33px;
     width: 600px;

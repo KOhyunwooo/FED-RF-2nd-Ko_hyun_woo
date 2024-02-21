@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>02. relative포지션</title>
+    <title>02. relative 포지션</title>
     <style>
         .bx{
             width: 300px;
@@ -18,38 +18,39 @@
         /* 첫번째 박스에 포지션 체크 */
         #r1{
             position: relative;/* por */
+
             /* 위치이동값 */
-            top: 100px;/* l100 */
-            left: 100px;/* t100 */
+            top: 100px;
+            left: 100px;
 
+            /*******************************************
+                [ 2. relative 포지션 ] 
+                - 렐러티브! 라고 읽어주세요~!
 
-            /****************************************************************************************
-                [2.relative 포지션]
-                -렐러티브! 라고 읽어주세요~!
                 1. 위치이동 속성이 적용된다!
-                
-                2. 위치이동의 기준은 원래있던 위치임
-                (그래서 상대적인 즉, relative라는 단어를 사용함)
-                
+
+                2. 위치이동의 기준은 원래있던 위치임!
+                (그래서 상대적인 즉, relative라는 단어를 사용함!)
+
                 3. 이동시 다른 요소에 영향이 없이 겹쳐질 수 있다!
-                (static요소보다는 위, 다른 포지션요소 나중것이 위)
+                (static요소보다는 위, 
+                다른 포지션요소는 나중것이 위)
 
                 4. 원래있던 위치는 그대로 보존된다!
-                (의미: 기존위치가 보존되기 때문에
-                    본래의 디자인이 망가지지 않는다!)
+                (의미: 기존위치가 보존되기 때문에 
+                본래의 디자인이 망가지지 않는다!)
 
-                5. 위치값 설정시 한방향당 한가지 기준으로 세팅한
-                -위, 아래 중 하나
-                -좌, 우중 하나
-                top,left/top,right
-                bottom,left/bottom.right
-                (만약, top,bottom을 같이 쓰거나 
-                left,right를 같이 세팅한경우
-                top,left가 우선적용된다!)
+                5. 위치값 설정시 한방향당 한가지 기준으로 셋팅한다!
+                - 위, 아래 중 하나
+                - 좌, 우 중 하나
+                top, left / top, right
+                bottom, left / bottom, right
+                (만약, top,bottom을 같이 쓰거나 left,right를
+                같이 셋팅한 경우 top, left가 우선적용된다!)
 
                 6. 마진은 그대로 적용된다!
                 (다른 static요소에 영향을 미친다!)
-                ->본래 위치에서 마진을 적용한 것으로 이해하면 됨
+                -> 본래 위치에서 마진을 적용한 것으로 이해하면됨!
 
                 7. relative에 위치 이동값을 안쓰면
                 static과 일반적인 배치가 동일하다!
@@ -57,25 +58,34 @@
                 8. relative는 겹쳐질 수 있으므로
                 위, 아래 관계가 성립한다!
 
-                기본적인 위아래 위치관계는 아래와 같다
-                1) static보다 항상 위
+                기본적인 위아래 위치관계는 아래와 같다!
+                1) static보다는 항상위
                 2) static 포지션이 아닌 경우
                     나중에 그려진 요소가 위!
                     (손 놓고 손등때리기!)
                 3) z-index 속성으로 숫자가 크면 위!
-                
-                9.부모자격  
 
+                9. 부모자격
+                -> 자식요소가 앱솔루트일때
+                부모자격으로 relative를 주는 경우가 많다!
+                왜? 기존 디자인이 그대로 유지되니까!
+                static한 특징이 있는 relative를
+                부모자격으로 설정하는 경우가 많은 것이다!!!
+                실제로 앱솔루트의 부모자격은
+                static이 아닌 포지션 즉,
+                relative, absolute, fixed, sticky 다!
 
-                
-                [z-index란?]
-                ->static이 아닌 표지션만 적용됨!
-                -겹치는 포지션을 준 경우 위치순서를
+                ___________________________________
+
+                [ z-index 란? ]
+                -> static이 아닌 포지션만 적용됨!
+
+                - 겹치는 포지션을 준 경우 위치순서를 
                 정하여 위아래 디스플레이를 변경하는 속성
 
-                -z는 화면방향의 축을 의미함
-                -기본값은 0 ->같은 층의 모든 기본 요소는 0임!
-                -숫자를 비교하여 큰 숫자가 위에 위치함!
+                - z 는 화면방향의 축을 의미함
+                - 기본값은 0 -> 같은 층의 모든 기본 요소는 0임!
+                - 숫자를 비교하여 큰 숫자가 위에 위치함!
 
                 -> 기본값 0이므로 마이너스값은 static요소보다
                 아래로 내려감!(직접선택툴로 안만져지는 이유는
@@ -88,34 +98,19 @@
                 복잡해져서 정리가 어려워진다! 남발하지 말자!
 
 
-                _____________________________________________
-
-
-
-                
 
 
 
 
+            
+            *******************************************/
 
-
-
-
-
-
-
-
-
-
-
-
-            ****************************************************************************************/
-           background: url(./images/ab5.jpg) no-repeat center/cover;
+            background: url(./images/ab5.jpg) no-repeat center/cover;
         }
         #r2{
             position: relative;/* por */
 
-           background: url(./images/ab4.jpg) no-repeat center/cover;
+            background: url(./images/ab4.jpg) no-repeat center/cover;
         }
         #s1{
             background-color: lightcoral;
@@ -127,10 +122,10 @@
     </style>
 </head>
 <body>
-    <div class="bx" id="r1">r1</div>
-    <div class="bx" id="s1">s1</div>
-    <div class="bx" id="r2">r2</div>
-    <div class="bx" id="s2">s2</div>
+   <div class="bx" id="r1">r1</div>
+   <div class="bx" id="s1">s1</div>
+   <div class="bx" id="r2">r2</div>
+   <div class="bx" id="s2">s2</div>
 
     <!-- 
         [ 젠코딩(에밋코딩) ]
