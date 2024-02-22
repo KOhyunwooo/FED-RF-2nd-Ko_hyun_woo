@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>04. sticky 포지션</title>
+    <title>05. sticky 포지션</title>
     <style>
         .bx{
             width: 300px;
@@ -15,65 +15,83 @@
             line-height: 300px;
         }
 
+        /* sticky박스 */
+        .stkbx{
+            position: sticky;
+            /************************************** 
+                [ 5. sticky 포지션 ]
 
-            /* sticky박스 */
-            .stkbx{
-                position: sticky;
-                /******************************************************************************** 
-                    [5.sticky포지션]
+                1. 위치값 top 설정에 따라 화면에
+                고정되는 포지션이다!
 
-                    1.위치값 top설정에 따라 화면에
-                    고정된느 포지션이다!
+                2. 고정되는 원리:
+                 처음에는 relative(left값적용됨!)하게
+                 가만히 현재위치를 점유하고 있음
+                 top값을 셋팅한 경우 보이는 화면 상단
+                 위치로부터 스티키 요소가 위치하게 되면
+                 fixed로 위치를 고정하여 화면에서
+                 사라지지 않도록 변경한다!
 
-                    2.고정되는 원리:
-                    처음에는 relative(left값 적용됨!)
-                    가만히 현재위치를 점유하고 있음
-                    top값을 셋팅한 경우 보이는 화면 상단
-                    위치로부터 스티키 요소가 위치하게 되면
-                    fixed로 위치를 고정하여 화면에서
-                    사라지지 않도록 변경한다.
+                3. sticky 적용구간
+                3. sticky 적용구간
+                    -> 싸고 있는 박스가 기준이된다!
+                    주의사항)
+                    1) 전체 스크롤시 적용요소가
+                    body 바로 아래 자식요소로 있어야함
 
-                    3.sticky적용구간
+                    2) 부모요소를 만들고 그 부모요소들중
+                    overflow: auto / hidden / scroll
+                    이 적용된 경우 스티키가 작동안함!
 
-                    
+                    3) 특정박스 하위요소인 경우 스티키는
+                    박스 내부에서만 보이는 화면기준으로 작동하기
+                    때문에 반드시 height값이 셋팅되어야함!
+                    height:auto 또는 height값이 없으면 
+                    스티키 작동안함! (높이값을 기준으로 작동하기
+                    때문임!!!)
 
+            **************************************/
 
+            /* 위치이동값이 적용되나? */
+            top: 100px;
+            left: 100px;
 
-
-
-
-                ********************************************************************************/
-                /* 위치이동값이 적용되나 */
-                top: 100px;
-                left: 100px;
-
-                width: 50%;
-                text-align: center;
-                font-size: 30px;
-                padding: 50px;
-                border: 5px dotted blue;
-                background-color: lightblue;
-                z-index: 99999;
-            }
-
-
-
-
-
-
-
-
+            width: 50%;
+            text-align: center;
+            font-size: 30px;
+            padding: 50px;
+            background-color: lightblue;
+            border: 5px dotted blue;
+            z-index: 999999999;
+        }
 
 
         /* 첫번째 fixed 요소 */
         #f1{
-            position: fixed;/* pof */            
+            position: fixed;/* pof */
             width: 800px;
             height: 200px;
             background-color: yellow;
             line-height: 200px;
             /* 기존 포지션 보다 위 */
             z-index: 1;
+        }
+
+        /* 위치이동값을 사용한 픽스드 포지션!
+        -> 보이는 화면을 기준한다! */
+        #f2{
+            position: fixed;/* pof */
+            top: -162px;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            border-radius: 50%;
+            background-color: pink;
+            border: 5px dashed red;
+            text-align: center;
+            font-size: 25px;
+            line-height: 443px;
+            z-index: 9999;
         }
 
 
@@ -318,55 +336,72 @@
             vertical-align: middle;
         }
 
-
-
-        /* 위치 이동값을 사용한 픽스드 포지션! 
-        ->보이는 화면을 기준한다! */
-        #f2{
-            position: fixed;/* pdf */
-            top: -162px;
-            left: 0;
-            width: 100%;
-            height: 300px;
-            border-radius: 50%;
-            background-color: pink;
-            border: 5px dashed red;
-            text-align: center;
-            font-size: 25px;
-            line-height: 443px;
-            z-index: 9999;
-        }
-
-
-        /* [부모가 많은 요소를 fixed처리하기! ]
-            -display:inline 요소가 자동 block처리됨!
-            왜? 앱솔루트/픽스드는 모두 블록요소여야만 하기 떄문!
-            -가로,세로크기가 없는 경우 내용만큼 크기가 정해짐! */
-            
-        
+        /* 
+            [ 부모가 많은 요소를 fixed처리하기! ]
+            - display:inline 요소가 자동 block처리됨!
+            왜? 앱솔루트/픽스드 는 모두 블록요소여야만 하기 때문!
+            - 가로,세로크기가 없는 경우 내용만큼 크기가 정해짐!
+        */
         .iamfixed{
-            position: fixed;/* pof */
+            position: fixed;
             top: 200px;
             right: 200px;
             background-color: yellowgreen;
             border: 4px double blue;
             border-radius: 50%;
-            padding: 5px;
-            z-index: 9999;
+            padding: 15px;
             font-size: 30px;
-
+            z-index: 99999;
         }
-        
+
+
+
+
+
+
+
+
+        /* 스티키를 포함하는 부모박스 */
+        .wrap{
+            /* overflow: hidden/auto/scroll; 
+            조상들 중 박스에 순수 높이값 셋팅을 방해하는
+            설정을 하면 스티키가 적용안됨! */
+            
+            padding: 15px;
+            border: 5px dotted rgb(47, 0, 255);
+            /* 스티키 구간적용을 위한 높이값 필수! */}
+            
+            /* 스티키 적용 구간 부모박스 */
+            .wrap-stk{
+                /* overflow: hidden/auto/scroll;  
+                조상들 중 박스에 순수 높이값 셋팅을 방해하는
+                설정을 하면 스티키가 적용안됨!*/
+                padding: 10px;
+                border: 5px dotted red;
+                height: 500px;
+                /* 스티키 구간적용을 위한 높이값 필수! */
+                
+        }
+
     </style>
 </head>
 <body>
    <div class="bx" id="r1">r1</div>
    <div class="bx" id="s1">s1</div>
-   <!-- stiky포지션 박스 -->
-   <div class="wrap-stk" >나는 sticky다 사라지지 않아!!</div>
-   <!-- <div class="stkbx" >나는 sticky다 사라지지 않아!!</div> -->
+
+
+   <div class="wrap">
+       <div class="wrap-stk">
+           <!-- 스티키 포지션 박스 -->
+           <div class="stkbx">
+            나는 sticky다! 사라지지 않아!
+        </div>
+   </div>
+
+
+   </div>
    <div class="bx" id="f1">나는 젠틀픽스드다!</div>
-   <div class="bx" id="f2">나는 보이는 화면을 기준한다!</div>
+   <div class="bx" id="f2">나는 보이는화면을 기준한다!</div>
    <div class="bx" id="a1" title="나는 젠틀앱솔루트다!">a1</div>
    <div class="bx" id="r2">r2</div>
    <div class="bx" id="s2">s2</div>
@@ -403,14 +438,10 @@
                 <span class="spabs" title="자동블록전환!!!">
                     나는 span앱솔루트다!
                 </span>
+
+                <!-- 부모가 많은 요소를 fixed처리하기! -->
+                <span class="iamfixed">👨‍🔧개발자👩‍🔧</span>
             </div>
-
-            <!-- 부모가 많은 요소를 fixed처리하기 -->
-            <span class="iamfixed">
-                👨‍🔧개발자👨‍🔧
-            </span>
-
-
         </div>
     </div>
 </div>
