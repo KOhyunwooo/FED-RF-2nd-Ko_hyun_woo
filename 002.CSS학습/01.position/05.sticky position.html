@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04. sticky 포지션</title>
+    <style>
+        .bx{
+            width: 300px;
+            height: 300px;
+            border: 2px solid blue;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;/* fwb */
+            /* 글자세로중앙 */
+            line-height: 300px;
+        }
+
+
+            /* sticky박스 */
+            .stkbx{
+                position: sticky;
+                /******************************************************************************** 
+                    [5.sticky포지션]
+
+                    1.위치값 top설정에 따라 화면에
+                    고정된느 포지션이다!
+
+                    2.고정되는 원리:
+                    처음에는 relative(left값 적용됨!)
+                    가만히 현재위치를 점유하고 있음
+                    top값을 셋팅한 경우 보이는 화면 상단
+                    위치로부터 스티키 요소가 위치하게 되면
+                    fixed로 위치를 고정하여 화면에서
+                    사라지지 않도록 변경한다.
+
+                    3.sticky적용구간
+
+                    
+
+
+
+
+
+
+                ********************************************************************************/
+                /* 위치이동값이 적용되나 */
+                top: 100px;
+                left: 100px;
+
+                width: 50%;
+                text-align: center;
+                font-size: 30px;
+                padding: 50px;
+                border: 5px dotted blue;
+                background-color: lightblue;
+                z-index: 99999;
+            }
+
+
+
+
+
+
+
+
+
+
+        /* 첫번째 fixed 요소 */
+        #f1{
+            position: fixed;/* pof */            
+            width: 800px;
+            height: 200px;
+            background-color: yellow;
+            line-height: 200px;
+            /* 기존 포지션 보다 위 */
+            z-index: 1;
+        }
+
+
+
+        /* 첫번째 앱솔루트 박스 */
+        #a1{
+            position: absolute;/* poa */
+                background: url(./images/ab1.jpg) no-repeat center/cover;
+            }
+            
+            /* 두번째 앱솔루트 박스 */
+            #a2{
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                /* 부모는? 위의 요소중 부모가 없으므로
+                보이는 화면이 부모가 된다! */
+                
+                background: url(./images/ab1.jpg) no-repeat center/cover;
+        }
+
+
+
+        #r1{
+            position: relative;/* por */
+
+            /* 위치이동값 */
+            top: 100px;
+            left: 100px;            
+
+            background: url(./images/ab5.jpg) no-repeat center/cover;
+        }
+        #r2{
+            position: relative;/* por */
+            top: 170px;
+            left: 170px;
+            background: url(./images/ab4.jpg) no-repeat center/cover;
+        }
+        #s1{
+            background-color: lightcoral;
+        }
+        #s2{
+            background-color: lightblue;
+        }
+
+        
+
+        /* 부모를 찾는 앱솔루트! */
+        .bx2{
+            border: 2px dotted orangered;
+            padding: 50px;
+            font-size: 24px;
+            text-align: center;
+        }
+        /* 각 부모박스 */
+        .s5{
+            position: relative;
+            background-color: lightblue;
+        }
+        .s6{
+            position: relative;
+            background-color: lightcoral;
+        }
+        .s7{
+            position: relative;
+            background-color: lightgreen;
+        }
+        .s8{
+            position: relative;
+            background-color: lightsalmon;
+        }
+
+        /* 부모를 찾는 앱솔루트 박스 */
+        .abs{
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            color: #fff;
+            background: url(./images/ab1.jpg) no-repeat center/cover;
+        }
+
+        /* 
+            .a3는 위치 이동값이 없으므로
+            젠틀하다!!! -> 싸고 있는 박스안에 패딩과 글자 다음에
+            위치하여 가만히 있는다!
+        */
+
+        /* .a4는 위치이동값을 사용하자! -> 부모찾아 삼만리! */
+        .a4{
+            top: 0;
+            left: 0;
+            /* 나의 부모는? .s8 */
+
+            width: 25%;
+            height: 40%;
+            /* 앱솔루트요소 크기를 %로 주면
+            부모자격박스를 기준한다! */
+        }
+
+        /* span을 앱솔루트로 만들경우! */
+        .spabs{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            /* 나의 부모는? .s7 */
+            border: 4px dotted red;
+        }
+
+        /* 앱솔루트 : 판타롱스타킹! */
+        .a5{
+            position: absolute;
+            /* 박스크기를 안준 앱솔루트는 그 크기가
+            내용만큼 늘어남! width,height 모두!!! */
+            top: 20%;
+            right: 10%;
+            /* 부모는? 보이는 화면! */
+
+            outline: 2px solid red;
+            /* 
+                outline은 보더와 유사하지만
+                보더는 박스 크기에 영향을 주는
+                필수 구성요소지만 다른영향이 전혀없는
+                외곽선만 표시하는 속성이다!
+                outline: 두께 종류 색상 (보더와 같다!)
+            */
+        }
+
+        /* 블록박스내에 단독 이미지 
+        하단 공백 4px 무엇인가? */
+        .a5 img{
+            vertical-align: top;
+            /* 
+                박스에 단일한 이미지를 넣은 경우
+                하단에 자연스런 간극이 존재한다(4px)
+                이것을 없애려면 vertical-align
+                인라인요소간 세로정렬 속성의 값으로
+                top/bottom/middle 중 하나로 셋팅하면
+                하단 간극이 사라진다!
+                (baseline 값을 적용안됨!)
+            */
+        }
+
+        /* 앱솔루트끼리는 서로 겹친다! */
+        .absimg{
+            /* 자식요소가 모두 앱솔루트면 스스로 박스크기를
+            지정해야한다! */
+            width: 92px;
+            height: 115px;
+            border: 10px ridge goldenrod;
+            margin: 100px auto;
+
+            /* 원형 : 50% */
+            border-radius: 50%;
+            /* 사각형 이미지가 바깥으로 나가 보이는것
+            숨기기 위해 hidden설정 주었지만 효과없음!
+            왜? 숨기기는 원래 앱솔루트의 부모자격이 있는
+            요소에서만 가능하다! */
+            overflow: hidden;
+
+            /* 이미지가 젠틀하지만 hidden적용을 위해
+            포지션을 준다! */
+            position: relative;
+
+        }
+        /* 이미지 앱솔루트 */
+        .absimg img{
+            position: absolute;
+        }
+
+        /* 두번째 이미지 투명하게 만들기 */
+        .absimg img:last-child{
+            opacity: 0;
+            /* filter: opacity(); - 이전방식투명도 */
+            /* 
+                [ opacity 속성 : 투명도 ]
+                - 실제로 요소가 위치하고 있지만
+                화면에 투명하게 보이게하는 속성
+                - 값 : 0 - 완전투명
+                        1 - 불투명
+                        0.몇 - 중간 투명도
+            */
+
+            /* 트랜지션 : 두 상태간 애니메이션 효과속성
+                transition : 속성 시간 이징 지연시간
+                transition: 속시이지;
+                간단하게는 애니메이션 시간만 쓰면
+                모든 변화가 애니메이션 된다!
+                -> 시간은 초단위(s)
+            */
+            transition: 1.2s;
+        }
+
+        /* 박스에 마우스 오버시 두번째 이미지 나타나기 */
+        .absimg:hover img:last-child{
+            opacity: 1;
+        }
+
+        /* 포스터 보기 fixed적용박스 */
+        .fixed-poster{
+            position: fixed;
+            top: 250px;
+            right: -190px;
+            z-index: 999;
+            /* 트랜지션 : trs */
+            transition: 0.3s;
+        }
+        /* 오버시 보이기 */
+        .fixed-poster:hover{
+            right: 0;
+        }
+        /* 글자 span */
+        .fixed-poster span{
+            position: absolute;
+            top: 0;
+            left: -50px;
+            /* 부모는? .fixed-poster */
+            width: 50px;
+            height: 300px;
+            background-color: lightblue;
+
+            /* 글자 세로모드 */
+            writing-mode: vertical-lr;
+            /* vertical-lr
+            세로방향 왼쪽에서 오른쪽으로 */
+            font-size: 25px;
+            text-align: center;
+            padding-left: 20px;
+            /* 자간 ls */
+            letter-spacing: 10px;
+
+            /* 둥근 모서리보더 방향별주기 
+            border-radius: 왼위 오른위 오른아래 왼아래;
+            왼쪽위부터 시계방향*/
+            border-radius: 15px 0 0 15px;
+
+        }
+
+        /* 포스터 이미지 */
+        .fixed-poster img{
+            height: 300px;
+            /* 하단간극 없앰 vam */
+            vertical-align: middle;
+        }
+
+
+
+        /* 위치 이동값을 사용한 픽스드 포지션! 
+        ->보이는 화면을 기준한다! */
+        #f2{
+            position: fixed;/* pdf */
+            top: -162px;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            border-radius: 50%;
+            background-color: pink;
+            border: 5px dashed red;
+            text-align: center;
+            font-size: 25px;
+            line-height: 443px;
+            z-index: 9999;
+        }
+
+
+        /* [부모가 많은 요소를 fixed처리하기! ]
+            -display:inline 요소가 자동 block처리됨!
+            왜? 앱솔루트/픽스드는 모두 블록요소여야만 하기 떄문!
+            -가로,세로크기가 없는 경우 내용만큼 크기가 정해짐! */
+            
+        
+        .iamfixed{
+            position: fixed;/* pof */
+            top: 200px;
+            right: 200px;
+            background-color: yellowgreen;
+            border: 4px double blue;
+            border-radius: 50%;
+            padding: 5px;
+            z-index: 9999;
+            font-size: 30px;
+
+        }
+        
+    </style>
+</head>
+<body>
+   <div class="bx" id="r1">r1</div>
+   <div class="bx" id="s1">s1</div>
+   <!-- stiky포지션 박스 -->
+   <div class="wrap-stk" >나는 sticky다 사라지지 않아!!</div>
+   <!-- <div class="stkbx" >나는 sticky다 사라지지 않아!!</div> -->
+   <div class="bx" id="f1">나는 젠틀픽스드다!</div>
+   <div class="bx" id="f2">나는 보이는 화면을 기준한다!</div>
+   <div class="bx" id="a1" title="나는 젠틀앱솔루트다!">a1</div>
+   <div class="bx" id="r2">r2</div>
+   <div class="bx" id="s2">s2</div>
+   <div class="bx" id="a2" title="나는 보이는 화면이 기준이다! 부모가 없어서 ㅠ.ㅠ">a2</div>
+
+   <!-- 포스터 보기 fixed적용박스 -->
+   <div class="fixed-poster">
+    <img src="./images/ab0.jpg" alt="포스터">
+    <span>포스터보기</span>
+   </div>
+
+   <!-- 앱솔루트 : 판타롱스타킹! -->
+   <div class="a5" title="앱솔루트 판타롱스타킹~!">
+    <img src="./images/ab2.jpg" alt="타노스">
+   </div>
+
+   <!-- 앱솔루트끼리는 서로 겹친다! -->
+   <div class="absimg">
+    <img src="./images/ab3.jpg" alt="토르">
+    <img src="./images/ab4.jpg" alt="닥스">
+   </div>
+
+   <!-- 부모를 찾는 앱솔루트! -->
+   <div class="bx2 s5">s5
+    <div class="bx2 s6">s6
+        <div class="bx2 s7">s7
+            <div class="bx2 s8">s8
+                <div class="abs a3" 
+                title="나는 젠틀앱솔루트다!">a3</div>
+
+                <div class="abs a4" 
+                title="나는 부모찾아 올라간다!">a4</div>
+
+                <span class="spabs" title="자동블록전환!!!">
+                    나는 span앱솔루트다!
+                </span>
+            </div>
+
+            <!-- 부모가 많은 요소를 fixed처리하기 -->
+            <span class="iamfixed">
+                👨‍🔧개발자👨‍🔧
+            </span>
+
+
+        </div>
+    </div>
+</div>
+
+    <!-- 
+        [ 젠코딩(에밋코딩) ]
+
+        .bx#s${s$}*3
+        ____________________
+        . : 클래스
+        # : 아이디
+        $ : 증가숫자자리
+        *숫자 : 반복생성횟수
+        {} : 데이터출력(꺽쇠사이값)
+        [] : 속성셋팅값
+        > : 하위직계 자식요소
+        + : 형제요소
+        () : 요소구분하기
+
+     -->
+    
+</body>
+</html>
