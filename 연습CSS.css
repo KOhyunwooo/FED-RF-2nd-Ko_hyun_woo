@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+
+.body *{
+    outline: 2px dashed black;
+}
+.body{
+    text-align: center;
+    margin: 0 auto;
+    background: url(./800.Layout연습/images/bg6.jpg) no-repeat cover/center;
+}
+
+
+.aaa{
+    text-align: center;
+    margin: 0 auto;
+    
+}
