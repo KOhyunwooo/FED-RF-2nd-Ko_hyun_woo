@@ -24,3 +24,6 @@ iframe 이 무엇???
 
 
 a:hover
+
+
+background와 background-image 차이 무엇?
