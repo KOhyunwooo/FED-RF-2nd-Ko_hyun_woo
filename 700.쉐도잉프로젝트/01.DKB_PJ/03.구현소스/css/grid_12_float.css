@@ -25,6 +25,7 @@
 }
 
 
-/* 컨텐트 박스 */
-/* .cont-box{
-} */
+/* 예외 높이값 설정 */
+.footer-area [class*='col-'] {
+    height: 50%;
+}

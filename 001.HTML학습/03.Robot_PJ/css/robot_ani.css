@@ -57,7 +57,7 @@
         [ 설정된 키프레임 호출하는 방법 ]
 
         animation : 이시이지반방마
-        (이름 시간 이징 지연 반복 방향 마지막상태)
+        (*이름 시간 이징 지연 반복 방향 마지막상태)
 
         1) 이름(animation-name) : keyframe 이름
         2) 시간(animation-duration) : 애니메이션 동작시간(초단위:s)
@@ -67,7 +67,7 @@
             - 기본값 1, 숫자를 쓰면 반복횟수
             - 영원히는 infinite(인피니트)
         6) 방향(animation-direction) : 시작->끝
-            - 대체경로 설정하기 : alternate : 시작->끝,끝->시작
+            - 대체경로 설정하기(역방항, 안필요하면 안써도 됨) : alternate : 시작->끝,끝->시작
             - 대체경로는 반복횟수가 2이상 또는 infinite 이여야함
         7) 마지막상태(animation-fill-mode) : 애니메이션이 끝났을때
             - 처음상태로 돌아가는 것이 기본!
@@ -77,12 +77,104 @@
 
 /* 1.로고애니 */
 .logo{
-    animation: logo-ani 2s ease-in-out 1s infinite alternate;
+    animation: logo-ani 3s linear 1s forwards,
+                swing-ani .4s ease-in-out 4s infinite alternate;
+    
+    transform: scale(1);
 }
 @keyframes logo-ani {
-    to{
-        top: 3vw;
-        left: 3vw;
+    /* 처음위치 이동 */
+    0%{
+        top: calc(50% + 0vw);
+        left: calc(50% + 0vw);
+        transform: scale(2);
+   }
+   /* 처음위치 이동: 왼쪽위 */
+    20%{
+        top: calc(0% - 5vw);
+        left: calc(0% - 5vw);
+        transform: scale(.5);
+   }
+   /* 두번쨰 위치이동:오른쪽위 */
+    40%{
+        top: calc(0% - 5vw);
+        left: calc(100% - 25vw);
+        transform: scale(.5);
+   }
+   /* 세번째 위치이동: 오른쪽 아래 */
+    60%{
+        top: calc(50% + 10vw);
+        left: calc(50% + 10vw);
+        transform: scale(.5);
+   }
+    80%{
+        top: calc(100% - 25vw);
+        left: calc(0% + 5vw);
+        transform: scale(.5);
+   }
+    90%{
+        top: calc(0% + 5vw);
+        left: calc(0% + 5vw);
+       
+   }
+   /* 각도돌리기 */
+    100%{
+        top: calc(0% + 5vw);
+        left: calc(0% + 5vw);
+        transform: scale(1) rotate(30deg);
+       
    }
     
+
+}
+
+/* 제자리 스윙 애니*/
+@keyframes swing-ani {
+    from{
+        transform: scale(1) rotate(30deg) ;
+    }
+    to{
+        transform: scale(1) rotate(-30deg) ;
+    }
+}
+
+
+.robot-box{
+    animation: robot-ani 3s ease-in-out 3s forwards;
+
+}
+@keyframes robot-ani{
+    from{ transform: scale(.3) translateX(340%) translatey(-75%);}
+    to{ transform: scale(.7) translateX(-64%) translatey(-20%);}
+}
+
+
+/* 3. 로봇다리작동 애니 */
+.leg1{
+    animation: leg-ani1 0.3s ease-in 3s infinite alternate;
+}
+
+@keyframes leg-ani1{
+    from{ top: 300px;
+
+    }
+    to{ top: 0px;
+
+    }
+   
+
+}
+.leg2{
+    animation: leg-ani2 0.3s ease-in 3s infinite alternate;
+}
+
+@keyframes leg-ani2{
+    from{ top: 0px;
+
+    }
+    to{ top: 300px;
+
+    }
+   
+
 }
