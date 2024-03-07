@@ -22,12 +22,14 @@ html,body,h1,h2,h3,ul,ol{
 html{
     font-size: 10px;
     /* rem단위 글자계산편의 위해 */
+    scroll-behavior: smooth;
 }
 
 /* 전체 배경이미지 */
 body{
     padding-top: 100vh;
     background: url(../images/bg.jpg) no-repeat fixed top/cover;
+    
 }
 
 /* 공사중 표시 */
@@ -67,15 +69,61 @@ h1.logo{
 }
 
 
+
+/* TOP이동 버튼 만들기*/
+.btn-top{
+    position: fixed;
+    bottom: 3vw;
+    right: 3vw;
+    width: 5vw;
+    height: 5vw;
+    border-radius: 50%;
+    border: 5px outset #01ff88;
+    z-index: 10;
+    background-color: #ccc;
+    
+    
+
+}
+
+
+/* a요소 확장 */
+.btn-top a{
+    display: block;
+    font-family: 'Orbitron', sans-serif;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    text-align: center;
+    line-height: 100%;
+    color: #ff2b2b;
+    font: 1.4vw/5vw 'Black Ops One';
+    
+}
+
+
+
+/* 오버시 설정 */
+.btn-top:hover{
+background-color: yellow;
+border-style: inset solid;
+
+}
+
 /**************** 2.메인영역 ****************/
 /* 2-1.로봇박스 */
 .robot-box{
-    position: fixed;
+    position: fixed ;
     top: 0;
     left: 50%;
     transform: scale(.3) translateX(340%) translatey(-75%);
     margin-top: 200px;
     margin-bottom: 560px;
+
+
+    /* 박스내에 있는 모든 요소의 외곽선에 그림자(글로우)효과르ㅏㄹ 주기는
+    filter:drop-shadow(); */
+    filter:drop-shadow(0 0 20px aquamarine);
     }
 /* 2-1-1.로봇머리 */
 .head{
@@ -218,7 +266,7 @@ h1.logo{
 /* 목 */
 .neck{
     position: absolute;
-    top: -50px;
+    top: -108px;
     left: calc(50% - 50px/2);
     /* 
         [ 가로/세로 중앙보내기 계산법 ]
@@ -228,7 +276,7 @@ h1.logo{
         top일 경우 height값이다!
     */
     width: 50px;
-    height: 50px;
+    height: 120px;
 }
 
 /* 팔공통 */
@@ -400,6 +448,8 @@ h1.logo{
 /* 왼다리 */
 .leg1{
     left: 0px;
+   
+    
 }
 /* 오른다리 */
 .leg2{
@@ -568,6 +618,171 @@ h1.logo{
     A글자 안쪽으로 들어가게 하는게 들여쓰기*/
     text-indent: 40px;
 }
+
+/* 
+    [ 원형 그라데이션 ]
+
+    - 기본형, 영역지정형은 박스모양을 따라감!
+
+    1) 기본형: 중앙중심, 모양은 박스크기에 맞춤
+    background-image: 
+        radial-gradient(색1,색2,색3,...);
+    - 시작색으로부터 중앙에서 시작됨
+
+    2) 영역 지정형:
+    background-image: 
+        radial-gradient(색1 몇%,색2 몇%,색3 몇%,...);
+    - 색 뒤에 한칸 띄고 %수치로 영역지정함
+
+    3) 그라데이션 모양을 원형으로 사용할 경우:
+    background-image: 
+        radial-gradient(circle,색1,색2,색3,...);
+    - circle 키워드를 첫번째에 사용함
+
+    4) 영역옵션 지정형: 중심점 변경
+    background-image: 
+        radial-gradient(옵션 at 가로위치 세로위치,색1,색2,색3,...);
+    - 옵션4가지 : closest-side / farthest-side
+                closest-corner / farthest-corner
+                ___________________________________
+                - closest는 중심점으로 좀더 모아진것
+                - farthest는 중심점에서 멀리 퍼진것
+                - side와 corner는 경계선과 끝부분옵션임
+    - 가로위치, 세로위치 (중심점) - 단위는 px / %
+*/
+.link-title :hover{
+    color: #01ff88;
+    background-image: radial-gradient(circle, red,green,blue);
+
+}  
+    
+
+
+.link-title span{
+    position: absolute;
+    width: 300px;
+    height: 90px;
+    left: 148%;
+    top: -24%;
+    
+    /* border: 13px dashed red; */
+    outline: 10px dashed red;
+    border-radius: 50%;
+    background-color: #fff;
+    text-align: center;
+    line-height: 90px;
+    font-size: 50px;
+    text-decoration: none;
+    color: #ff869a;
+    font-weight: bold;
+    /* box-sizing: border-box; */    
+    transform: scale(0);
+    z-index: 1;
+}
+
+
+/* 가상요소로 삼각형 만들기 */
+.link-title::before{
+    content: '';
+    position: absolute;
+    left: 303px;
+    top: -104px;
+    transform: rotate(45deg);
+
+    /* 가로,세로 크기0 */
+    width: 0;
+    height: 0;
+    /* 보더탑 크기+색 설정 */
+    border-top: 60px solid red;
+    /* 양쪽보더 크기+투명색 설정 */
+    border-left: 20px solid transparent ;
+    border-right: 20px solid transparent ;
+
+    
+}
 /**************** 3.하단영역 ****************/
+/* 3-1. 회사정보 */
+#bottom-area{
+    color: #fff;
+    /* 글자크기: 30px, 글자체 'black ops one' */
+    font: 3rem "black ops one";
+    text-shadow: 2px 2px 2px #333;
+    text-align: center;
+    padding: 7vmin ;
+    /* 반투명 배경넣기: 검은색 반투명(0.5) */
+    background-color: rgb(0 0 0 /0.5);
+    position: relative;
+    z-index: 1;
+    margin-top: 100px;
+
+}
 
 
+
+
+
+
+
+
+
+
+
+/* ******************************************************************** 
+
+
+
+    transform: translateX(200px) scale(1);
+    
+    transform-origin: left bottom;
+    width: 40vw;
+    height: 20vw;
+  
+    
+  
+    text-decoration: none;
+    color: orangered;
+    font-size: 5vw;
+  
+  
+  }
+  .link-title span{
+    
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #fff;
+    text-align: center;
+    line-height: 20vw;
+    border: 10px dashed orangered;
+    box-sizing: border-box;
+    z-index: 1;
+  }
+   가상요소로 삼각형 만들기
+  .link-title::after{
+    content: '';
+    position: absolute;
+    top: 62.7%;
+    left: -8%;
+     왜%인가? 유동적인 부모를 기준한 위치값이다!
+    transform: rotate(43deg);
+     가로,세로 크기 0 
+    width: 0;
+    height: 0;
+     보더탑 크기+색 설정 
+    border-top: 11vw solid orangered;
+     양쪽보더 크기+투명색 설정
+    border-left: 1.5vw solid transparent;
+    border-right: 1.5vw solid transparent;
+  }
+
+
+
+<!-- 2-1-0.로봇말풍선 -->
+          <a href="#text-box" class="link-title">
+            <span>What is Robot?</span>
+          </a>
+
+ 
+
+          *********************************************************************/

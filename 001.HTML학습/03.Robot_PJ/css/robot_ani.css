@@ -2,7 +2,6 @@
 
 /* Robot PJ - 애니메이션 CSS */
 
-
 /* 애니메이션 css/****************************************** 
         [ CSS 애니메이션 ]
         - CSS 속성 변화를 장면으로 구성하여
@@ -74,107 +73,220 @@
             - 마지막 상태를 유지하고 싶을때 forwards(앞쪽에...즉,애니끝장면)
         ******************************************/
 
-
 /* 1.로고애니 */
-.logo{
+.logo {
     animation: logo-ani 3s linear 1s forwards,
-                swing-ani .4s ease-in-out 4s infinite alternate;
-    
+        swing-ani 0.4s ease-in-out 4s infinite alternate;
+
     transform: scale(1);
 }
 @keyframes logo-ani {
     /* 처음위치 이동 */
-    0%{
+    0% {
         top: calc(50% + 0vw);
         left: calc(50% + 0vw);
         transform: scale(2);
-   }
-   /* 처음위치 이동: 왼쪽위 */
-    20%{
+    }
+    /* 처음위치 이동: 왼쪽위 */
+    20% {
         top: calc(0% - 5vw);
         left: calc(0% - 5vw);
-        transform: scale(.5);
-   }
-   /* 두번쨰 위치이동:오른쪽위 */
-    40%{
+        transform: scale(0.5);
+    }
+    /* 두번쨰 위치이동:오른쪽위 */
+    40% {
         top: calc(0% - 5vw);
         left: calc(100% - 25vw);
-        transform: scale(.5);
-   }
-   /* 세번째 위치이동: 오른쪽 아래 */
-    60%{
+        transform: scale(0.5);
+    }
+    /* 세번째 위치이동: 오른쪽 아래 */
+    60% {
         top: calc(50% + 10vw);
         left: calc(50% + 10vw);
-        transform: scale(.5);
-   }
-    80%{
+        transform: scale(0.5);
+    }
+    80% {
         top: calc(100% - 25vw);
         left: calc(0% + 5vw);
-        transform: scale(.5);
-   }
-    90%{
+        transform: scale(0.5);
+    }
+    90% {
         top: calc(0% + 5vw);
         left: calc(0% + 5vw);
-       
-   }
-   /* 각도돌리기 */
-    100%{
+    }
+    /* 각도돌리기 */
+    100% {
         top: calc(0% + 5vw);
         left: calc(0% + 5vw);
         transform: scale(1) rotate(30deg);
-       
-   }
-    
-
+    }
 }
 
-/* 제자리 스윙 애니*/
+/* 로고 제자리 스윙 애니*/
 @keyframes swing-ani {
-    from{
-        transform: scale(1) rotate(30deg) ;
+    from {
+        transform: scale(1) rotate(30deg);
     }
-    to{
-        transform: scale(1) rotate(-30deg) ;
+    to {
+        transform: scale(1) rotate(-30deg);
     }
 }
 
-
-.robot-box{
+.robot-box {
     animation: robot-ani 3s ease-in-out 3s forwards;
-
 }
-@keyframes robot-ani{
-    from{ transform: scale(.3) translateX(340%) translatey(-75%);}
-    to{ transform: scale(.7) translateX(-64%) translatey(-20%);}
+@keyframes robot-ani {
+    from {
+        transform: scale(0.3) translateX(340%) translatey(-75%);
+    }
+    to {
+        transform: scale(0.7) translateX(-64%) translatey(-20%);
+    }
 }
-
 
 /* 3. 로봇다리작동 애니 */
-.leg1{
-    animation: leg-ani1 0.3s ease-in 3s infinite alternate;
+.leg1 {
+    animation: leg-ani1 0.3s ease-in-out 3s 12 alternate;
 }
 
-@keyframes leg-ani1{
-    from{ top: 300px;
-
+@keyframes leg-ani1 {
+    from {
+        top: 90%;
     }
-    to{ top: 0px;
-
+    to {
+        top: 100%;
     }
-   
-
 }
-.leg2{
-    animation: leg-ani2 0.3s ease-in 3s infinite alternate;
+.leg2 {
+    animation: leg-ani2 0.3s ease-in-out 3s 12 alternate;
 }
 
-@keyframes leg-ani2{
-    from{ top: 0px;
-
+@keyframes leg-ani2 {
+    from {
+        top: 100%;
     }
-    to{ top: 300px;
-
+    to {
+        top: 90%;
     }
-   
-
 }
+
+/* 팔공통 트랜스폼 새로축 기준 top으로 변경 */
+.arm,
+.arm span,
+.arm1 span::after,
+.arm2 span::after {
+    transform-origin: top;
+}
+
+
+/* 4.로폿 왼쪽팔 허리에 올리기 */
+.arm1 {
+    animation: left-arm-ani1 1s ease-in 5s alternate infinite;
+}
+.arm1 span {
+    animation: left-arm-ani2 1s ease-in 6s alternate infinite;
+}
+.arm1 span::after {
+    animation: left-arm-ani3 1s ease-in 6s alternate infinite;
+}
+@keyframes left-arm-ani1 {
+    to {
+        transform: rotate(160deg);
+    }
+}
+@keyframes left-arm-ani2 {
+    to {
+        transform: rotate(-15deg);
+    }
+}
+@keyframes left-arm-ani3 {
+    to {
+        transform: rotate(-35deg);
+    }
+}
+
+/* 5. 로봇 오른쪽팔 손흔들기 */
+.arm2 {
+    animation:     
+      /* 팔올리기 */ 
+      right-arm-ani1 0.4s 9s forwards,
+      /* 팔흔들기 : 팔올린다음(지연9.4초) */ 
+      right-arm-ani2 0.4s ease-in-out 9.4s infinite alternate;
+  }
+  /* 팔올리기 키프레임 */
+  @keyframes right-arm-ani1 {
+    to {
+      transform: rotate(-150deg);
+    }
+  }
+  /* 팔흔들기 키프레임 */
+  @keyframes right-arm-ani2 {
+    to {
+      transform: rotate(-135deg);
+    }
+  }
+  
+  /* 오른손 팔꿈치 살짝 움직이기 */
+  .arm2 span{
+      animation: right-arm-ani3 0.4s ease-in-out 9.8s infinite alternate;
+  }
+  
+  /* 오른손 팔꿈치 키프레임 */
+  @keyframes right-arm-ani3 {
+      to {
+        transform: rotate(-15deg);
+      }
+    }
+  /* 오른손 Y축회전 */
+  .arm2 span::after{
+      animation: right-arm-ani4 0.2s 8s forwards;
+      
+  }
+  
+  /* 오른손 Y축회전 키프레임 */
+  @keyframes right-arm-ani4 {
+      to {
+        transform: rotateY(180deg);
+        left:-13px;
+      }
+    }
+  
+
+
+
+
+
+    /* 머리 흔들거리기 */
+    .head.metal1{
+        transform-origin: bottom;
+    }
+    .head.metal1{
+        animation: head-ani 0.5s ease-in-out 5s infinite alternate;
+
+       z-index: 1;
+    }
+    @keyframes head-ani{
+        from {
+            transform:rotate(-20deg);
+        }
+        to {
+            transform:rotate(20deg);
+        }
+    }
+
+
+
+
+    /* 링크타이틀(말풍선)애니매이션 */
+    .link-title span{
+        transform-origin: left bottom;
+       animation: malani 0.5s ease-in 6s 1 forwards;
+    }
+    @keyframes malani{ 
+     from{
+        transform: scale(0);
+     }
+    to{
+        transform: scale(1);
+     }
+    }
