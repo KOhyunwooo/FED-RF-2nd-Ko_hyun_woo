@@ -1,0 +1,123 @@
+@charset "utf-8";
+
+/* 3.가로네비 서브 전체 드롭다운 전체창 css */
+
+/* 초기화 CSS불러오기 */
+@import url(./reset.css);
+/* 12그리드 불러오기 */
+@import url(./grid_12_flex.css);
+/* 웹폰트 CDN */
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro&family=Noto+Sans+KR&display=swap");
+
+/* 
+    font-family: 'Maven Pro', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif; 
+*/
+
+
+
+body *{
+    outline: 2px dashed rgb(255, 251, 0);
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    background: url(../images/nav03/main_intro_banner_1_ksr.jpg) no-repeat center/cover;
+}
+
+
+
+
+/* 중앙속박스 */
+.inbox{
+    max-width: 1600px;
+    margin: 0 auto;
+
+
+}
+
+
+
+/******************** 1.상단영역*******************/
+#top-area{
+    /* 트랜지션: 속시이지 */
+    transition: all .6s ease-in-out;
+}
+/* 상단영역 오버시 배경색 흰색 */
+
+#top-area:hover{
+    background-color: rgb(255, 255, 255);
+}
+/********************** 1-1.로고파트 **********************/
+
+
+/* 로고 이미지 */
+.logo img{
+    width: 100%;
+  
+}
+
+
+/* 탑에이리어에 마우스 오버시 로고 이미지 변환 */
+.logo :nth-child(2){
+    display: none;
+}
+#top-area:hover .logo img:nth-child(1){
+    display: none;
+}
+#top-area:hover .logo img:nth-child(2){
+    display: block;
+}
+
+
+
+
+/********************** 1-2.네비파트 **********************/
+/* gnb박스 */
+.gnb{
+    display: flex;
+    /* 직계자식요소 dl을 옆으로 흐르게함! */
+
+    /* GNB전체 중앙정렬 */
+    text-align: center;
+    
+    /* 높이값 제한 */
+    height: 102px;
+    /* 자식요소 하위메뉴 숨기기 */
+    overflow: hidden;
+    /* 트랜지션: 속시이지  */
+    transition: all 0.1s ease-in-out;
+
+    /* 글자 줄바꿈 방지 */
+    white-space: nowrap;
+
+}
+/* 상단영역 오버시 하위메뉴 보이기*/
+#top-area:hover .gnb{
+    height: 360px;
+}
+/* 상단영역 오버시 상위메뉴 dt>a 글자색 변경*/
+#top-area:hover .gnb dt a{
+    color: #000;
+}
+
+
+.gnb dt a{
+    color: #ffffff;
+
+
+}
+/* 메뉴박스 dl */
+.gnb dl{
+    padding: 0 34px;
+}
+/* 상위메뉴 dt */
+.gnb dt{
+    line-height: 110px;
+}
+/* 상위메뉴 dd */
+.gnb dd{
+    line-height: 45px;
+}
+
+/********************** 1-3.기타파트 **********************/
