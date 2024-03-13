@@ -15,10 +15,10 @@
 */
 
 
-
-body *{
+/* 공사중표시 */
+/* body *{
     outline: 2px dashed rgb(255, 251, 0);
-}
+} */
 body{
     width: 100vw;
     height: 100vh;
@@ -49,24 +49,32 @@ body{
     background-color: rgb(255, 255, 255);
 }
 /********************** 1-1.로고파트 **********************/
-
+/* 로고박스 */
+.logo{
+    padding-top: 25px;
+}
 
 /* 로고 이미지 */
 .logo img{
     width: 100%;
+    max-width: 145px;
+    min-width: 120px;
   
 }
 
 
-/* 탑에이리어에 마우스 오버시 로고 이미지 변환 */
+/******************* 탑에이리어 마우스 오버시 -로고 이미지 변환 *************/
+/* 두번째 이미지 숨기기 */
 .logo :nth-child(2){
     display: none;
 }
+/* 오버시 첫번쨰 이미지 숨기기 */
 #top-area:hover .logo img:nth-child(1){
     display: none;
 }
+/* 오버시 두번쨰 이미지 숨기기 */
 #top-area:hover .logo img:nth-child(2){
-    display: block;
+    display: inline;
 }
 
 
@@ -94,7 +102,7 @@ body{
 }
 /* 상단영역 오버시 하위메뉴 보이기*/
 #top-area:hover .gnb{
-    height: 360px;
+    height: 388px;
 }
 /* 상단영역 오버시 상위메뉴 dt>a 글자색 변경*/
 #top-area:hover .gnb dt a{
@@ -115,9 +123,154 @@ body{
 .gnb dt{
     line-height: 110px;
 }
+/* 상위메뉴 dt의 이미지 */
+.gnb dt img{
+    margin-top: 10px;
+}
+
+
 /* 상위메뉴 dd */
 .gnb dd{
     line-height: 45px;
 }
 
+
+
+
+
+
+
+/* 처음이미지 보이기 */
+dl dt a img:nth-child(1)~img{
+    display: none;
+}
+/* 전체박스에 오버시 둘째 이미지 보이면서, 첫번째 이미지 숨기기 */
+#top-area:hover dl dt a img:nth-child(2){
+    display: inline;
+}
+#top-area:hover dl dt a img:nth-child(1){
+    display: none;
+}
+/* dl에 오버시 둘째이미지 숨기기 ,셋쨰 이미지 보이기 */
+
+#top-area dl:hover dt a img:nth-child(2){
+    display: none;
+}
+#top-area dl:hover dt a img:nth-child(3){
+    display: inline;
+}
+
+
+
+
+
+
+
+/* 마우스 오버시 빨강 변환 */
+/* 상위메뉴는 dl에 오버시로 설정 */
+/* 하위메뉴는 a 에 바로 오버시로 설정 */
+#top-area .gnb dl:hover dt a,.gnb dd a:hover{
+    color: red;
+}
+
 /********************** 1-3.기타파트 **********************/
+/* 랭귀지 등 포함 박스 */
+.lang{
+    display: flex;
+    padding-top:40px;
+}
+
+.lang li{
+    padding: 0 10px;
+}
+
+.lang a{
+    /* 글자색 흰색 */
+    color: #fff;    
+}
+/* 두번째 li의 KOR글자 가상요소로 넣기 */
+.lang li:nth-child(2) a::after{
+    content: 'KOR';
+    font-size: 12px;
+    
+    display: block;
+    /* position: absolute; */
+    margin-top: -13px;
+    margin-left: 30px;
+    
+    
+}
+/* 세번째 li의 STORE글자 가상요소로 넣기 */
+.lang li:nth-child(3) a::after{
+    content: 'STORE';
+    font-size: 12px;
+    
+    display: block;
+    margin-top: -13px;
+    margin-left: 25px;
+
+}
+/* 박스 이미지 */
+.lang img{
+    height: 30px;
+    margin-left: 10px;
+}
+
+
+
+/* 대상요소는 li중 첫번째 다음 li 형제요소들 
+.lang li:nth-child(1)~li
+2,3번째 li 하위 이미지 모두 안보이게 함!*/
+.lang li:nth-child(1)~li img{
+    display: none;
+}
+/* 대상 이미지중 첫번째 보이게함 */
+.lang li:nth-child(1)~li img:nth-child(1){
+    display: inline;
+}
+/* 최상위 박스 오버시 첫번쨰 이미지 숨기기,두번쨰 이미지 나오기 */
+#top-area:hover .lang li:nth-child(1)~li img:nth-child(1){
+    display: none;
+}
+#top-area:hover .lang li:nth-child(1)~li img:nth-child(2){
+    display: inline;
+}
+
+
+
+/* 최상위 박스 오버시, 동시에 a요소 오버시 
+두번째 이미지 숨기기 */
+#top-area:hover .lang li:nth-child(1)~li a:hover img:nth-child(2){
+    display: none;
+}
+/* 최상위 박스 오버시, 동시에 a요소 오버시 
+세번째 이미지 보이기 */
+#top-area:hover .lang li:nth-child(1)~li a:hover img:nth-child(3){
+    display: inline;
+}
+
+
+
+
+
+/* 최상위 오버시 글자색 회색 */
+#top-area:hover .lang a{
+    color: #222;
+}
+/* 최상위 오버시 동시에 a오버시 글자색 빨강 */
+#top-area:hover .lang a:hover{
+    color: red;
+}
+
+
+
+
+
+/* 타이틀 글자 */
+.tit{
+    position: fixed;
+    left: 5vw;
+    top: 20vw;
+    font-size: 4vw;
+    color: #fff;
+}
