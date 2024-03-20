@@ -1,7 +1,29 @@
 // 나의 영화 초이스 객체 JS
 
 
-/* <iframe width="1280" height="720" src="https://www.youtube.com/embed/xwWgp1bqVwE" title="I Saw The Devil Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */
+
+
+// 현우의 오브젝트!
+// 자신만의 오브젝트! -> 변경가능하게 let으로 선언한다!
+let myObj = {};
+// 오브젝트 형만 만들고 객체내용은 아래에서!
+
+// 1. 영화 제목
+myObj.title = "악마를 보았다";
+// 2. 감독
+myObj.director = "김지운";
+// 3. 배우
+myObj.actor = "이병헌,최민식";
+// 4. 장르
+myObj.genre = "범죄";
+// 5. 관람가
+myObj.ratings = "19세";
+// 6. 예고편
+myObj.trailer = function () {
+  console.log("예고편:영화아이디");
+  // 예고편 플레이 함수 호출!
+  playMovie("xwWgp1bqVwE");
+}; /////////// trailer 메서드 ///////////
 
 // 현우의 오브젝트!
 // 자신만의 오브젝트! -> 변경가능하게 let으로 선언한다!
