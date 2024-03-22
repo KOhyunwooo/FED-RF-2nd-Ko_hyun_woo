@@ -203,26 +203,22 @@
                     moving.style.top = e.pageY + "px";
                     moving.style.left = e.pageX + "px";
                 }; /////////////mousemove이벤트함수////////////////
-            //.wrap에 마우스엔터시 포스터 보이기
-            wrap.onmouseenter=()=>{
-                //포스터 박스 배경이미지 초기셋팅하기
-                //영화제목박스가 비어있으면 "기본"포스터
-                //아니면 영화제목과 같은 포스터를 출력
-                //비 ? 집 : 놀이동산
-                //첫번째입력박스비었냐?"기본":포스터명
-                moving.style.backgroundImage=`url(${img_src[minfo[0].innerText==''?"기본":minfo[0].innerText]})`;
-                moving.style.display='block';
-            };////mouseenter///
-            //.wrap에 마우스리브시 포스터 숨기기
-            wrap.onmouseleave=()=>{
-                moving.style.display='none';
-            };////mouseleave////
-            
-            
-            
-            
-            
-            
+                //.wrap에 마우스엔터시 포스터 보이기
+                wrap.onmouseenter = () => {
+                    //포스터 박스 배경이미지 초기셋팅하기
+                    //영화제목박스가 비어있으면 "기본"포스터
+                    //아니면 영화제목과 같은 포스터를 출력
+                    //비 ? 집 : 놀이동산
+                    //첫번째입력박스비었냐?"기본":포스터명
+                    moving.style.backgroundImage = `url(
+                    ${img_src[minfo[0].innerText == ""? "기본": minfo[0].innerText]
+                    })`;
+                    moving.style.display = "block";
+                }; ////mouseenter///
+                //.wrap에 마우스리브시 포스터 숨기기
+                wrap.onmouseleave = () => {
+                    moving.style.display = "none";
+                }; ////mouseleave////
             } /////////////loadFn함수//////////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /******************************************* 
@@ -308,7 +304,7 @@
             /* 마우스 따라다니는 포스터박스 */
             .flying-poster {
                 position: absolute;
-                
+
                 top: 0;
                 left: 0;
                 width: 200px;
@@ -332,7 +328,7 @@
                 display: none;
                 /* 트랜지션 설정하기
                 -처음이동시 빨리 움직이고 나중에 천천히 ease-out이 가장 자연스럽다! */
-                transition: .05s ease-out;
+                transition: 0.05s ease-out;
             }
         </style>
     </head>
@@ -368,3 +364,6 @@
         </div>
     </body>
 </html>
+
+
+
