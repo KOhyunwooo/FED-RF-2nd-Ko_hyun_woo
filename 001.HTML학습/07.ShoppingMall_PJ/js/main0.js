@@ -42,14 +42,19 @@ addEvt(window,"DOMContentLoaded", loadFn);
 ******************************************/
 function loadFn() {
     console.log("로딩완료!");
+    
 
+    // [대상선정]
     // 이동버튼 대상:  .abtn
     const abtn = qsa('.abtn');
     // 변경대상 : #slide
     const slide = qs('#slide');
-    // console.log(abtn,slide);
+    // 블릿대상:
+    const indic = 
+    document.querySelectorAll('.indic li');
+    // console.log(abtn,slide,indic);
 
-    //오른쪽 버튼 처음에 숨기기
+    // 왼쪽 버튼 처음에 숨기기
     abtn[0].style.display = 'none';
 
     // 슬라이드 순번 전역변수
@@ -73,59 +78,65 @@ function loadFn() {
      기능: 슬라이드 이동
      ******************************************/
     function goSlide(){
-        //1.오른쪽 버튼인 .ab2인가?
-        let isRbtn=this.classList.contains('ab2');
-        //[classList]객체의contains()메서드]
-        //->해당요소의 특정 클래스인지 여부를 리턴함
-        //해당클래스가 있으면 true, 없으면 false
+        // 1.오른쪽 버튼인 .ab2인가?
+        let isRbtn = 
+        this.classList.contains('ab2');
+        // [classList 객체의 contains() 메서드]
+        // -> 해당요소의 특정 클래스인지 여부를 리턴함
+        // 해당클래스가 있으면 true, 없으면 false
+
 
         // 함수호출확인
-        console.log('나 슬라이드야~!',isRbtn);
-        //this는 호출한 버튼 자신
-        //2.오른쪽 버튼이면++,아니면--
+        console.log('나 슬라이드야~!',this,isRbtn);
+        // this는 호출한 버튼 자신
         
-        
-        // 슬라이드 순번 증가
-        isRbtn? snum++: snum--;
-       
+        // 2. 오른쪽버튼이면 ++, 아니면 --
+        // 슬라이드 순번 증감
+        isRbtn? snum++ : snum--;
 
-        //3.한계값 설정하기
-        //한계값일때 각 버튼 숨기기
-        
-        //3-1.오른쪽 버튼일 경우 0보다 작으면 숨기기
+        // 3. 한계값 설정하기
+        // 한계값일때 각 버튼 숨기기
+        // 3-1. 오른쪽 버튼일 경우 0보다 작으면 숨기기
+        // snum은 0으로 고정!
         if(snum<0){
-            //snum은 0으로 고정!
             snum = 0;
-        }///if///
+        } /// if ///
+        // snum은 4로 고정!
         else if(snum>4){
-            //snum은 4으로 고정!
             snum = 4;
-        }///else if////
+        } /// else if ///
         
-        //4. 마지막 구역에서 버튼 숨기기
-        // '||'은 이거나
-        if(snum === 0 || snum=== 4){
-            this
-            //해당버튼 숨기기
-            this.style.display="none";
-        }
+        // 4. 마지막 구역에서 버튼 숨기기
+        if(snum === 0 || snum === 4){
+            // 해당버튼 숨기기
+            this.style.display = 'none';            
+        } /// if ///
         else{
-            //버튼 다시 보이기
+            // 버튼 다시 보이기
             for(let x of abtn){
-            x.style.display="block";
-        }
-        }///else///
+                x.style.display = 'block'; 
+            } /// for of ///
 
-
+        } /// else ///
         
-
-
-
 
        console.log('이동%:',(-100*snum)+'%');
     
        slide.style.left = (-100*snum)+'%';
        slide.style.transition = '.6s ease-in-out';
+
+       // 5. 블릿표시 구현하기
+       // 모든 클래스 on지우기+현재 순번 클래스 넣기
+       indic.forEach((ele,idx)=>{
+        // ele - 각각의 li, idx - 각각의 순번
+        if(idx===snum){ // 현재순번 on넣기
+            ele.classList.add('on');
+        } /// if ///
+        else{ // 나머지는 on빼기
+            ele.classList.remove('on');
+        } /// else ///
+
+       }); ///// forEach /////
 
    } ///////////// goSlide 함수 ////////////////
    /////////////////////////////////////////////
