@@ -215,7 +215,7 @@
     bottom: 5%;
     /* 부모는? .ban-area*/
     width: 100%;
-    outline: 2px dashed red;
+    /* outline: 2px dashed red; */
 }
 
 /* 캐릭터 속박스 -static한 박스임!(공간차지)*/
@@ -278,10 +278,12 @@
     background: url(../images/eachBG.jpg) no-repeat bottom/cover;
     /* 트랜지션 */
     transition: .4s ease-in-out;
+    border-radius: 5%;
+    margin-top: 5%;
 }
 /* 상위 캐릭터 개별박스에 오버시 설명박스 보이기 */
 .cat-inbox article:hover .descbx{
-    height: 200px;
+    padding-top: 55%;
 
 }
 /* 상위 캐릭터 개별박스에 오버시 이미지박스 트랜지션
@@ -290,25 +292,31 @@
     transition: .4s ease-in-out;
 }
 /* 상위 캐릭터 개별박스에 오버시 이미지박스 -마진으로 위로 올리기 */
-.cat-inbox article:hover .imbx{
-    margin-top: -200px;
+.cat-inbox article:hover .imbx, .cat-inbox article:hover .descbx h3{
+    margin-top: -55%;
 
 }
 /* 캐릭터 타이틀 */
 .descbx h3{
     font-family: 'Gugi';
-    font-size: 2.4rem;
+    /* 글자크기 최대 2.4rem, 기타는 2vw */
+    font-size: min(2.4rem,2vw);
     font-weight: normal;
     padding: 15px 10px 5px;
     letter-spacing: -1px;
+    margin-top: 0;
+    /* 트랜지션 마진탑만 주기 */
+    transition: margin-top .4s ease-in-out;
 }
 /* 설명박스 */
 .descbx p{
     font-family: 'single day','zcool kuaile';
-    font-size: 1.8rem;
+    font-size: min(1.8rem,1.4vw);
     line-height: 1.6;
     padding: 1.5rem;
     text-align: justify;/* 양쪽정렬 */
+    
+    
     
 
 }

@@ -117,8 +117,15 @@ function wheelFn(e) {
   // scrollTo(0, y축이동값)
   window.scrollTo(0, pos);
 
-  // 6. 해당메뉴 순번 on넣기 / 나머지 on빼기
-  chgMenu(pgNum);
+  // 6.전체 메뉴에 on빼기
+  for (let x of gnb) {
+    x.parentElement.classList.remove("on");
+  } /// for of ///
+
+  // 7.해당순번에 on넣기
+  gnb[pgNum].parentElement.classList.add("on");
+  // parentElement는 선택요소의 부모요소다!
+  // gnb[pgNum]은 해당순번의 메뉴a요소다!
 } /////////// wheelFn 함수 ////////////////
 ///////////////////////////////////////////
 
@@ -127,53 +134,22 @@ function wheelFn(e) {
 *******************************/
 // 이벤트 대상: .gnb a
 const gnb = document.querySelectorAll(".gnb a");
-// 이벤트 대상: .indic a
-const indic = document.querySelectorAll(".indic a");
-console.log("gnb:", gnb,"/indic:",indic);
-
+console.log("gnb:", gnb);
 // 이벤트 설정하기 + 기능구현하기
 gnb.forEach((ele, idx) => {
   ele.onclick = () => {
-     // 메뉴 변경함수 호출
-     chgMenu(idx);
+    // 클릭시 자신의 순번찍기
+    console.log("순번:", idx);
+    // 1.전역페이지변수에 순번 업데이트
+    pgNum = idx;
+
+    // 2.전체 메뉴에 on빼기
+    for (let x of gnb) {
+      x.parentElfement.classList.remove("on");
+    } /// for of ///
+
+    // 3.해당순번에 on넣기
+    ele.parentElement.classList.add("on");
+    // parentElement는 선택요소의 부모요소다!
   }; /// click함수 ///
 }); //// forEach ///
-
-indic.forEach((ele, idx) => {
-  ele.onclick = () => {
-     // 메뉴 변경함수 호출
-     chgMenu(idx);
-  }; /// click함수 ///
-}); //// forEach ///
-
-// [ 메뉴 변경함수 : .gnb + .indic ] /////
-function chgMenu(idx){ // idx - 순번
-  // 클릭시 자신의 순번찍기
-  console.log("순번:", idx);
-
-  // 1.전역페이지변수에 순번 업데이트
-  pgNum = idx;
-
-  // 2.전체 메뉴에 on빼기
-  gnb.forEach((ele,seq)=>{
-    // ele - a요소 / seq - 순번
-    if(idx === seq){ // 선택순번과 같으면 on넣기
-      ele.parentElement.classList.add("on");
-      indic[seq].parentElement.classList.add("on");
-    } /// if ///
-    else{ // 기타의 경우 on 지우기
-      ele.parentElement.classList.remove("on");
-      indic[seq].parentElement.classList.remove("on");
-    } /// else ///
-  }); //// forEach ///////
-
-  // for (let x of gnb) {
-  //   x.parentElement.classList.remove("on");
-  // } /// for of ///
-
-  // 3.해당순번에 on넣기
-  // ele.parentElement.classList.add("on");
-  // parentElement는 선택요소의 부모요소다!
-
-} //////////// chgMenu 함수 //////////
-

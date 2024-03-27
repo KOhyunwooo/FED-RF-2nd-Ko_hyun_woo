@@ -9,9 +9,9 @@
 
 
 /* 공사중 표시 */
-body * {
+/* body * {
     outline: 2px dashed #ccc;
-}
+} */
 
 /* 3. 인트로영역 */
 .intro-area{
