@@ -14,7 +14,6 @@ export default function slideFn() {
   // ele - 요소, evt - 이벤트, fn - 함수
   const addEvt = (ele, evt, fn) => 
   ele.addEventListener(evt, fn);
-
   // HTML태그 로딩후 loadFn함수 호출! ///
   addEvt(window, "DOMContentLoaded", loadFn);
 
@@ -280,7 +279,37 @@ export default function slideFn() {
         autoSlide();
       }, 5000);
     } ////////// clearAuto ////////////
+
+
+    //이동버튼 이벤트 설정하기////////////////////
+    //이벤트대상: 이동버튼 영역- .evt-cover aside
+    const evtCover = qsa('.evt-cover aside');
+    //변경대상: 버튼-.abtn ->abtn변수에 할당됨!!!
+    
+    evtCover.forEach((ele,idx) => {
+      // console.log(ele);
+      // 이벤트 셋팅하기1 :mouseover - 버튼보이기
+      ele.onmouseover = ()=>{
+        abtn[idx].style.display='block';
+      };//mouseon
+      // 이벤트 셋팅하기2 :mouseout - 버튼숨기기
+      ele.onmouseout = ()=>{
+        abtn[idx].style.display='none';        
+      };///mouseout
+      // 이벤트 셋팅하기3 :mousemove - 버튼따라오기
+      ele.onmousemove = (e)=>{
+        abtn[idx].style.top=e.pageY+'px';
+        abtn[idx].style.left=e.pageX+'px';
+      };///mousemove///
+
+
+      // 이벤트 셋팅하4 : click-이동함수 호출!
+      ele.onclick=goSlide;
+    });////forEach////////////////////
+
   } //////////////// loadFn 함수 ///////////////
   /////////////////////////////////////////////
+
+
 } ///////////// slideFn 함수 ///////////////
 ////////////////////////////////////////////
