@@ -1,6 +1,5 @@
 @charset "utf-8";
-/* 그리드 시스템 12그리드 적용 - 가로비율 */
-
+/* 그리드 시스템 12그리드적용 - 가로비율 */
 .col-1 {width: 8.33%;}
 .col-2 {width: 16.66%;}
 .col-3 {width: 25%;}
@@ -14,18 +13,13 @@
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
 
-
 /* 파티션 비율박스 공통 */
 [class*='col-']{
-    /* float:left; */
+    float: left;
     height: 100%;
     padding: 10px;
     box-sizing: border-box;
-    
 }
 
-
-/* 예외 높이값 설정 */
-.footer-area [class*='col-'] {
-    height: 50%;
-}
+/* 컨텐트 박스 */
+/* .cont-box{} */
