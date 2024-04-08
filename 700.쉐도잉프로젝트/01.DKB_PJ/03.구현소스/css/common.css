@@ -160,8 +160,8 @@
     left: 0;
     font-size: 24px;
     font-weight: bold;
-    color: #fff;
-    text-shadow: 0 0 5px #000;
+    color: #e2e2e2;
+    text-shadow: 0 0 10px #ffffff;
     z-index: 99;
     display: none; /* 처음에 숨기기 */
     /* 따라다니는 버튼요소 오버시 무시하기 */
@@ -170,6 +170,7 @@
     transition: 0.3s ease-out;
     /* 트랜스폼 */
     transform: translate(-50%, -50%);
+    
 }
 
 /* 슬라이더 */

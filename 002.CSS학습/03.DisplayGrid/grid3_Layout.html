@@ -44,7 +44,18 @@
             }
 
             /* 그리드 박스 */
-            .grid {}
+            .grid {
+                  /* 그리드 박스 */
+                  display:grid;
+                /* 레이아웃 그리드는 격자구성으로 생각하며 12그리드로 구성해 본다 */
+                grid-template-columns: repeat(12,1fr);
+
+                max-width: 1200px;
+                margin: 0 auto;
+                margin-bottom: 200px;
+                /* 간격주기 */
+                gap:10px 5px;
+            }
 
             /* 컨텐츠 영역박스 공통 */
             .grid > div {
@@ -79,37 +90,52 @@
                 값 -> 시작라인번호 / 끝라인번호 */
             /* 1.로고 - 2개영역 */
             .logo {
+                grid-column: 1/3;
             }
 
             /* 2. GNB - 7개영역 */
             .gnb {
+                grid-column: 3/10;
             }
 
             /* 3. 상단 사이드 - 3개영역 */
             .side {
+                grid-column: 10/13;
                 /* 세로영역을 아랫쪽으로 설정 */
                 line-height: 610px;
+                /*그리드는 같은줄에 올 경우 가장 큰 높이값을 박스를
+                기준으로 나머지 같은 줄의 박스의 높이값을 강제로 늘려준다 */
+                grid-row: 1/3;
+                /* 앞의 박스에는 grid-row설정이 없고 이박스에만
+                1~3까지를 설정하면 이 박스는 두 줄에 걸쳐서 셋팅됨
+                앞의 박스는 자동으로 한줄만 셋팅됨! */
             }
 
             /* 4. 배너 -10개영역 */
             .ban {
+                grid-column: 1/10;
             }
 
             /* 5. 배너 사이드 - 2개영역 */
             .bnside {
+                grid-column: 4/13;
                 line-height: 300px;
             }
 
             /* 6. 하단좌측 - 3개영역 */
             .bleft {
+                grid-column: 1/4;
+                grid-row: 3/4;
             }
 
             /* 7. 하단정보 - 6개영역 */
             .binfo {
+                grid-column: 1/10;
             }
 
             /* 8. 하단우측 - 3개영역 */
             .bright {
+                grid-column: 10/13;
             }
 
             /************************************* 
@@ -140,9 +166,7 @@
                     grid-column: 1/13;
                     grid-row: auto;
                 }
-                .grid {
-                    grid-template-rows: auto;
-                }
+                
             }
 
             /* 미디어쿼리 700px이하 끝 */

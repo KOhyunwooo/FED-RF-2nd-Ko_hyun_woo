@@ -1,23 +1,31 @@
 @charset "utf-8";
 /* 도깨비 PJ : 메인페이지 CSS - main.css */
 
-/* 리셋, 코아, 커먼 공통 외부css 합치기 */
+/* 리셋, 코아, 커먼 공통 외부CSS 합치기 */
 @import url(./reset.css);
 @import url(./core.css);
 @import url(./common.css);
-@import url(./grid_12_flex.css);/* 그리드12 불러오기 */
-
+/* 그리드 12 불러오기 */
+@import url(./grid_12_flex.css);
 
 /* 공사중 표시 */
-/* body * {
-    outline: 2px dashed #ccc;
-} */
-
-/*********************************************************** 3. 인트로영역 ***********************************************************/
-.intro-area{
-    height: 100px;
+body * {
+    /* outline: 2px dashed #ccc; */
 }
-
+/* 메인파트 전체박스 */
+.main-area {
+    padding-top: 80px;
+    padding-bottom: 60px;
+}
+/* 메인파트 직계하위박스(겉박스) div 두번째부터
+패딩탑 위아래 간격주기 */
+.main-area>div+div{
+    padding-top: 60px;
+}
+/**************** 3. 인트로영역 ****************/
+.intro-area{
+    /* height: 575px; */
+}
 /*********** 방송편성소개파트 : .intro-part ***********/
 .main .intro-part .partbox {
     height: 455px;
@@ -63,8 +71,8 @@
     /* 부모자격 */
     aspect-ratio: 2/1.1;
 }
-/* 가상요소로 플레이버튼 만들기 
-->.off를 준 경우에만 가상요소 버튼보임
+/* 가상요소로 플레이버튼 만들기
+-> .off를 준 경우에만 가상요소 버튼보임
 따라서 비디오태그 넣을 경우 .off 지울것! */
 .intro-mv-img.off::after{
     content: '';
@@ -92,24 +100,117 @@
     padding-top: 10px;
 }
 
-
-
-
-
-
-/*********************************************************** 4. 미리보기영역 ***********************************************************/
+/************** 4. 미리보기영역 **************/
 .preview-area{
-    height: 803px;
+    /* height: 803px; 
+    -> 높이값을 지정하면 내용만큼 자동으로
+    높이값이 잡히지 않아서 매번 크기에 따라
+    값을 셋팅해야하므로 auto로 두자!
+    */
 }
-/*********************************************************** 5. 현장포토영역 ***********************************************************/
+.preview-box ul {
+    gap: 20px;
+}
+/* 리스트박스 */
+.preview-box li {
+    /* 한줄에 4개 플렉스 배치 - gap값 고려해서뺌 */
+    flex-basis: calc(100% / 4 - 15px);
+    padding: 24px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #222;
+    box-sizing: border-box;
+}
+/* 리스트 타이틀 */
+.preview-box li h3 {
+    font-size: 2rem;
+    color: #000;
+    font-weight: normal;
+}
+/* 리스트 내용 */
+.preview-box li p {
+    font-size: 1.5rem;
+    margin-top: 1.4rem;
+    color: #00000099;
+    line-height: 1.7;
+
+    /* 여러줄 말줄임표시 셋팅하기 */
+    display: -webkit-box;
+    overflow: hidden;
+    /* 말줄임표시 */
+    text-overflow: ellipsis;
+    /* 보여줄 라인수 셋팅속성 */
+    -webkit-line-clamp: 7;
+    /* 라인진행방향 셋팅 */
+    -webkit-box-orient: vertical;
+}
+/* 리스트박스 오버시 내용글자색 */
+.preview-box li:hover p {
+    color: #000;
+}
+
+/************** 5. 현장포토영역 **************/
 .real-photo-area{
-    height: 1043px;
+    /* height: 1043px; */
 }
-/*********************************************************** 6. 대표이미지 영역 ***********************************************************/
+/* 현장포토 그리드 박스 */
+.live-box ul{
+    display: grid;
+    /* 4개 컬럼동일비율 셋팅 */
+    grid-template-columns: repeat(4, 1fr);
+    /* 사이간격 */
+    grid-gap: min(20px,1.2vw);
+}
+/* 이미지 */
+.live-box img{
+    border-radius: 6px;
+    width: 100%;
+    cursor: pointer;
+}
+/* 이미지 타이틀 */
+.live-box figcaption{
+    font-size: 2rem;
+    padding-top: 1.4rem;
+
+}
+/************** 6. 대표이미지 영역 **************/
 .main-photo-area{
-    height: 731px;
+    /* height: 731px; */
 }
-/*********************************************************** 7. 최신동영상영역 ***********************************************************/
+/* 대표이미지 그리드 박스 */
+.poster-box ul{
+    display: grid;
+    /* 4개 컬럼동일비율 셋팅 */
+    grid-template-columns: repeat(4, 1fr);
+    /* 사이간격 */
+    grid-gap: min(20px,1.2vw);
+}
+/* 대표이미지 리스트 grid-row셋팅하기 
+->3줄로 세팅하려면 줄번호가 3번이 끝번호임! */
+/* 1번 */
+.poster-box li:nth-child(1){
+    grid-row:1/2;
+}
+.poster-box li:nth-child(1)~li:nth-child(-n+4){
+    grid-row:1/3;
+}
+
+.poster-box li:nth-child(5){
+    grid-row:2/3;
+}
+/* 이미지 */
+.poster-box img{
+    border-radius: 6px;
+    width: 100%;
+    cursor: pointer;
+}
+/* 이미지 타이틀 */
+.poster-box figcaption{
+    font-size: 2rem;
+    padding-top: 1.4rem;
+
+}
+/************** 7. 최신동영상영역 **************/
 .clip-video-area{
     height: 548px;
 }
