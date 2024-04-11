@@ -52,17 +52,27 @@ introMv.onclick = () => {
 
 **********************************************************/
 
-
 // 2. 미리보기 파트 내용 넣기 //////////
 ////////// 미리보기 구현 코드랩핑구역 시작 //////////////////////////////
 (() => {
-
     // 대상: .preview-box
     const previewBox = myFn.qs(".preview-box");
     // 데이터: dkb_data.js 의 previewData배열
     const pData = dkbData.previewData;
+    // 데이터 원본의 정렬을 내림차순으로 변경!
+    //배열값인 객체의 idx키 값을 기준으로
+    //내림차순 정렬을 할때 문자형 숫자이므로
+    //Number() 숫자 형변환 메서드로 싸서 숫자로서
+    //비교하여 정확한 내림차순이 되도록 한다!
+    pData.sort((a, b) =>
+        Number(a.idx) == Number(b.idx)
+            ? 0
+            : Number(a.idx) < Number(b.idx)
+            ? 1
+            : -1
+    );
     // 구조: ul>li>h3+p
-    
+
     // 1. 8개만 데이터를 html로 구성하여 넣는다!
     // html 코드변수
     let hcode = `<ul class="fx-box">`;
@@ -76,31 +86,26 @@ introMv.onclick = () => {
         </li>
         `;
     } //// for //////
-    
+
     hcode += `</ul>`;
-    
+
     // 데이터 확인
     console.log(hcode);
     // console.log('대상:',previewBox,'미리보기 data:',pData);
-    
+
     // 2. 화면출력하기 ///////
     previewBox.innerHTML = hcode;
-    
 })(); ///// 미리보기 코드랩핑구역 종료 //////////////////////////////
-
-
-
 
 // 3. 현장포토 파트 내용 넣기 //////////
 ////////// 현장포토 구현 코드랩핑구역 시작 //////////////////////////////
 (() => {
-
     // 대상: .live-box
     const liveBox = myFn.qs(".live-box");
     // 데이터: dkb_data.js 의 liveData배열
     const lvData = dkbData.liveData;
     // 구조: ul>li>figure>img + figcaption
-    
+
     // 1. 8개만 데이터를 html로 구성하여 넣는다!
     // html 코드변수
     let hcode = `<ul>`;
@@ -109,8 +114,7 @@ introMv.onclick = () => {
     // liveData 배열은 총8개임. 모두 돌기를 셋팅하자!
 
     //.jpg 확장자
-    lvData.forEach(v=>{
-
+    lvData.forEach((v) => {
         hcode += `
         <li>
         <figure>
@@ -119,33 +123,27 @@ introMv.onclick = () => {
         </figure>
         </li>
         `;
-    });/////////////forEach//////////////
-    
-    
+    }); /////////////forEach//////////////
+
     // hcode += `</ul>`;
-    
+
     // 데이터 확인
     // console.log(hcode);
-    console.log('대상:',liveBox,'현장포토 data:',lvData);
-    
+    console.log("대상:", liveBox, "현장포토 data:", lvData);
+
     // 2. 화면출력하기 ///////
     liveBox.innerHTML = hcode;
-    
 })(); ///// 현장포토 코드랩핑구역 종료 //////////////////////////////
-
-
-
 
 // 4. 대표이미지 파트 내용 넣기 //////////
 ////////// 대표이미지 구현 코드랩핑구역 시작 //////////////////////////////
 (() => {
-
     // 대상: .live-box
     const posterBox = myFn.qs(".poster-box");
     // 데이터: dkb_data.js 의 posterData배열
     const pData = dkbData.posterData;
     // 구조: ul>li>figure>img + figcaption
-    
+
     // 1. 8개만 데이터를 html로 구성하여 넣는다!
     // html 코드변수
     let hcode = `<ul>`;
@@ -154,8 +152,7 @@ introMv.onclick = () => {
     // posterData 배열은 총8개임. 모두 돌기를 셋팅하자!
 
     //.jpg 확장자
-    pData.forEach(v=>{
-
+    pData.forEach((v) => {
         hcode += `
         <li>
         <figure>
@@ -164,16 +161,71 @@ introMv.onclick = () => {
         </figure>
         </li>
         `;
-    });/////////////forEach//////////////
-    
-    
+    }); /////////////forEach//////////////
+
     // hcode += `</ul>`;
-    
+
     // 데이터 확인
     // console.log(hcode);
     // console.log('대상:',posterBox,'대표이미지 data:',pData);
-    
+
     // 2. 화면출력하기 ///////
     posterBox.innerHTML = hcode;
-    
 })(); ///// 대표이미지 코드랩핑구역 종료 //////////////////////////////
+
+
+
+
+
+
+//GNB메뉴 데이터////불러오기//////////////
+import gnbData from "../data/gnb_data.js";
+
+//gnb메뉴 코드 넣기
+//대상 :.gnb
+//데이터: gnbData는 객체니까 배열용 map()메서드 못씀!
+//그래서 gnbData를 키배열로 변환해서 사용함!
+//그리고 이 객체의 key는 상위메뉴 이기도 함!
+//Object.keys(객체)->해당객체의 속성명(키) 배열생성!
+console.log(Object.keys(gnbData));
+myFn.qs(".gnb").innerHTML = `
+<ul>
+    ${Object.keys(gnbData)
+        .map(
+            (v) => `
+        <li>
+        <a href="#">${v}</a>
+        ${
+            //서브메뉴 "없음"이면 빈값
+            //아니면 서브메뉴 출력!
+            //gnbData[키]->값을 가져옴!
+            gnbData[v] == "없음"
+                ? ""
+                : `
+            <div class="smenu">
+      <div class="swrap">
+        <h2>${v}</h2>
+        <ol>
+        ${gnbData[v]
+            .map(
+                (vSub) => `
+            <li>
+              <a href="#">${vSub}</a>
+            </li>
+            `
+            )
+            .join("")}
+          
+        </ol>
+      </div>
+    </div>
+            `
+        }
+
+        </li>
+        `
+        )
+        .join("")}
+</ul>
+`;
+0;
