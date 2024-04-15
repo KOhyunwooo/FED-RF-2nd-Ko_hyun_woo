@@ -65,11 +65,13 @@ body {
   transform: translateY(20%);
   opacity: 0;
   transition: 1.2s ease-in-out;
+  border-radius: 15%;
 }
 /* 스크롤 등장 클래스 .on */
 .set-it1.on{
   transform: translateY(0);
   opacity: 1;
+  border-radius: 0;
 }
 
 /* 스크롤 등장 초기화 클래스2 */
@@ -93,6 +95,13 @@ body {
 .set-it3.on{
   transform: translate(0,0) scale(1);
 }
+
+
+
+
+
+
+
 
 
 /* 등장하는 글자 셋팅 */

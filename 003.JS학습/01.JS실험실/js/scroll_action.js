@@ -111,6 +111,13 @@ function addOn(ele) {
   else ele.classList.remove("on");
 } ///////////// addOn 함수 //////////////
 
+
+
+
+
+
+
+
 // [ 글자등장 셋팅하기 ] /////////////////
 // 글자등장함수 //////
 function showLetters() {
