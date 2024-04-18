@@ -1,29 +1,6 @@
-코드 미리보기가 안나옴:ctrl+space 두번
-
-#id.class 줄 자체를 바꾸고 싶을떄 어떻게 하는지
-
-border: 1px solid 검정색선택하는 네모가 안나옴
-bd라고 치면 나옴
-
 https://youtu.be/bT-84iDJYFc?t=5677
 
 https://www.w3schools.com/\
 
 
-figcaption 폰트 사이즈 안바뀜 :<small>에 묶여있어서 그럼. 더 자세히 써야됨
-
-
-
-
-
-
-
-@charset "utf-8" 은 젠코드 없는지?????
-
-iframe 이 무엇???
-
-
-a:hover
-
-
-background와 background-image 차이 무엇?
+리턴이란?
