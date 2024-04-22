@@ -11,67 +11,29 @@ export default function setSlide(clsName) {
   // [1] 슬라이드 셋팅하기 ////////////
   // 슬라이드 대상요소 : .banbx
   const banBox = mFn.qsa("." + clsName);
-  ////console.log("슬라이드 대상:", banBox);
+  // console.log("슬라이드 대상:", banBox);
 
   // 슬라이드 만큼 모두 호출하기!
   banBox.forEach((ele) => {
+    // 하위슬라이드 선택요소(드래그 대상요소인 슬라이드)
+    let subSlide = mFn.qsEl(ele, ".slide");
+
     // 슬라이드 함수 호출하기
-    slideFn(ele);
+    slideFn(ele, subSlide);
     // 실제 DOM요소를 보낸다!
 
-    // [2] 드래그 요소 선택하여 셋팅하기 //////////
-    // 들어온 이름 "banbx" 하위 "slide" 클래스를 선택한다!
-    // 하위슬라이드 선택요소
-    let subSlide = mFn.qsEl(ele, ".slide");
-    ////console.log(subSlide);
-    // 슬라이드 함수 드래그 호출하기
-    goDrag(subSlide);
   }); /////// forEach ///////////
 } ///////////// setSlide 함수 //////////
 
-/***************************************************** 
-    [ 슬라이드 이동 기능정의 ]
-    1. 이벤트 종류: click
-    2. 이벤트 대상: 이동버튼(.abtn)
-    3. 변경 대상: 슬라이드 박스(.slide)
-    4. 기능 설계:
-
-        (1) 오른쪽 버튼 클릭시 다음 슬라이드가
-            나타나도록 슬라이드 박스의 left값을
-            -100%로 변경시킨다.
-            -> 슬라이드 이동후!!! 
-            바깥에 나가있는 첫번째 슬라이드
-            li를 잘라서 맨뒤로 보낸다!
-            동시에 left값을 0으로 변경한다!
-
-        (2) 왼쪽버튼 클릭시 이전 슬라이드가
-            나타나도록 하기위해 우선 맨뒤 li를
-            맨앞으로 이동하고 동시에 left값을
-            -100%로 변경한다.
-            그 후 left값을 0으로 애니메이션하여
-            슬라이드가 왼쪽에서 들어온다.
-
-        (3) 공통기능: 슬라이드 위치표시 블릿
-            - 블릿 대상: .indic li
-            - 변경 내용: 슬라이드 순번과 같은 순번의
-            li에 클래스 "on"주기(나머진 빼기->초기화!)
-
-*****************************************************/
-
-/* 
-(참고: JS에서 이름짓는 일반규칙)
-1. 변수/함수 : 캐믈케이스(첫단어소문자 뒷단어 대문자시작)
-2. 생성자함수/클래스 : 파스칼케이스(모든첫글자 대문자)
-3. 상수 : 모든글자 대문자(연결은 언더스코어-스네이크 케이스)
-*/
-
 /****************************************** 
- 함수명: slideFn
- 기능: 로딩 후 버튼 이벤트 및 기능구현
+    함수명: slideFn
+    기능: 로딩 후 버튼 이벤트 및 기능구현
+        + 드래그 이동기능(goDrag함수 합침)
  ******************************************/
-function slideFn(selEl) {
+function slideFn(selEl,slider) {
   // selEl 선택 슬라이드 부모 요소
-  ////console.log("슬라이드 함수 호출확인!");
+  // slider 드래그할 대상 슬라이드
+  // console.log("슬라이드 함수 호출확인!");
 
   // 0.슬라이드 공통변수 /////
   // 0-1. 광클금지상태변수 : 0-허용,1-불허용
@@ -90,7 +52,7 @@ function slideFn(selEl) {
   let indic = mFn.qsEl(sldWrap, ".indic");
 
   // 대상확인
-  ////console.log("대상", abtn, slide, indic);
+  // console.log("대상", abtn, slide, indic);
 
   // 1.4. 슬라이드 개수와 동일한 블릿동적생성
   // 대상: .indic -> indic변수
@@ -132,7 +94,7 @@ function slideFn(selEl) {
     setTimeout(() => (clickSts = 0), TIME_SLIDE); //해제!
 
     // 호출확인
-    ////console.log("나야나!", this, this.classList.contains("ab2"));
+    // console.log("나야나!", this, this.classList.contains("ab2"));
 
     // classList.contains(클래스명)
     // 선택요소에 해당클래스가 있으면 true
@@ -192,7 +154,7 @@ function slideFn(selEl) {
       .querySelectorAll("li")
       [isRight ? 1 : 0].getAttribute("data-seq");
 
-    ////console.log("현재슬라이드 순번:", nowSeq);
+    // console.log("현재슬라이드 순번:", nowSeq);
 
     // 2. 해당순번 블릿li에 클래스 on넣기
     // 블릿전체순회시 해당순번에 on넣고 나머지는 on빼기
@@ -245,7 +207,7 @@ function slideFn(selEl) {
       // 블릿변경함수호출(오른쪽은 1)
       chgIndic(1);
 
-      // ////console.log('실행!');
+      // // console.log('실행!');
       // 오른쪽버튼 클릭이벤트 강제발생!
       // 선택요소.click()
       //  abtn[1].click();
@@ -259,7 +221,7 @@ function slideFn(selEl) {
   function clearAuto() {
     // 자동넘김 지우기
     // clearInterval(인터발할당변수)
-    ////console.log("멈춤!!!");
+    // console.log("멈춤!!!");
 
     // 1. 인터발 지우기
     clearInterval(autoI);
@@ -269,28 +231,18 @@ function slideFn(selEl) {
     autoT = setTimeout(slideAuto, 5000);
     // 결과적으로 5초후 인터발재실행은 하나만 남는다!
   } //////////// clearAuto 함수 ///////////
-} //////////////// slideFn 함수 ///////////////
-/////////////////////////////////////////////
 
-/******************************************* 
-    [ 드래그 다중적용 함수 만들기 ]
-    함수명 : goDrag
-    기능 : 다중 드래그 기능 적용
+  ////////////////////////////////////////////
+  ////////// 드래그 기능 구현 구역 /////////////
+  /////////////////////////////////////////////
 
-    수정필요사항 체크
-    1) 드래그 시 위치이동 안되는 버그
-    (원인:top,left초기값 셋팅안될경우 에러)
-    2) z-index 초기화로 인한 순서변경 어색
-
-*******************************************/
-function goDrag(ele) {
-  // ele - 호출시 보내준 대상을 받는 변수
+  // slider - 전달된 대상 슬라이드
   // -> 하나씩 전달된 드래그 대상 요소임!
-  ////console.log(ele);
+  // console.log(slider);
 
   // 드래그 적용 대상 및 이벤트 설정하기 ////
   // 1. 대상선정 : 보내준 대상 HTML컬렉션
-  const dtg = ele;
+  const dtg = slider;
   // const dtg = mFn.qs('.dtg2');
 
   // 드래그할 대상의 CSS 기본값을 셋팅한다!
@@ -301,7 +253,7 @@ function goDrag(ele) {
   // .banbx의 width값 곱하기 2.2
   // 기준위치값 변수에 할당!
   let leftVal = mFn.qs(".banbx").offsetWidth * -2.2;
-  ////console.log("left 셋팅값:", leftVal);
+  // console.log("left 셋팅값:", leftVal);
   // left위치값 최초셋업! -> px단위 꼭 쓸것!!!
   dtg.style.left = leftVal + "px";
 
@@ -341,7 +293,7 @@ function goDrag(ele) {
     // e - 이벤트 객체 전달변수
     // 드래그 상태는 dragSts값이 true인 경우에만 허용!
     if (dragSts) {
-      // ////console.log('드래그중~!');
+      // // console.log('드래그중~!');
 
       // 1. 드래그 상태에서 움질일대 포인터 위치값
       // - 브라우저용 포인터 위치는 pageX, pageY를 사용!
@@ -352,7 +304,7 @@ function goDrag(ele) {
       // ->>> 두 할당문중 값이 유효한(true)값이 할당됨!
       // DT용 코드와 Mobile코드를 동시에 셋팅할 수 있다!
       moveX = e.pageX || e.touches[0].screenX;
-      // ////console.log(e.touches[0]);
+      // // console.log(e.touches[0]);
       // moveX = e.pageX;
       // moveY = e.pageY;
 
@@ -373,8 +325,8 @@ function goDrag(ele) {
       // 최종 이동위치값이 더해진다!
 
       // 값확인
-      //console.log(`moveX: ${moveX}`);
-      //console.log(`resultX: ${resultX}`);
+      // console.log(`moveX: ${moveX}`);
+      // console.log(`resultX: ${resultX}`);
     } //// if ////////
 
     // 드래그 중(dragSts===true)일때는 주먹손(grabbing),
@@ -388,7 +340,7 @@ function goDrag(ele) {
     firstX = e.pageX || e.touches[0].screenX;
     // firstX = e.pageX;
     // firstY = e.pageY;
-    //console.log("첫포인트:", firstX);
+    // console.log("첫포인트:", firstX);
   }; ///////// firstPoint 함수 //////////
 
   // (5) 마지막 위치포인트 셋팅함수 : lastX, lastY 값셋팅
@@ -397,7 +349,7 @@ function goDrag(ele) {
   const lastPoint = () => {
     // 이동결과 계산된 최종값을 기존값에 더함(+=)
     lastX += resultX;
-    //console.log("끝포인트:", lastX);
+    // console.log("끝포인트:", lastX);
   }; ///////// lastPoint 함수 //////////
 
   // 4. 드래그 이벤트 설정하기 //////////
@@ -416,7 +368,7 @@ function goDrag(ele) {
     // z-index 전역변수(zNum) 숫자를 1씩 높이기
     // dtg.style.zIndex = ++zNum;
 
-    //console.log("마우스 다운!", dragSts);
+    // console.log("마우스 다운!", dragSts);
   }); ///////// mousedown //////////
 
   // (2) 마우스 업 이벤트 함수연결하기
@@ -432,7 +384,7 @@ function goDrag(ele) {
     // 대상의 left값 찍기
     console.log('슬라이드left:',dtg.style.left);
 
-    //console.log("마우스 업!", dragSts);
+    // console.log("마우스 업!", dragSts);
   }); ///////// mouseup //////////
 
   // (3) 마우스 무브 이벤트 함수연결하기
@@ -448,7 +400,7 @@ function goDrag(ele) {
     // 단, style위치값 코드는 'px'단위가 있으므로 parseInt처리!
     lastX = parseInt(dtg.style.left);
 
-    ////console.log("마우스나감!", dragSts);
+    // console.log("마우스나감!", dragSts);
   }); ///////// mouseleave //////////
 
   //////////// 모바일 이벤트 처리 구역 //////////
@@ -465,7 +417,7 @@ function goDrag(ele) {
     // z-index 전역변수(zNum) 숫자를 1씩 높이기
     // dtg.style.zIndex = ++zNum;
 
-    ////console.log("터치스타트!", dragSts);
+    // console.log("터치스타트!", dragSts);
   }); ///////// touchstart //////////
 
   // (2) 터치엔드 이벤트 함수연결하기
@@ -475,11 +427,11 @@ function goDrag(ele) {
     // 마지막 위치포인트 셋팅!
     lastPoint();
 
-    ////console.log("터치엔드!", dragSts);
+    // console.log("터치엔드!", dragSts);
   }); ///////// touchend //////////
 
   // (3) 터치무브 이벤트 함수연결하기
   mFn.addEvt(dtg, "touchmove", dMove);
   //////////// touchmove /////////////
-} /////////////// goDrag 함수 ///////////////
+} /////////////// slideFn 함수 ///////////////
 /////////////////////////////////////////////
