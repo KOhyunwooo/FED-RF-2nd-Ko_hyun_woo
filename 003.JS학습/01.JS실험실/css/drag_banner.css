@@ -117,12 +117,13 @@ ol {
     filter: brightness(70%);
     
     /* 트랜지션 */
-    transition: .4s ease-in-out;
+    /* transition: .4s ease-in-out; */
 }
-/* 3번째가 주인공이므로 원래밝기로 조금 크게변경! */
-.slide li:nth-child(3){
+/* li.on 주인공이므로 원래밝기로 조금 크게변경! */
+.slide li.on{
     filter: brightness(100%);
     transform: scale(1.1);
+    transition:0.5s ease-out;
 }
 .slide li img {
     /*이미지는 박스에 맞춤!*/

@@ -8,3 +8,6 @@ https://www.w3schools.com/\
 표현식?
 
 구문?
+
+
+선언적 함수? 호출형 함수?
