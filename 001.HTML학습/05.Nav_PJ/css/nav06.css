@@ -27,11 +27,24 @@ html,body{
     /* outline: 5px dotted blue; */
 }
 
+/* 가상요소로 드래그 막기장치 */
+.banbx.on::after{
+    content: "";
+    position:absolute;
+    transform: scaleY(1.1);
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    z-index:99;
+    /* background-color: rgba(43, 55, 224, 0.5); */
+}
+
 .slide {
     display: flex;
     /* 플렉스박스!!! */
-    gap: 0 5vw;
-    /* 양쪽간격 5vw */
+    gap: 0 10%;
+    /* 양쪽간격 기준박스의 10%크기 */
 
     /*사진을 싸고 있는 슬라이드*/
     position: absolute;
@@ -68,8 +81,8 @@ html,body{
     /* 트랜지션 */
     transition: .4s ease-out;
 }
-/* 3번째가 주인공이므로 원래밝기로 조금 크게변경! */
-.slide li:nth-child(3){
+/* 클래스가 on이 주인공이므로 원래밝기로 조금 크게변경! */
+.slide li.on{
     filter: brightness(100%);
     transform: scale(1.1);
 }
@@ -151,5 +164,48 @@ html,body{
     /*회색이미지만 투명하게*/
     opacity: 1;
     /*우선적용!*/
+}
+
+
+
+/* 서브 컨텐츠 */
+.sub-cont{
+    display: flex;
+    max-width: 1200px;
+    aspect-ratio: 2/1.1;
+    /* height: 500px; */
+    margin: 0 auto;
+    padding: 50px 0;
+}
+/* 파티션 박스 */
+.sub-cont>div{
+    flex: 1;
+    outline: 2px dashed lightpink;
+}
+/* 서브 컨텐츠 오른쪽박스 */
+.cont-right-box{
+    overflow: hidden;
+}
+
+/* 서브 배너 디자인 변경하기 
+-> scale 1.1배에 대한 보정으로
+크기를 박스에 맞춤!*/
+.sub-banbx {    
+    left: 3.2%;
+    width: 92.2%;
+    aspect-ratio: 1;
+}
+
+.sub-banbx .ab1 {
+    left: 15px;
+}
+
+.sub-banbx .ab2 {
+    right: 15px;
+}
+/* 사이간격은 그대로 두고 li크기를
+키워서 사이간격 없애기 셋팅 */
+.sub-slide li{
+    transform: scale(1.1);
 }
 

@@ -76,7 +76,26 @@ ol {
     box-sizing: border-box;
     
     outline: 5px dotted blue;
+
+    /* 드래그 선택영영 안바히게 하기 */
+    -webkit-user-drag: none;
+    user-select: none;
 }
+
+/* 배너 최상위 박스에 드래그 막기 장치 가상요소 */
+.banbx.on::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    z-index: 99;
+    background-color: rgba(0, 255, 0, 0.363);
+    transform: scale(1.1);
+    
+}
+
 
 .slide {
     display: flex;
