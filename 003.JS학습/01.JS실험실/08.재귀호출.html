@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08.재귀호출: 무한이동 갤러리</title>
+    <script type="module" src="./js/call_myself.js"></script>
+    
+    <!--**************************************** css구간 ****************************************-->
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+            
+        }
+        .gbox{
+            overflow: hidden;
+            
+        }
+        .gbox ul{
+            translate: 10%;
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            
+        }
+        .gbox li{
+            width: 25vw;
+            flex-shrink: 0;/* fxs:플렉스 부모박스 크게에 맞춰줄여라 
+            0을쓰면 아니! 안줄여 이런뜻임!*/
+            aspect-ratio: 664/443;
+            padding: 1vw;
+            box-sizing: border-box;
+        }
+        .gbox li img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 이미지에 호버시 크기 커지게 */
+        .gbox li img:hover{
+           transform: scale(1.1);
+           transition: .2s ease-in;
+        }
+        </style>
+        <!--**************************************** /css구간 ****************************************-->
+        
+
+</head>         
+<body>
+    <h1>08.재귀호출: 무한이동 갤러리</h1>
+    <div class="gbox">
+        
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
