@@ -44,7 +44,7 @@
         const newArr3 = arr1.map(val=>`<h1>${val}</h1>`)
         // console.log('새배열3:',newArr3);
         
-        // 5. JS 구조화 //////////////////
+        // 5. JS 비구조화 할당(구조분해할당)//////////////////
         // -> 배열의 값을 각각의 변수에 담는 방법
         // 기존방식은 무엇?
         const list = ['현대','삼성','LG'];
@@ -59,9 +59,13 @@
         const home = ['의자','TV','노트북'];
         // 변수를 한꺼번에 선언하여 배열값을 각각 할당함!
         let [chair,tv,notebook] = home;
-        // console.log('구조화방식으로 배열값 변수할당:',
-        //chair,tv,notebook);
+        // console.log('구조화방식으로 배열값 변수할당:',chair,tv,notebook);
         
+        const home2 = ["엄마", "아빠", "동생"];
+        // 변수를 한꺼번에 선언하여 배열값을 각각 할당함!
+        // 중간값을 건너 뛸 경우 콤마로 비워둔다!
+        let [mom, , bro] = home2;
+        console.log("구조분해할당으로 배열값 변수할당:", mom, bro);
 
         // 6. 모듈 문법 : 03.JS모듈
 
