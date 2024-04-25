@@ -42,15 +42,73 @@
         /* 이미지에 호버시 크기 커지게 */
         .gbox li img:hover{
            transform: scale(1.1);
-           transition: .2s ease-in;
+           transition: .2s ease-in-out;
         }
+        
+        /* 프로그래스 바 */
+        .progress{
+            display: flex;
+        }
+        /* 준비/출발 글자 박스 */
+        .txt{
+            
+            font-size: 40px;
+            color: rgb(255, 115, 139);
+            line-height: 60px;
+            padding: 0 10px;
+        }
+        /* 퍼센트바 */
+        .pbar{
+            /* .bar의 부모자격 */
+            position: relative;
+            /* box-sizing: border-box; */
+            width: 500px;
+            height: 60px;
+            line-height: 60px;
+            border: 2px solid gray;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #ccc;
+            /* 글자 그림자로 1px글자 외곽선 만들기 */
+            text-shadow: 
+            1px 0  #000,
+            -1px 0  #000,
+            0 1px  #000,
+            0 -1px  #000;
+        }
+        /* 퍼센트 글자박스 */
+        .pNum{
+            position: relative;
+            z-index: 1;
+        }
+        /* 증가표시바 */
+        .bar{
+            position: absolute;
+            width: 0;
+            height: 100%;
+            left: 0;
+            background-color: blue;
+        }
+
+        
         </style>
         <!--**************************************** /css구간 ****************************************-->
+        
+
         
 
 </head>         
 <body>
     <h1>08.재귀호출: 무한이동 갤러리</h1>
+    <div class="progress">
+        <span class="txt">준비!</span>
+        <div class="pbar">
+            <span class="pNum"></span>
+            <span class="bar"></span>
+        </div>
+    </div>
     <div class="gbox">
         
     </div>
