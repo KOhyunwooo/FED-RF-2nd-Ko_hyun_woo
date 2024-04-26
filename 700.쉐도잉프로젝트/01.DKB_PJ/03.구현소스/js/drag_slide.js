@@ -397,10 +397,12 @@ function slideFn(selEl) {
       let oneSize = currList[0].offsetWidth;
       // (4) 마지막위치 한계값 left
       // -> 히든박스width - 전체 슬라이드 width
-      let limitSize= selEl.offsetWidth - 
+      // 전체 슬라이드 width = li한개당width * 슬라이드개수
+      let limitSize = 
+      selEl.offsetWidth - (oneSize * listLength);
+      console.log('마지막한계left:',limitSize);
 
-
-      // 4-1. 맨앞에서 튕기기
+      // 4-1. 맨앞에서 튕기기 ////////////
       if(parseInt(dtg.style.left)>0){
         // 약간의 시간간격으로 조금 간후 튕겨서 돌아오는 효과
         setTimeout(() => {
@@ -408,6 +410,17 @@ function slideFn(selEl) {
           dtg.style.left = "0";
           // 마지막 위치값 0
           lastX = 0;
+        }, 200);
+      } ////// if /////////
+
+      // 4-2. 맨뒤에서 튕기기 ////////////
+      if(parseInt(dtg.style.left)<limitSize){
+        // 약간의 시간간격으로 조금 간후 튕겨서 돌아오는 효과
+        setTimeout(() => {
+          // left 값 0
+          dtg.style.left = limitSize + "px";
+          // 마지막 위치값 0
+          lastX = limitSize;
         }, 200);
       } ////// if /////////
 
