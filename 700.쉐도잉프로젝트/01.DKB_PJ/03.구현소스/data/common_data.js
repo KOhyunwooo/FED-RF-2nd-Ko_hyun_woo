@@ -1,212 +1,206 @@
 // 공통요소 데이터 객체 - common_data.js
+
 const comData = {
-    //1. 상단영역 코드
-    topArea: `
-    
+    // 1. 상단영역 코드
+    topArea:`    
     <header class="top-area inbox">
-    <!-- 1-1.로고/GNB파트 -->
-    <div class="cont-box">
-      <!-- 1-1-1.로고 -->
-      <div class="col-2">
-        <h1 class="mlogo">
-          <img src="03.구현소스/images/tvnlogo2.png" alt="메인tvN로고" />
-        </h1>
-      </div>
-      <!-- 1-1-2.GNB -->
-      <div class="col-10">
-        <!-- Top메뉴 -->
-        <nav class="top-menu">
-          <ul>
-            <li>
-              <a href="#">로그인</a>
-            </li>
-            <li>
-              <a href="#">회원가입</a>
-            </li>
-            <li>
-              <a href="#">검색</a>
-            </li>
-          </ul>
-        </nav>
-        <!-- GNB메뉴 -->
-        <nav class="gnb"></nav>
-      </div>
-    </div>
-  </header>
-`,
-    //2. 하단영역 코드
-    footerArea: `
-    
-    <footer class="footer-area inbox">
-    <!-- <h2 class="temp-tit">8. 하단영역</h2> -->
-    <div class="cont-box">
-      <!-- 하단링크박스 영역 -->
-      <div class="col-8">
-        <aside class="info-link">
-          <ul>
-            <li>
-              <a href="#">회사소개</a>
-            </li>
-            <li>
-              <a href="#">광고/제휴문의</a>
-            </li>
-            <li>
-              <a href="#">이용약관</a>
-            </li>
-            <li>
-              <a href="#">개인정보 처리방침</a>
-            </li>
-            <li>
-              <a href="#">청소년보호정책</a>
-            </li>
-            <li>
-              <a href="#">법적고지</a>
-            </li>
-            <li>
-              <a href="#">이메일무단수집거부</a>
-            </li>
-            <li>
-              <a href="#">큐톤표</a>
-            </li>
-            <li>
-              <a href="#">고객센터</a>
-            </li>
-            <li>
-              <a href="#">공지사항</a>
-            </li>
-          </ul>
-        </aside>
-      </div>
-      <!-- 바로가기 콤보박스 영역 -->
-      <div class="combo-area col-4">
-        <select name="brand" id="brand">
-          <option value="어쩌구">저쩌구</option>
-          <option value="어쩌구">저쩌구</option>
-          <option value="어쩌구">저쩌구</option>
-        </select>
-        <select name="corp" id="corp">
-          <option value="어쩌구">저쩌구</option>
-        </select>
-      </div>
-      <!-- 하단로고박스 영역 -->
-      <div class="col-3">
-        <!-- 하단로고 -->
-      <h1 class="footer__logo">
-        <img src="03.구현소스/images/tvnlogo2.png" alt="" />
-      </h1>
-      </div>
-      <!-- 회사주소박스 영역 -->
-      <div class="col-9">
-        <address class="corp-info">
-          시청자 상담실 (편성 문의 및 시청자 의견) : 080-080-0780 <br />
-          (주)씨제이이엔엠?대표이사 : 구창근, 윤상현 사업자정보확인 <br />
-          본점 : (06761) 서울시 서초구 과천대로 870-13 사업장 : (03926) 서울시
-          마포구 상암산로 66 사업자 등록번호 : 106-81-51510 개인정보
-          보호책임자 : 강봉관
-        </address>
-      </div>
-      <!-- SNS박스 영역 -->
-      <div class="col-3">
-        <aside class="sns-box">
-          <ul>
-            <li>
-              <a href="#" class="fa-brands fa-instagram">
-                <span class="ir"> 인스타그램 </span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="fa-brands fa-facebook">
-                <span class="ir"> 페이스북 </span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="fa-brands fa-twitter">
-                <span class="ir"> 트위터 </span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="fa-brands fa-youtube">
-                <span class="ir"> 유튜브 </span>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="fa-solid fa-play">
-                <span class="ir"> 네이버 TV </span>
-              </a>
-            </li>
-          </ul>
-        </aside>
-      </div>
-    </div>
-  </footer>
-`,
-    //3. 스티키 메뉴 코드
-    stkMenu:`
-    <nav class="spart-menu inbox">
-      <ul>
-        <li class="on">
-          <a href="#">메인</a>
-        </li>
-        <li class="be-sub">
-          <a href="#intro-part">프로그램 소개</a>
-          <!-- 서브메뉴 -->
-          <div class="spart-sub-menu">
-            <ol>
-              <li>
-                <a href="#intro-part">프로그램 소개</a>
-              </li>
-              <li>
-                <a href="#">인물 소개</a>
-              </li>
-              <li>
-                <a href="#">인물 관계도</a>
-              </li>
-            </ol>
-          </div>
-        </li>
-        <li>
-          <a href="#preview-part">미리보기</a>
-        </li>
-        <li>
-          <a href="#clip-area">동영상</a>
-        </li>
-        <li class="be-sub">
-          <a href="#live-photo-area">사진첩</a>
-          <!-- 서브메뉴 -->
-          <div class="spart-sub-menu">
-            <ol>
-              <li>
-                <a href="#live-photo-area">현장 포토</a>
-              </li>
-              <li>
-                <a href="#poster-area">대표 포스터</a>
-              </li>
-            </ol>
-          </div>
-        </li>
-        <li>
-          <a href="#clip-area">OST</a>
-        </li>
-      </ul>
-
-
-
-
-    </nav>
-  
+        <!-- 1-1.로고/GNB파트 -->
+        <div class="cont-box">
+        <!-- 1-1-1.로고 -->
+        <div class="col-2">
+            <h1 class="mlogo">
+            <img src="./images/tvnlogo2.png" alt="메인tvN로고" />
+            </h1>
+        </div>
+        <!-- 1-1-2.GNB -->
+        <div class="col-10">
+            <!-- Top메뉴 -->
+            <nav class="top-menu">
+            <ul>
+                <li>
+                <a href="#">로그인</a>
+                </li>
+                <li>
+                <a href="#">회원가입</a>
+                </li>
+                <li>
+                <a href="#">검색</a>
+                </li>
+            </ul>
+            </nav>
+            <!-- GNB메뉴 -->
+            <nav class="gnb"></nav>
+        </div>
+        </div>
+    </header>
     `,
+    // 2. 하단영역 코드
+    footerArea:`    
+    <footer class="footer-area inbox">
+        <div class="cont-box">
+        <!-- 하단링크박스 영역 -->
+        <div class="col-8">
+            <aside class="info-link">
+            <ul>
+                <li>
+                <a href="#">회사소개</a>
+                </li>
+                <li>
+                <a href="#">광고/제휴문의</a>
+                </li>
+                <li>
+                <a href="#">이용약관</a>
+                </li>
+                <li>
+                <a href="#">개인정보 처리방침</a>
+                </li>
+                <li>
+                <a href="#">청소년보호정책</a>
+                </li>
+                <li>
+                <a href="#">법적고지</a>
+                </li>
+                <li>
+                <a href="#">이메일무단수집거부</a>
+                </li>
+                <li>
+                <a href="#">큐톤표</a>
+                </li>
+                <li>
+                <a href="#">고객센터</a>
+                </li>
+                <li>
+                <a href="#">공지사항</a>
+                </li>
+            </ul>
+            </aside>
+        </div>
+        <!-- 바로가기 콤보박스 영역 -->
+        <div class="combo-area col-4">
+            <select name="brand" id="brand">
+            <option value="어쩌구">저쩌구</option>
+            <option value="어쩌구">저쩌구</option>
+            <option value="어쩌구">저쩌구</option>
+            </select>
+            <select name="corp" id="corp">
+            <option value="어쩌구">저쩌구</option>
+            </select>
+        </div>
+        <!-- 하단로고박스 영역 -->
+        <div class="col-12">
+            <!-- 하단로고 -->
+            <h1 class="footer__logo">
+            <img src="./images/tvnlogo2.png" alt="" />
+            </h1>
+        </div>
+        <!-- 회사주소박스 영역 -->
+        <div class="col-9">
+            <address class="corp-info">
+            시청자 상담실 (편성 문의 및 시청자 의견) : 080-080-0780 <br />
+            (주)씨제이이엔엠?대표이사 : 구창근, 윤상현 사업자정보확인 <br />
+            본점 : (06761) 서울시 서초구 과천대로 870-13 사업장 : (03926)
+            서울시 마포구 상암산로 66 사업자 등록번호 : 106-81-51510 개인정보
+            보호책임자 : 강봉관
+            </address>
+        </div>
+        <!-- SNS박스 영역 -->
+        <div class="col-3">
+            <aside class="sns-box">
+            <ul>
+                <li>
+                <a href="#" class="fa-brands fa-instagram">
+                    <span class="ir"> 인스타그램 </span>
+                </a>
+                </li>
+                <li>
+                <a href="#" class="fa-brands fa-facebook">
+                    <span class="ir"> 페이스북 </span>
+                </a>
+                </li>
+                <li>
+                <a href="#" class="fa-brands fa-twitter">
+                    <span class="ir"> 트위터 </span>
+                </a>
+                </li>
+                <li>
+                <a href="#" class="fa-brands fa-youtube">
+                    <span class="ir"> 유튜브 </span>
+                </a>
+                </li>
+                <li>
+                <a href="#" class="fa-solid fa-play">
+                    <span class="ir"> 네이버 TV </span>
+                </a>
+                </li>
+            </ul>
+            </aside>
+        </div>
+        </div>
+    </footer>
 
-    //4. 배너영역 코드
-    banArea: `
+    `,
+    // 3. 드라마 파트메뉴 코드
+    spartMenu:`        
+      <nav class="spart-menu inbox">
+        <ul>
+            <li class="on">
+            <a href="#">메인</a>
+            </li>
+            <li class="be-sub">
+            <a href="#intro-part">프로그램 소개</a>
+            <!-- 서브메뉴 -->
+            <div class="spart-sub-menu">
+                <ol>
+                <li>
+                    <a href="#intro-part">프로그램 소개</a>
+                </li>
+                <li>
+                    <a href="#">인물 소개</a>
+                </li>
+                <li>
+                    <a href="#">인물 관계도</a>
+                </li>
+                </ol>
+            </div>
+            </li>
+            <li>
+            <a href="#preview-part">미리보기</a>
+            </li>
+            <li>
+            <a href="#clip-area">동영상</a>
+            </li>
+            <li class="be-sub">
+            <a href="#live-photo-area">사진첩</a>
+            <!-- 서브메뉴 -->
+            <div class="spart-sub-menu">
+                <ol>
+                <li>
+                    <a href="#live-photo-area">현장 포토</a>
+                </li>
+                <li>
+                    <a href="#poster-area">대표 포스터</a>
+                </li>
+                </ol>
+            </div>
+            </li>
+            <li>
+            <a href="#clip-area">OST</a>
+            </li>
+        </ul>
+        </nav>    
+    `,
+    // 4. 배너영역 코드
+    banArea:`    
     <!-- 배너는 중앙속박스 적용안함! -->
     <section class="ban-area">
       <h2 class="temp-tit">2. 배너영역</h2>
+
       <!-- 이동버튼 -->
-      <div class="btn-box" >
-        <a href="#" class="abtn ab1"> <<< </a>
-        <a href="#" class="abtn ab2"> >>> </a>
+      <div class="btn-box">
+        <a href="#" class="abtn ab1">이전</a>
+        <a href="#" class="abtn ab2">다음</a>
       </div>
-      
+
       <!-- 블릿박스 -->
       <div class="indic-box">
         <ol class="indic"></ol>
@@ -217,8 +211,8 @@ const comData = {
           <!-- 슬라이드 박스 -->
           <div class="slide-box">
             <ul class="slider"></ul>
-            
-            <!-- 이벤트 커버박스 이것이 이동버튼 기능역할도 함!-->
+            <!-- 이벤트 커버박스
+            이것이 이동버튼 기능역할도 함! -->
             <div class="evt-cover">
               <aside class="ab1"></aside>
               <aside class="ab2"></aside>
@@ -231,11 +225,11 @@ const comData = {
               <article>
                 <!-- 이미지박스 -->
                 <div class="imbx">
-                  <img src="03.구현소스/images/dc1.png" alt="공유" />
+                  <img src="./images/dc1.png" alt="공유" />
                   <!-- 이름이미지박스 -->
                   <span class="iname">
-                    <img src="03.구현소스/images/d011.png" alt="흐린이름" />
-                    <img src="03.구현소스/images/d01.png" alt="진한이름" />
+                    <img src="./images/d011.png" alt="흐린이름" />
+                    <img src="./images/d01.png" alt="진한이름" />
                   </span>
                 </div>
                 <!-- 설명박스 -->
@@ -272,11 +266,11 @@ const comData = {
               <article>
                 <!-- 이미지박스 -->
                 <div class="imbx">
-                  <img src="03.구현소스/images/dc2.png" alt="김고은" />
+                  <img src="./images/dc2.png" alt="김고은" />
                   <!-- 이름이미지박스 -->
                   <span class="iname">
-                    <img src="03.구현소스/images/d022.png" alt="흐린이름" />
-                    <img src="03.구현소스/images/d02.png" alt="진한이름" />
+                    <img src="./images/d022.png" alt="흐린이름" />
+                    <img src="./images/d02.png" alt="진한이름" />
                   </span>
                 </div>
                 <!-- 설명박스 -->
@@ -309,11 +303,11 @@ const comData = {
               <article>
                 <!-- 이미지박스 -->
                 <div class="imbx">
-                  <img src="03.구현소스/images/dc3.png" alt="이동욱" />
+                  <img src="./images/dc3.png" alt="이동욱" />
                   <!-- 이름이미지박스 -->
                   <span class="iname">
-                    <img src="03.구현소스/images/d033.png" alt="흐린이름" />
-                    <img src="03.구현소스/images/d03.png" alt="진한이름" />
+                    <img src="./images/d033.png" alt="흐린이름" />
+                    <img src="./images/d03.png" alt="진한이름" />
                   </span>
                 </div>
                 <!-- 설명박스 -->
@@ -347,11 +341,11 @@ const comData = {
               <article>
                 <!-- 이미지박스 -->
                 <div class="imbx">
-                  <img src="03.구현소스/images/dc4.png" alt="유인나" />
+                  <img src="./images/dc4.png" alt="유인나" />
                   <!-- 이름이미지박스 -->
                   <span class="iname">
-                    <img src="03.구현소스/images/d044.png" alt="흐린이름" />
-                    <img src="03.구현소스/images/d04.png" alt="진한이름" />
+                    <img src="./images/d044.png" alt="흐린이름" />
+                    <img src="./images/d04.png" alt="진한이름" />
                   </span>
                 </div>
                 <!-- 설명박스 -->
@@ -383,7 +377,9 @@ const comData = {
         </div>
       </div>
     </section>
-  `,
-}; ////comData 객체//////
+  
+    `,
+
+}; /////////// comData 객체 ////////////////
 
 export default comData;

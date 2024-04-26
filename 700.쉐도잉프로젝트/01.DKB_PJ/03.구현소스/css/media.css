@@ -5,11 +5,13 @@
 /********* 최대사이즈 1024px 이하 시작 *********/
 @media screen and (max-width: 1024px) {
   /* 내가 직접 수정한것! */
+
   /* 미리보기 한줄에 2개씩 */
   .preview-box li {
-    /* 한줄에 4개 플렉스 배치 - gap값 고려해서뺌 */
     flex-basis: calc(100% / 2 - 15px);
   }
+
+
   /* x축 스크롤없앰 -> html,body에 줄때
   하위 박스중 sticky박스가 작동하지 않음!
   따라서 body>* 박스에 이것을 준다! */
@@ -56,7 +58,7 @@
     padding-top: 59px;
   }
   /* 상단영역 고정 */
-  #header {
+  #top-area {
     position: fixed;
     top: 0;
     left: 0;
@@ -79,7 +81,7 @@
     transition: left 0.4s ease-in-out;
   }
   /* 메뉴박스 등장 */
-  .header.on .gnb {
+  .top-area.on .gnb {
     left: 0;
   }
 
@@ -125,27 +127,20 @@
     grid-row: 5/6;
     grid-column: 2/3;
   }
-  
+
   /* 대표이미지 */
   .poster-box ul {
     /* 한줄에 2개씩 */
     grid-template-columns: repeat(2, 1fr);
     /* 4줄 생성하기:이동배치위해 repeat(개수,특정크기) */
-    /* grid-template-rows: repeat(4, 34vw);
+    /* grid-template-rows: repeat(4, 34vw); */
     /* grid-template-rows: auto; */
   }
-  /* 공유, 이동욱 포스터 */
-  /* .poster-box ul li:nth-child(4) {
-    grid-row: 3;
-    grid-column: 2;
-  }
-  /* 공유, 이동욱, 육성재 포스터 */
-  /* .poster-box ul li:nth-child(5) {
-    grid-row: 4;
-  } */
-  .poster-box ul li{
+  /* 공통 */
+  .poster-box ul li {
     grid-row: auto !important;
-    }
+  }
+  
 
   /* 최신동영상 - 한번에 2개만 보이기 */
   .clip-box li {
