@@ -5,6 +5,7 @@
 @import url(./reset.css);
 @import url(./core.css);
 @import url(./common.css);
+@import url(./drag_slide.css);
 /* 그리드 12 불러오기 */
 @import url(./grid_12_flex.css);
 

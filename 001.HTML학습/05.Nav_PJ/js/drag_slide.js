@@ -390,8 +390,14 @@ function slideFn(selEl) {
   const dMove = (e) => {
     // e - 이벤트 객체 전달변수
     // 드래그 상태는 dragSts값이 true인 경우에만 허용!
+    
+    // 이동버튼+블릿 이벤트 없앰 설정하기
+    // 상위 selEl에 클래스 .no 주면된다!
+    if (dragSts) selEl.classList.add('no');
+    else selEl.classList.remove('no');
+    
     if (dragSts) {
-
+      
       // 0. 자동넘김 멈춤함수 호출하기
       // clearAuto();
   
@@ -512,12 +518,14 @@ function slideFn(selEl) {
 
   // (1) 마우스 다운 이벤트 함수연결하기
   mFn.addEvt(dtg, "mousedown", (e) => {
-     //드래그시 버튼,인딕 마우스이벤트막기
+    //  드래그시 버튼,인딕 마우스이벤트막기(ver.노영)
       abtn.forEach(x=>x.style.pointerEvents = "none");
       abtn.forEach(x=>x.style.zIndex ='-1');
       indic.forEach(x=>x.style.pointerEvents = "none"); 
-      indic.forEach(x=>x.style.opacity = "0.5"); 
+    
       
+
+
     // 0. 자동넘김 멈춤함수 호출하기
     // clearAuto();
     // 자동호출을 지우기만 해서 자동시작안함!
@@ -542,12 +550,14 @@ function slideFn(selEl) {
 
   // (2) 마우스 업 이벤트 함수연결하기
   mFn.addEvt(dtg, "mouseup", (e) => {
-     //드래그끝나면 버튼,인딕 마우스이벤트열기
+    //  드래그끝나면 버튼,인딕 마우스이벤트열기(ver.노영)
      abtn.forEach(x=>x.style.pointerEvents = "all");
      abtn.forEach(x=>x.style.zIndex ='0');
      indic.forEach(x=>x.style.pointerEvents = "all"); 
-     indic.forEach(x=>x.style.opacity = "1"); 
-     
+   
+
+
+
     // 0. 자동넘김 멈춤함수 호출하기
     clearAuto();
     
@@ -572,7 +582,12 @@ function slideFn(selEl) {
   // (4) 마우스가 대상을 벗어나면 드래그상태값 false처리하기
   mFn.addEvt(dtg, "mouseleave", () => {
     // 드래그 상태값 false로 변경!
-    dFalse();
+    
+    setTimeout(dFalse,0);
+    
+    //마우스가 벗어나면 이동판별함수 호출!
+    if(dragSts)moveDragSlide();
+    
     // 과도한 드래그로 갑자가 아웃되면 lastX,lastY값이
     // 셋팅되지 못한다! 이것을 기존 요소의 위치값으로 보정함!
     // 단, style위치값 코드는 'px'단위가 있으므로 parseInt처리!
@@ -624,6 +639,17 @@ function slideFn(selEl) {
   // (3) 터치무브 이벤트 함수연결하기
   mFn.addEvt(dtg, "touchmove", dMove);
   //////////// touchmove /////////////                                                                                             
+
+
+
+
+
+
+
+
+
+
+
 
   // 브라우저 크기 리사이즈시 동적 변경값 업데이트함수
   mFn.addEvt(window, "resize", () => {
