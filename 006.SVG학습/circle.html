@@ -82,62 +82,9 @@
       }
 
       /* circle 설정 */
-      .c1 {
-        /* 채우기색 - 기본색 검정
-            투명 - transparent
-            없음 - none (뚫린상태)
-        */
-        /* fill: red; */
-        /* fill: transparent; */
-        fill: none;
-        /* 선색 - 기본은 안나옴 */
-        stroke: red;
-        /* 선두께 - 기본값은 1px
-        단위를 안쓰면 모두 px단위
-        선두께는 선의 중심선으로부터 생김 */
-        stroke-width: 20;
-
-        /* 선끝처리 : stroke-linecap 
-            1) butt : 끝에 중심선이 보임(기본값)
-            2) square : 끝에 사각형으로 덮음
-            3) round : 끝에 둥근모양으로 덮음
-        */
-        stroke-linecap: round;
-
-        /* 
-        [데쉬선 속성 : stroke-dasharray] 
-        - 선,공백 순으로 데쉬선 셋팅함
-        - 선부터 전체 채우기 위해 일단 50%를
-        주고 선,공백이 몇조각나는지 센다
-        - 여기서는 50%를 주면 6조각이 나옴
-        50%*6 = 300% 로 계산하여 선으로 모두
-        채우기가 됨!
-        
-        */
-        stroke-dasharray: 300%;
-        /* 
-            [ 데쉬어레이 시작위치 밀기
-            : stroke-dashoffset ]
-            - 특정 숫자값을 주면 px만큼 밀어준다
-            - 계산된 stroke-dasharray 선채우기
-            값으로 밀어주면 공백부터 시작됨!
-        */
-        stroke-dashoffset: 300%;
-        /* 
-            [ SVG 라인 애니메이션의 원리 ]
-            - 데쉬설정을 공백부터 시작하여
-            stroke-dashoffset값을 0으로 변경할때
-            애니메이션 설정으로 하여 선이 그려지는
-            효과의 애니가 완성된다!
-        */
-
-        /* 트랜지션 : 속시이지 */
-        transition: stroke-dashoffset 0.8s ease-in-out;
-      }
+      .c1 {}
       /* 오버시 선보이기 */
-      .svg1:hover .c1 {
-        stroke-dashoffset: 0;
-      }
+      .svg1:hover .c1 {}
 
       /* 끝날때 빠져나가는 다른방식 연구~ */
       /* .svg1:hover .c1.on{
@@ -149,21 +96,9 @@
         background: url(./images/black.jpg) no-repeat top/cover;
       }
       /* 사각형 svg - rect */
-      .rt1 {
-        fill: none;
-        stroke: black;
-        stroke-width: 20;
-        stroke-linecap: round;
-        /* 데쉬선 */
-        stroke-dasharray: 15%;
-        stroke-dashoffset: 102%;
-        /* 트랜지션 */
-        transition: 0.6s;
-      }
+      .rt1 {}
       /* 오버시 선 움직이기 */
-      .svg2:hover .rt1 {
-        stroke-dashoffset: 0;
-      }
+      .svg2:hover .rt1 {}
 
       /* 3. 닥스박스 : 다각형(6각형) */
       .svg3 {
@@ -174,58 +109,21 @@
       }
 
       /* 다각형 */
-      .pg1 {
-        fill: none;
-        stroke: lightgreen;
-        stroke-width: 20;
-        stroke-linecap: round;
-        /* 데쉬선 */
-        stroke-dasharray: 300%;
-        stroke-dashoffset: 300%;
-        /* 트랜지션 */
-        transition: 0.6s;
-      }
+      .pg1 {}
       /* 오버시 선보이기 */
-      .svg3:hover .pg1 {
-        stroke-dashoffset: 0;
-      }
+      .svg3:hover .pg1 {}
 
       /* 4. 완다 : path */
-      .svg4 svg {
-        background: url(./images/wan.jpg) no-repeat top/cover;
-        /* 클리핑 SVG모양대로 보이게함 */
-        clip-path: url(#myClip);
-      }
+      .svg4 svg {}
       /* 패스 */
-      .pa1{
-        fill: none;
-        stroke: orangered;
-        stroke-width: 20;
-        stroke-linecap: round;
-
-        /* 데쉬선 설정 */
-        stroke-dasharray: 340%;
-        stroke-dashoffset: 340%;
-        /* 트랜지션 */
-        transition: .7s ease-out;
-      }
+      .pa1{}
       /* 완다에 오버시 선그리기 */
-      .svg4:hover .pa1{
-        stroke-dashoffset: 0;
-      }
+      .svg4:hover .pa1{}
 
 
       /* 미디어쿼리 */
       @media screen and (max-width:1000px) {
-        /* 컨텐츠박스 */
-        .cbx{
-          width: 200px;
-          height: 200px;
-        }
-        /* 완다 클리핑 SVG */
-        #myClip{
-          transform: scale(.67);
-        }
+        
       }
     </style>
   </head>
