@@ -63,7 +63,8 @@ function AskMoreInfo({ brand, model, color, opt }) {
     <React.Fragment>
       <h1>더 자세히 말씀해주세요?!</h1>
       {/* 디테일 정보구성 컴포넌트 호출 */}
-      <DetailCarInfo brand={brand} model={model} color={color} opt={opt} />
+      <DetailCarInfo 
+      brand={brand} model={model} color={color} opt={opt} />
     </React.Fragment>
   );
 } ////////// AskMoreInfo 컴포넌트 ////////////////
@@ -72,22 +73,19 @@ function AskMoreInfo({ brand, model, color, opt }) {
 function DetailCarInfo({ brand, model, color, opt }) {
   // info는 세부적인 모델정보 객체가 들어온다!
   // 전달속성은 model(모델명), color(차색), opt(css옵션)
-  console.log("css옵션:",opt)
-  
-  //객체값 추가는 (객체변수.속성명=값)
-  //실제 css변수형 속성명으로 사용해야 효과있음
-  opt.width='500px';
-  
+  console.log("CSS옵션객체:", opt);
+
+  // 객체값 추가는 (객체변수.속성명=값)
+  opt.width = "600px";
+  // 실제 CSS변수형 속성명으로 사용해야 효과있음
+
   return (
     <React.Fragment>
       <h2>
         모델명은 {model}이고 자동차색은 {color}입니다!
       </h2>
       {/* 이미지 출력 */}
-      <img 
-      src={"./images/"+carImage[brand]} 
-      alt={brand} 
-      style={opt} />
+      <img src={"./images/" + carImage[brand]} alt={brand} style={opt} />
       {/* 리액트 style속성의 값으로 객체를 CSS속성에
       맞게 주면 인라인코드로 CSS를 셋팅할 수 있다! */}
     </React.Fragment>
@@ -110,10 +108,10 @@ ReactDOM.render(
   <div>
     <ShowBrandCar brand="기아레이" modelNum={2} />
     <ShowBrandCar brand="현대제네시스" modelNum={0} />
+    <ShowBrandCar brand="기아레이" modelNum={0} />
+    <ShowBrandCar brand="현대제네시스" modelNum={1} />
     <ShowBrandCar brand="기아레이" modelNum={1} />
     <ShowBrandCar brand="현대제네시스" modelNum={2} />
-    <ShowBrandCar brand="현대제네시스" modelNum={0} />
-    <ShowBrandCar brand="기아레이" modelNum={1} />
   </div>,
   mFn.qs("#root1")
 );
