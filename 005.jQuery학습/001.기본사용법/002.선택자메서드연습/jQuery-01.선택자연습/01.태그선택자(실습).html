@@ -1,129 +1,142 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>태그 선택자</title>
-        <!-- jQuery library 가장위에 있어야함!!! -->
-        <script src="../jquery-3.6.3.min.js"></script>
-        <script>
-            /*************************************************
-              [ 제이쿼리 라이브러리 사용법 ]
+  <head>
+    <meta charset="utf-8" />
+    <title>태그 선택자</title>
+    <!-- jQuery library 가장위에 있어야함!!! -->
+    <script src="../jquery-3.6.3.min.js"></script>
+    <script>
+      /************************************************* 
+      [ 제이쿼리 라이브러리 사용법 ]
+      
+      1. 제이쿼리 함수 호출하기
+       -> 제이쿼리 함수명 : jQuery() -> $()
 
-              1. 제이쿼리 함수 호출하기
-               -> 제이쿼리 함수명 : jQuery() -> $()
+      2. 로딩구역 설정하기 (로드구역은 "DOMContentLoaded"를 사용함!)
+      -> $(document).ready(function(){코드})
+       -> $(function(){코드})
+       -> $(()=>{코드})
 
-              2. 로딩구역 설정하기 (로드구역은 "DOMContentLoaded"를 사용함!)
-              -> $(document).ready(function(){코드})
-               -> $(function(){코드})
-               -> $(()=>{코드})
+      3. 요소 선택방법
+      -> $(선택자) : 요소의 개수에 상관없이 한가지방법사용!
+      예) $("#my a") 
 
-              3. 요소 선택방법
-              -> $(선택자) : 요소의 개수에 상관없이 한가지방법사용!
-              예) $("#my a")
+      4. CSS 변경방법
+      -> css() 메서드 사용
+      (1) 단일속성만 변경
+        -> css(속성명,값) 
+        -> 속성명은 문자형(따옴표사용)만 가능!
+        예) $(".my").css("border","1px solid red")
+      (2) 다중속성 변경
+        -> css({속성명:값,속성명:값,...})
+        -> 속성명은 변수형 / 문자형 모두 사용가능함!
+        예) $("#we").css({color:"red",fontSize:"24px"})
 
-              4. CSS 변경방법
-              -> css() 메서드 사용
-              (1) 단일속성만 변경
-                -> css(속성명,값)
-                -> 속성명은 문자형(따옴표사용)만 가능!
-                예) $(".my").css("border","1px solid red")
-              (2) 다중속성 변경
-                -> css({속성명:값,속성명:값,...})
-                -> 속성명은 변수형 / 문자형 모두 사용가능함!
-                예) $("#we").css({color:"red",fontSize:"24px"})
+      5. 이벤트 메서드 사용방법
+      (1) 이벤트별 메서드호출
+        -> $(선택자).이벤트메서드(함수)
+        -> 이벤트 메서드 종류
+        ->>> click() / mouseover() / mouseenter() / blur() 등
+        예) $(".my").click(()=>{코드})
 
-              5. 이벤트 메서드 사용방법
-              (1) 이벤트별 메서드호출
-                -> $(선택자).이벤트메서드(함수)
-                -> 이벤트 메서드 종류
-                ->>> click() / mouseover() / mouseenter() / blur() 등
-                예) $(".my").click(()=>{코드})
+      (2) 이벤트 공통 메서드호출
+        -> $(선택자).on(이벤트종류,함수)
+        예) $("#my").on("blur",function(){코드})
 
-              (2) 이벤트 공통 메서드호출
-                -> $(선택자).on(이벤트종류,함수)
-                예) $("#my").on("blur",function(){코드})
+        -> 함수는 외부함수 또는 익명함수 모두 사용가능함!
 
-                -> 함수는 외부함수 또는 익명함수 모두 사용가능함!
+      6. 제이쿼리 코딩순서
+      (1) 제이쿼리 라이브러리 가져오기(반드시 코드위에 위치함!)
+      (2) 제이쿼리 UI 가져오기(라이브러리 아래!)
+      (3) 제이쿼리 사용코드 작성(제이쿼리 로딩구역에 작성!)
 
-              6. 제이쿼리 코딩순서
-              (1) 제이쿼리 라이브러리 가져오기(반드시 코드위에 위치함!)
-              (2) 제이쿼리 UI 가져오기(라이브러리 아래!)
-              (3) 제이쿼리 사용코드 작성(제이쿼리 로딩구역에 작성!)
+      7. 주의사항 :제이쿼리문법과 JS문법은 같은 명령문에서 
+                  혼용할 수 없다!
+                  
+      예) $(".my").classList.add("on") -> X
+          document.querySelector(".my").classList.add("on") -> O
 
-              7. 주의사항 :제이쿼리문법과 JS문법은 같은 명령문에서
-                          혼용할 수 없다!
-
-              예) $(".my").classList.add("on") -> X
-                  document.querySelector(".my").classList.add("on") -> O
-
-                  document.querySelector(".my").click() -> X
-                  $(".my").click() -> O
-
-
+          document.querySelector(".my").click() -> X
+          $(".my").click() -> O
 
 
-            *************************************************/
-            //제이쿼리 코드 구역 !!!
-            $(()=>{
-              //대상:h2 태그
-              //이벤트는 클릭
-              $('h2').click(()=>{
-                console.log('나야나~!');
-              //변경대상:.list
-              $('.list').css({
-                position:'relative',
-                left:'0',
-                fontSize:'50px',
-                color:'gold',
-                transition:'2s ease-in-out',
-              })
-              .delay(1500) //1.5초 기다림
-              //.animate({},시간,이징,함수)
-              .animate({left:"300px"},500)
 
-              //클릭시 이벤트 셋팅하기!
-              $('.list li span').mouseover((e)=>{
-                //자기자신
-                let ele=e.currentTarget;
+    
+    *************************************************/
 
-                // console.log('오버야~~~!!',ele,$(ele).text(),$(ele).parent(),index());
-                //text()는 태그 데이터 읽기/쓰기
-                //parent()는 부모요소로 올라감
-                //index()는 같은 형제요소의 순번
-                
-                //오버된 span의 부모 li순번
-                let seq=$(ele).parent().index();
-                //글자변경하기!
-                $(ele).text(arrText[seq]);
-                //글자색변경하기
-                $(ele).css({color:arrColor[seq]})
-                
-                
-              });////mouseover////
+      //  제이쿼리 코드 구역 !!!
+      $(() => {
+        // 대상: h2
+        // 이벤트는 클릭
+        $('h2').click(()=>{
+          console.log('나야나~!');
+          // 변경대상: .list
+          $('.list')
+          .css({
+            position: 'relative',
+            left:'0',
+            fontSize:'50px',
+            color:'hotpink',
+            transition:'1.5s ease-in-out',
+          })
+          // 1.5 초 기다림
+          .delay(1500) 
+          // 0.5초간 left값 변경애니
+          .animate({left:"300px"},500)
 
-              });/////////click//////////
-              const arrText=["나는","프론트엔드","개발자다!",]
-              const arrColor=["RED","BLUE","GREEN",]
-            });
-        </script>
-    </head>
+          // .animate({},시간,이징,함수)
 
-    <body>
-        <div id="container">
-            <header>
-                <h2>여기를 클릭하시오~!!!</h2>
-            </header>
 
-            <nav>
-                <ul class="list">
-                    <li id="first"><span>One</span></li>
-                    <li id="second"><span>Two</span></li>
-                    <li id="third"><span>Three</span></li>
-                </ul>
-            </nav>
-        </div>
+          /// 클릭시 이벤트 셋팅하기!
+          $('.list li span')
+          .mouseover((e)=>{
+            // 자기자신
+            let ele = e.currentTarget;
 
-        <!---------- jQuery code Start ---------->
-        <script></script>
-    </body>
+            console.log('오버야~!',
+            ele,
+            $(ele).text(),
+            $(ele).parent().index());
+            // text()는 태그 데이터 읽기/쓰기
+            // parent()는 부모요소로 올라감
+            // index() 같은 형제요소의 순번(0부터)
+            
+            // 오버된 span의 부모li순번
+            let seq = $(ele).parent().index();
+
+            // 글자변경하기!
+            $(ele).text(arrText[seq]);
+            // 글자색변경하기
+            $(ele).css({color:arrColor[seq]})
+
+          }); ///// mouseover //////
+
+        }); //// click /////
+
+        const arrText = ["나는","프론트엔드","개발자다!"];
+        const arrColor = ["red","blue","green"];
+
+
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="container">
+      <header>
+        <h2>여기를 클릭하시오~!!!</h2>
+      </header>
+
+      <nav>
+        <ul class="list">
+          <li id="first"><span>One</span></li>
+          <li id="second"><span>Two</span></li>
+          <li id="third"><span>Three</span></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!---------- jQuery code Start ---------->
+    <script></script>
+  </body>
 </html>
