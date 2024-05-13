@@ -8,7 +8,16 @@ import mFn from "./my_function.js";
 // 드래그 슬라이드 기능 함수 불러오기
 import setSlide from "./drag_slide.js";
 
+// GNB메뉴 생성함수 파일 불러오기
+import makeMenu from "./gnb_menu.js";
+
+
+
 // [2] 기능구현 파트 ///////////////
+
+// 메뉴 구현함수 호출하기
+makeMenu(mFn.qs(".gnb"));
+
 
 // 바로실행 구역함수1 ////////////////////////////////////////////////
 (()=>{

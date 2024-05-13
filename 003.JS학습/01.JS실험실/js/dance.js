@@ -66,5 +66,45 @@ mFn.addEvt(window,'scroll',moveSlide);
         
         
     }//////////moveSlide함수/////////////
+
+
+
+
+    
+
+    ///////////////////////////////////////////////////////////
+    /////////메뉴 오버시 배경박스 따라다니기 구현//////////////
+    //////////////////////////////////////////////////////////
+    //1.대상선정
+    // 이벤트 대상: .gnb li
+    const gnbList=mFn.qsa(".gnb li");
+    // 변경대상: .mbg
+    const mbg=mFn.qs(".mbg");
+    //2.이벤트 설정하기//////////
+    //이벤트 종류: mouseenter/mouseleave
+    gnbList.forEach(e=>{
+        mFn.addEvt(e,"mouseenter",overFn);
+        mFn.addEvt(e,"mouseleave",outFn);
+
+    });/////////////forEach///////////
+    //3.함수 만들기//////////////
+    function overFn(){
+        // console.log("오버:",this);
+        //1. 오버된 li의 left위치값 읽기
+        let posLeft= this.offsetLeft;
+        console.log("오버된 li의 left위치값:",posLeft);
+        //2.메뉴배경 보이기 +위치값 주기
+        mbg.style.opacity="1";
+        mbg.style.left=posLeft+'px';
+        
+        //오버시 주황색이 박스크기에 맞추기
+        let boxWidth=this.offsetWidth;
+        mbg.style.width=boxWidth+'px';
+        
+    }
+    function outFn(){
+        // console.log("아웃:",this);
+        mbg.style.opacity="0";
+    }
     
     
