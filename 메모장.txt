@@ -2,6 +2,9 @@ https://youtu.be/bT-84iDJYFc?t=5677
 
 https://www.w3schools.com/\
 
+데이터가 있으면map
+데이터가 없으면 forEach 사용해야함
+
 
 
 
@@ -14,6 +17,8 @@ https://www.w3schools.com/\
 
 버블링이란 무엇인가?
 
+객체란 무엇?
+배열이란 무엇?
 
 https://tombap8.github.io/FED-RF-2nd-2024-TOM/960.%ED%8C%80%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/
 
