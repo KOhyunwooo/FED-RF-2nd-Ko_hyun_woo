@@ -107,7 +107,7 @@ export default function showSubBox() {
                 <img 
                   src="./images/live_photo/${
                     selData.imgName[0]}/${i+1}.jpg" 
-                  alt="${selData.title}" />
+                    alt="${selData.title}"/>
                  
                   
                 `).join('')}

@@ -343,15 +343,15 @@ $(".spart-menu a").click((e) => {
 
 // 개별 박스에 부드러운 스크롤 생성자함수 적용하기연습
 $(".preview-box").css({
-  height: "200px",
+  height: "300px",
   overflow: "auto"
 })
 //개별박스에 마우스 호버일때 마우스 휠 사용가능하게 만들기
-// .on("wheel",e=>{
-//   e.stopPropagation();
-// })
+.on("wheel",e=>{
+  e.stopPropagation();
+})
 
 //부드러운 스크롤 개별박스 적용
-// const smallSmooth =
-// new SmoothScroll(
-//   myFn.qs(".preview-box"),120,30);
+const smallSmooth =
+new SmoothScroll(
+  myFn.qs(".preview-box"),120,30);
