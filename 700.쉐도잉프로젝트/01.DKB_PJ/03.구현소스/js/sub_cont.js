@@ -108,9 +108,7 @@ export default function showSubBox() {
                   src="./images/live_photo/${
                     selData.imgName[0]}/${i+1}.jpg" 
                   alt="${selData.title}" />
-                  .on("wheel",e=>{
-                    e.stopPropagation();
-                  })
+                 
                   
                 `).join('')}
                       
