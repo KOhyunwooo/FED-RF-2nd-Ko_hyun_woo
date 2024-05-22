@@ -12,6 +12,9 @@ https://www.w3schools.com/\
 
 구문?
 
+바인딩이란??
+
+JSON.parse(); 가 무엇?
 
 선언적 함수? 호출형 함수?
 
