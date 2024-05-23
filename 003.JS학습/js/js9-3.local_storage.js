@@ -190,8 +190,9 @@ function bindData() {
         
 } ///////// bindData ////화면에 게시판을 뿌려주는 바인딩함수//////
 
-// 게시판 최초호출
-bindData();
+// 게시판 최초호출 :로컬쓰 minfo 존재여부에 따라 처리
+if(localStorage.getItem("minfo")) bindData();
+else makeObj();
 
 
 ///// 게시판 입력 버튼 클릭시 구현하기/////
@@ -205,18 +206,44 @@ mFn.qs("#sbtn").onclick=()=>{
     //JSON.parse();는 텍스트를 배열로 변환 시켜줌
     console.log("입력!!!",localData);
 
-    // 2. 입력할 데이터 객체형식으로 배열에 넣기
+    //2.입력값이 비었으면 돌려보내기! (|| <-는 or 라는 뜻)
+    //trim은 앞뒤공백 제거 메서드
+    if(mFn.qs("#tit").value.trim()==""||mFn.qs("#cont").value.trim()==""){
+        alert("제목과 내용입력은 필수!");
+        return;
+    }
+    // 3. 입력할 데이터 객체형식으로 배열에 넣기
     // 배열.push({객체})
     localData.push({
-        idx: localData.length+1,
+        // 순번은 배열객체 idx값중 최대값을 구하여 1 더한다
+        idx: Math.max.apply(null,localData.map(v=>v.idx))+1,
         tit: mFn.qs("#tit").value,
         cont: mFn.qs("#cont").value
     });
 
-    // 3. 배열 데이터를 문자화하여 로컬쓰에 입력
+    // 4. 배열 데이터를 문자화하여 로컬쓰에 입력
     localStorage.setItem("minfo",JSON.stringify(localData));
 
-    // 4. 화면출력 함수 호출하기
+    // 5. 화면출력 함수 호출하기
     bindData();
 
 };///click함수//////////////
+
+
+// CRUD 크루드!!!
+// Create(만들기)/ Read(읽기)/ Update(수정)/ Delete(삭제)
+///////수정기능 구현하기/////////
+
+//수정항목 선택박스 업데이트 함수 호출
+updateItemList();
+
+//수정할 항목 업데이트 함수 /////
+function  updateItemList(){
+    //대상: 수정선택박스 - #sel
+    const selBox= mFn.qs("#sel");
+    // 데이터의 idx를 순회하며 option만들기
+    const localData= JSON.parse(localStorage.getItem("minfo"));
+    selBox.innerHTML = localData.map(v=>`
+        <option value='${v.idx}'></option>
+    `).join('');
+}
