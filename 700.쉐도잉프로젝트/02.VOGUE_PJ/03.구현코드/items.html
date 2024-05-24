@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -19,7 +20,7 @@
             href="https://cdn.jsdelivr.net/npm/fontisto@v3.0.4/css/fontisto/fontisto.min.css"
         />
         <!-- 메인 CSS -->
-        <link rel="stylesheet" href="./css/main.css" />
+        <link rel="stylesheet" href="./css/items.css" />
 
         
         
@@ -45,6 +46,14 @@
 
 
 
+
+        <!-- 아이템 카테고리 데이터JS -->
+        <script
+            src="./js/data/category.js"
+            data-plugins="transform-es2015-modules-umd"
+            type="text/babel"
+        ></script>
+
         <!-- 상단영역 모듈(TopArea) JSX :공통모듈JS위에 위치해야함-->
         <script
             src="./js/components/TopArea.jsx"
@@ -52,9 +61,9 @@
             type="text/babel"
         ></script>
 
-        <!-- 메인영역 모듈(TopArea) JSX :공통모듈JS위에 위치해야함-->
+        <!-- 아이템영역 모듈(itemsArea) JSX :공통모듈JS위에 위치해야함-->
         <script
-            src="./js/components/MainArea.jsx"
+            src="./js/components/ItemsArea.jsx"
             data-plugins="transform-es2015-modules-umd"
             type="text/babel"
         ></script>
@@ -74,7 +83,7 @@
         <!-------------------------- 리액트 사용 준비물 -------------------------->
         <!-- 4.리액트 공통모듈js -->
         <script
-            src="./js/main.js"
+            src="./js/items.js"
             data-plugins="transform-es2015-modules-umd"
             type="text/babel"
         ></script>
