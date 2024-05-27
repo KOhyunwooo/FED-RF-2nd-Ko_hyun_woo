@@ -10,6 +10,31 @@ export default function ItemsArea({ catName }) {
     //해당 카테고리의 데이터 선택하여 담기
     const selData = catData[catName];
     console.log(selData);
+
+    //태그처리 구분 코드 생성함수
+    const makeCode=(data)=>{
+        console.log("배열인가?",Array.isArray(data));
+        // 배열 데이터는 태그 구성이 다름!
+        // runway 카테고리만 다름
+        //배열인경우
+        if(Array.isArray(data)){
+            return(
+                <h2>
+                    <small>{data[0]}</small>
+                    <br />
+                    {data[1]}
+                </h2>
+            );
+        }////if 배열인 경우/////
+        //배열이 아닌경우////
+        else{
+            return(
+                <h2>{data}</h2>
+            );
+        }////else배열이 아닌경우////
+
+    };//////makeCode함수/////
+
     // 코드 리턴구역 /////
     return (
         <div id="main-area">
@@ -40,27 +65,28 @@ export default function ItemsArea({ catName }) {
                     
                 </header>
                 {/* <!-- 2-2. 카테고리 페이지 컨텐츠영역 --> */}
-                <div className="cat-cont-area fashion">
+                <div className="cat-cont-area ">
+                    {/* 데이터적용4: 컨텐츠 타이틀 넣기 */}
                     <section className="pt2">
                         <div className="cbx bgi bg1-1">
-                            <h2></h2>
+                            {makeCode(selData.타이틀[0])}
                         </div>
                         <div className="cbx bgi bg1-2">
-                            <h2></h2>
+                            {makeCode(selData.타이틀[1])}
                         </div>
                         <div className="cbx bgi bg1-3">
-                            <h2></h2>
+                            {makeCode(selData.타이틀[2])}
                         </div>
                     </section>
                     <section className="pt2">
                         <div className="cbx bgi bg2-1">
-                            <h2></h2>
+                            {makeCode(selData.타이틀[3])}
                         </div>
                         <div className="cbx bgi bg2-2">
-                            <h2></h2>
+                            {makeCode(selData.타이틀[4])}
                         </div>
                         <div className="cbx bgi bg2-3">
-                            <h2></h2>
+                            {makeCode(selData.타이틀[5])}
                         </div>
                     </section>
                 </div>

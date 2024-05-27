@@ -1,5 +1,31 @@
 // 상단영역 컴포넌트 ////////////////////////////////////////////////////////////////////////////
-export default function TopArea() {
+
+export default function TopArea({ changeMenu }) {
+    //changeMenu - 부모의 setMenu 상태관리
+
+    // 메뉴 배열
+    const menuArr = [
+        "FASHION",
+        "BEAUTY",
+        "LIVING",
+        "PEOPLE",
+        "VIDEO",
+        "RUNWAY",
+        "TIME & GEM",
+        "SHOPPING",
+    ];
+    //메뉴 변경하기 함수//////
+    const chgMenuFn = (v)=>{
+        console.log(v);
+        
+        // 전달값 변경하기 : 소문자, 특수문자 변경
+        v=v.toLowerCase();//.replace(" & ", " - ")///toLowerCase() <-소문자로 바꾸기, replace(A,B) <- A를 B로 바꾸기
+
+        // 부모 메뉴변경 상태메서드로 메뉴 변경하기
+        changeMenu(v);
+
+    };//////////chgMenuFn함수///////////
+
     // 코드 리턴구역 /////
     return (
         <div id="top-area">
@@ -39,7 +65,7 @@ export default function TopArea() {
                         >
                             <span className="ir">회원가입</span>
                         </a>
-                        <a href="#" className="fi fi-camera" title="갤러리">
+                        <a href="#" className="fi fi-camera" title="갤러리" onClick={()=>chgMenuFn("gallery")}>
                             <span className="ir">갤러리</span>
                         </a>
                         <a href="#" className="fi cas" title="카카오스토리">
@@ -72,37 +98,21 @@ export default function TopArea() {
                 </div>
                 {/* <!-- 1-2.로고박스 --> */}
                 <h1 className="logo">
-                    <a href="#">
+                    <a href="#" onClick={()=>chgMenuFn("home")}>
                         <img src="./images/mlogo.png" alt="메인로고" />
                     </a>
                 </h1>
                 {/* <!-- 1-3.GNB박스 --> */}
                 <nav className="gnb">
                     <ul>
+                       {
+                        menuArr.map(v=>
                         <li>
-                            <a href="#">FASHION</a>
+                            <a href="#" onClick={()=>{chgMenuFn(v)}
+                            }>{v}</a>
                         </li>
-                        <li>
-                            <a href="#">BEAUTY</a>
-                        </li>
-                        <li>
-                            <a href="#">LIVING</a>
-                        </li>
-                        <li>
-                            <a href="#">PEOPLE</a>
-                        </li>
-                        <li>
-                            <a href="#">VIDEO</a>
-                        </li>
-                        <li>
-                            <a href="#">RUNWAY</a>
-                        </li>
-                        <li>
-                            <a href="#">TIME &amp; GEM</a>
-                        </li>
-                        <li>
-                            <a href="#">SHOPPING</a>
-                        </li>
+                        )
+                       }
                         <li>
                             {/* <!-- 돋보기 검색버튼 --> */}
                             <i href="#" className="fi fi-search">

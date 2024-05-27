@@ -5,8 +5,9 @@ https://www.w3schools.com/\
 데이터가 있으면map
 데이터가 없으면 forEach 사용해야함
 
+구조분해 할당이 무엇?
 
-
+스와이퍼 플러그인
 
 표현식?
 
