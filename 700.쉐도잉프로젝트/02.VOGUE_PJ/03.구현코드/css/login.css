@@ -1,4 +1,5 @@
 @charset "UTF-8";
+/* 공통 외부CSS */
 /* 보그 PJ 리셋 CSS - reset.css */
 /* 요소의 초기화 */
 /* 1. 마진,패딩 없애기 */
@@ -469,7 +470,7 @@ font-family: 'Roboto Condensed', sans-serif;
 
 /* 컨텐츠 영역 속박스 */
 .main-area {
-  min-height: 1000px;
+  min-height: 600px;
   padding: 15px;
 }
 
@@ -484,34 +485,147 @@ font-family: 'Roboto Condensed', sans-serif;
 
 /* 2-2. 서브 컨텐츠 박스 */
 .scont {
-  min-height: 600px;
-  /* 드래그선택 안되게하기 */
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
-  -webkit-user-drag: none;
-}
-
-/* swiper에서 css 붙혀넣기(Responsive breakpoints) */
-.swiper {
-  max-width: 1300px;
-  height: 700px;
+  position: relative;
+  /* 부모자격 - .btnbx */
+  max-width: 700px;
+  min-height: 275px;
   margin: 0 auto;
+  border: 2px solid #737373;
+  border-radius: 10px;
+  /* 크기유지 */
+  box-sizing: border-box;
+  padding: 60px 15px;
+  background-color: #fff;
+  /* 비밀번호박스 */
+}
+.scont div:nth-child(2) {
+  margin-top: 20px;
 }
 
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-  /* 플렉스 설정 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.minput {
+  /* 입력창 공통라벨 */
+  /* 입력양식공통 */
 }
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}/*# sourceMappingURL=gallery.css.map */
+.minput label {
+  display: inline-block;
+  width: 150px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+  text-align: center;
+  line-height: 36px;
+  /* outline: 2px solid red; */
+}
+.minput input {
+  width: 320px;
+  height: 36px;
+  border: 1px solid #777;
+  border-radius: 5px;
+  font-size: 18px;
+  padding-left: 5px;
+  /* 크기유지 */
+  box-sizing: border-box;
+  color: #666;
+}
+
+/* 포커스 아웃라인 제거
+모든 브라우저에 기본 포커스 아웃라인 셋팅됨! */
+input:focus {
+  outline: none;
+}
+
+/* 버튼영역 */
+.btnbx {
+  position: absolute;
+  top: 60px;
+  right: 60px;
+  /* 부모는? .scont */
+}
+
+/* 서브밋 버튼 */
+#sbtn {
+  width: 113px;
+  height: 92px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  /* 그라데이션
+  배경이미지에서 셋팅
+  linear-gradient(방향,색1,색2,...) */
+  background-image: linear-gradient(to bottom, #ddd, #555);
+  color: #fff;
+  text-shadow: 1px 1px #555;
+  font-size: 15px;
+}
+
+/* 기타체크링크 박스 */
+.addbx {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 16px;
+  /* 체크박스 영역 */
+  /* 체크박스 라벨과 세로정렬 */
+  /* 기타링크 */
+}
+.addbx span {
+  margin: 0 15px;
+  color: #555;
+}
+.addbx input {
+  vertical-align: -2px;
+}
+.addbx a {
+  margin: 0 15px;
+  color: #222;
+  text-decoration: none;
+}
+
+/* 추가링크 영역바 */
+.bar {
+  font-weight: normal;
+  /* b요소 기본 두껍게 해제 */
+}
+
+/* 모바일용 바(.bar1), 줄바꿈(.brk)숨기기 */
+.bar1,
+.brk {
+  display: none;
+}
+
+/* 미디어쿼리 690px 이하 시작 */
+@media screen and (max-width: 690px) {
+  .minput {
+    /* 입력창 공통라벨 */
+    /* 입력양식공통 */
+  }
+  .minput label {
+    display: block;
+    width: auto;
+  }
+  .minput input {
+    width: 100%;
+  }
+  /* 버튼영역 */
+  .btnbx {
+    position: static;
+  }
+  /* 서브밋 버튼 */
+  #sbtn {
+    width: 100%;
+    height: 50px;
+    margin-top: 50px;
+  }
+  /* 추가링크박스 */
+  .addbx {
+    line-height: 2.5;
+  }
+  /* 추가링크 바숨기기 */
+  .bar2 {
+    display: none;
+  }
+  /* 추가링크 바,줄바꿈 보이기 */
+  .bar1,
+  .brk {
+    display: inline;
+  }
+}
+/* 미디어쿼리 690px 이하 끝 *//*# sourceMappingURL=login.css.map */

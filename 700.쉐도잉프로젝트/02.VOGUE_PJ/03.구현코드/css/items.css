@@ -68,10 +68,6 @@ font-family: 'Roboto Condensed', sans-serif;
   4. bgi - background image 관련 속성
 */
 /* 공사중 표시 */
-body * {
-  outline: 1px dashed gray;
-}
-
 /************* 2. 공통 class *************/
 /* 2-1. 중앙 속박스 */
 .ibx {
