@@ -11,9 +11,9 @@ import FooterArea from "./components/FooterArea";
 import Gallery from "./components/Gallery";
 
 // import { useState } from "react"; <-cdn방식에서는 지원하지 않음
-
 // [1] 메인 페이지 전체 레이아웃 로딩 컴포넌트 ///
 function Layout() {
+    
     // 상태관리변수 설정구역 ///////////////
     // [1] 메뉴 변경 상태변수
     const [menu,setMenu] = React.useState("home");
