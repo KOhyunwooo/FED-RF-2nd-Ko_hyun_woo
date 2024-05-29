@@ -31,7 +31,7 @@ function App() {
       <header className="App-header">
         <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F5686%2F2024%2F05%2F24%2F0000127840_001_20240524151002641.jpg&type=sc960_832" className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+         이제 리액트는 내껍니다~
         </p>
         <span>
           <a
