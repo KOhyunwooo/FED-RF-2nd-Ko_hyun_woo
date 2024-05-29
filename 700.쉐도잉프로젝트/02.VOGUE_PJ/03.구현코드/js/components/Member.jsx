@@ -1,6 +1,13 @@
 // 보그JS 회원가입 컴포넌트///////
+//유효성 검사 함수 불러오기~
+import validateFn from "../validation.js";
 
 export default function Member() {
+    //페이지 렌더링 후 실행구역///
+    React.useEffect(validateFn,[]);
+  
+
+
     //코드 리턴구역///////
     return (
         <div id="main-area">
