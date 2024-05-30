@@ -44,6 +44,9 @@ function Layout() {
         //menu값이 "login" 인경우 login.css를 로딩하고
         //menu값이 "member" 인경우 member.css를 로딩하고
         //기타 메뉴인 경우 items.css를 로딩한다!
+
+        //페이지 최상단이동코드
+        window.scrollTo(0,0);
         
     },[menu]);//////////////////////////////////////////
 
@@ -60,9 +63,9 @@ function Layout() {
                 :menu=="gallery"
                 ?<Gallery/>
                 :menu=="login"
-                ?<Login/>
+                ?<Login changeMenu={setMenu}/>
                 :menu=="member"
-                ?<Member/>
+                ?<Member changeMenu={setMenu}/>
                 :<ItemsArea catName={menu}/>
                 }
                 {/* 3. 하단영역 컴포넌트 */}

@@ -2,9 +2,11 @@
 //유효성 검사 함수 불러오기~
 import validateFn from "../validation.js";
 
-export default function Member() {
+export default function Member({changeMenu}) {
+    //changeMenu- 상태변수메서드 setMenu 전달
+
     //페이지 렌더링 후 실행구역///
-    React.useEffect(validateFn,[]);
+    React.useEffect(()=>validateFn(changeMenu),[]);
   
 
 
