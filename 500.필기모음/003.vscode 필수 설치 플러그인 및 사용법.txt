@@ -193,3 +193,11 @@ ________________________________
 
 
 
+
+--------ver.고현우----------------
+.js, .jsx에서
+h2, h3, h4, h5, p, span 같은 태그가
+emmet 으로 자동완성 되게 하기
+
+설정->emmet:includelanguages->항목:javascript 값:javascriptreact 추가
+
