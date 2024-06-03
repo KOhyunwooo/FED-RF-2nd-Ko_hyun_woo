@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
-import Charactor from "./components/pages/Charactor";
 import Main from "./components/pages/Main";
 import Comics from "./components/pages/Comics";
+import Character from "./components/pages/Character";
 
 /********************************************* 
     [ 리액트 라우터 ]
