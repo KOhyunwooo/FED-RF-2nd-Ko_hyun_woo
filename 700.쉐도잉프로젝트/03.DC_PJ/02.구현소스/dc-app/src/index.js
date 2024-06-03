@@ -49,7 +49,7 @@ export default function MainComponent() {
         -> path설정대신 index키워드를 쓰면 첫페이지로 구성됨
         =>MainArea컴포넌트<Outlet/>에 출력된다!*/}
         <Route index element={<Main />} />
-        <Route path="character" element={<Charactor />} />
+        <Route path="character" element={<Character />} />
         <Route path="comics" element={<Comics />} />
         </Route>
 
