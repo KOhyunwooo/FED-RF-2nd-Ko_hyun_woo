@@ -12,6 +12,7 @@
     (3) npm i jquery-ui-dist
     (4) npm i jquery-ui-touch-punch
     (5) npm i swiper
+    (6) npm i sass
 
 3. 설치확인
 - 파일명: package.json
