@@ -30,10 +30,10 @@ export default function TopArea() {
                                 {
                                     // 하위 메뉴가 있으면 일반 a요소에 출력
                                     // 없으면 Link 라우팅 출력
-                                    v.sub ? (
-                                        <a href="#">{v.txt}</a>
+                                    v.sub ? ( //v.sub가있냐?
+                                        <a href="#">{v.txt}</a> //그러면 이거 출력
                                     ) : (
-                                        <Link to={v.link}>{v.txt}</Link>
+                                        <Link to={v.link}>{v.txt}</Link> //아니면 여기로 출력
                                     )
                                 }
                                 {

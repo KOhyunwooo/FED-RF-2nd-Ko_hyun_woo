@@ -1,13 +1,20 @@
+//전체 공통 css불러오기
+import "../src/css/index.scss";
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
-import Main from "./components/pages/Main";
-import Comics from "./components/pages/Comics";
-import Character from "./components/pages/Character";
 
-//전체 공통 css불러오기
-import "../src/css/index.scss";
+import Main from "./components/pages/Main";
+import Character from "./components/pages/Character";
+import Comics from "./components/pages/Comics";
+import Movies from "./components/pages/Movies";
+import Series from "./components/pages/Series";
+import Games from "./components/pages/Games";
+import News from "./components/pages/News";
+import Video from "./components/pages/Video";
+import Board from "./components/pages/Board";
 /********************************************* 
     [ 리액트 라우터 ]
     -> 컴포넌트를 연결하여 특정 이벤트에 모듈을
@@ -35,29 +42,39 @@ import "../src/css/index.scss";
     2. Layout.jsx 레이아웃 컴포넌트를 루트로 선택
     3. 상단영역 GNB에 <Link to> 셋팅
     4. 메인영역에 <Outlet /> 셋팅
+    5. 라우터 연결흐름:
+      (1) Route의 path정보 셋팅
+      (2) Link to 정보 클릭시 1번정보와 대조
+      (3) 1번정보 일치시 element에 등록된 컴포넌트 로딩
+      (4) Outlet 표시 컴포넌트에 삽입
     
 *********************************************/
 
 export default function MainComponent() {
-  return (
-    // 라우터 루트로 라우터 구성시작
-    <BrowserRouter>
-      <Routes>
-        {/* 중요!!! 레이아웃 컴포넌트를 루트로 설정! 
+    return (
+        // 라우터 루트로 라우터 구성시작
+        <BrowserRouter>
+            <Routes>
+                {/* 중요!!! 레이아웃 컴포넌트를 루트로 설정! 
         루트 Route는 홀로 닫지말고 반드시 다른 하위 라우트를 감싸도록한다*/}
-        <Route path="/" element={<Layout />}>
-
-        {/* 하위 라우트 셋팅 
+                <Route path="/" element={<Layout />}>
+                    {/* 하위 라우트 셋팅 
         -> path설정대신 index키워드를 쓰면 첫페이지로 구성됨
         =>MainArea컴포넌트<Outlet/>에 출력된다!*/}
-        <Route index element={<Main />} />
-        <Route path="character" element={<Character />} />
-        <Route path="comics" element={<Comics />} />
-        </Route>
-
-      </Routes>
-    </BrowserRouter>
-  );
+                    <Route index element={<Main />} />
+                    {/* path이름으로 부르면 element={<Character />로 호출됨 */}
+                    <Route path="character" element={<Character />} />
+                    <Route path="comics" element={<Comics />} />
+                    <Route path="movies" element={<Movies />} />
+                    <Route path="series" element={<Series />} />
+                    <Route path="games" element={<Games />} />
+                    <Route path="news" element={<News />} />
+                    <Route path="video" element={<Video />} />
+                    <Route path="board" element={<Board />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 /// 컴포넌트 출력 ///
