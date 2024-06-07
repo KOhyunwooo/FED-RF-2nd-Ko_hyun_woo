@@ -8,11 +8,14 @@ import { banData } from "../data/banner";
 import "../../css/banner.scss";
 
 // 배너 슬라이드 기능 함수 
-import goSlide from "../func/go_slide";
-
+import SlideFn from "../func/go_slide.js";
 
 function Banner({ catName }) {
     // catName 배너 데이터 카테고리 이름
+
+    // 슬라이드 기능 생성자함수 인스턴스 생성하기
+    const sldFn= new SlideFn();
+
     // 선택 데이터
     const selData = banData[catName];
     // 코드 리턴구역///////////
@@ -43,8 +46,8 @@ function Banner({ catName }) {
                 selData.length > 1 && (
                     <>
                         {/* 양쪽이동버튼 */}
-                        <button className="abtn lb" onClick={goSlide}>＜</button>
-                        <button className="abtn rb" onClick={goSlide}>＞</button>
+                        <button className="abtn lb" onClick={sldFn.goSlide}>＜</button>
+                        <button className="abtn rb" onClick={sldFn.goSlide}>＞</button>
                         {/* 블릿 인디케이터 - 선택데이터의 개수만큼 만들기 map메서드의 반복기능만 이용하여 태그생성 순번은 첫번째 블릿li만 클래스를 "on"넣기*/}
                         <ol className="indic">
                             {selData.map((v,i)=>
