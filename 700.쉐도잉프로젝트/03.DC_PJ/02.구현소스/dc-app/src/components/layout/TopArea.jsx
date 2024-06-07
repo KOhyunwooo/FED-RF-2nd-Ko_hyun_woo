@@ -22,7 +22,10 @@ export default function TopArea() {
                     <ul>
                         {/* 1. 로고 컴포넌트 */}
                         <li>
+                            <Link to="/">
                             <Logo logoStyle="top" />
+
+                            </Link>
                         </li>
                         {/* 2. GNB메뉴 데이터 배열로 만들기 */}
                         {menu.map((v, i) => (
