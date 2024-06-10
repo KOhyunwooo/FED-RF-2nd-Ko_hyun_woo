@@ -1,3 +1,1 @@
-[ VS Code 리액트 관련 확장설치 ]
-
-1. Reactjs code snippets 설치
+2024-6-10일 오전 수업 쉐도잉 하기 vogue관련
