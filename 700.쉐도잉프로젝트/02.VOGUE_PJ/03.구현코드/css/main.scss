@@ -61,3 +61,25 @@
 .bg15{
     background-image: url(../images/cont7-3.jpg);
 }
+
+
+
+
+
+// 스크롤 등장 클래스 (.hide-el)
+.hide-el {
+    opacity: 0;
+    translate: 0 20%;
+    transition: 0.6s ease-in-out;
+    // 클래스 on 적용시 등장
+    &.on {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+
+
+
+
+  // 메인페이지 미디어 쿼리 불러오기
+  @import "../css/media/main-media"

@@ -1,5 +1,112 @@
+// 부드러운 스크롤 불러오기
+import { scrolled, setPos } from "../../js/smoothScroll24.js";
+
+// 스크롤 등장 함수 불러오기
+import scrollShowFn from "../scroll_show.js";
+
 //메인영역 컴포넌트//////////////////////////////////////////////////////////
 export default function MainArea() {
+    //컴포넌트 화면 렌더링 직전 로드(:useLayoutEffect)구역
+    React.useLayoutEffect(() => {
+        // 스크롤 이벤트(스크롤 등장)/////////////////////////////////////////
+        // 스크롤 등장 대상에 클래스 넣기 : .hide-el
+        console.log($(".main-area>section"));
+
+        // 제이쿼리용 forEach메서드
+        // each((idx,ele)=>{코드})
+        // idx-순번/ele-요소자신
+        $(".main-area>section").each((idx, ele) => {
+            // ele에(모든 .main-area>section에) hide-el 클래스 넣기
+            // $(ele).addClass("hide-el");
+
+            // 첫번째를 제외한 .main-area>section을 제외하고 hide-el넣기
+            if (idx != 0) $(ele).addClass("hide-el"); //idx(순번이) 0이 아니면 addClass hide-el을 해라.
+        }); ////제이쿼리 forEach메서드: each/////////////////
+
+        // 스크롤 등장함수 호출
+        scrollShowFn();
+        ////////////////////////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////
+        // [ 이벤트의 해제는 removeEventListener()를 사용한다!!! ]
+        // 부드러운 스크롤은 "home"에서만 적용함!
+        document.addEventListener("wheel", scrolled, { passive: false });
+
+        /////////////////////////////////////////////////////////
+
+        // 슬림적용 대상: #top-area
+        const topMenu = document.querySelector("#top-area");
+        // 상단이동 버튼 대상 : .tbtn
+        const tbtn = document.querySelector(".tbtn");
+        // 상단이동기능
+        tbtn.onclick = (e) => {
+            // 기본이동막기
+            e.preventDefault();
+            // 상단이동하기 : 부드러운스크롤 위치값 업데이트
+            setPos(0);
+            // 제이쿼리 애니메이션 상단이동
+            $("html.body").animate({ scrollTop: "0" }, 500); //<-제이쿼리가 스크롤 이벤트 잘함
+
+            // 위치값 이동하기 : scrollTo(가로스크롤, 세로스크롤)
+            // window.scrollTo(0, 0);
+        }; ///// click ///////
+
+        // 슬림메뉴 적용하기 : "home"에서만 적용
+        const chkSlim = () => {
+            // 스크롤 위치값 구하기
+            let scTop = window.scrollY;
+            // console.log("슬림적용!!!", scTop);
+
+            // 슬림메뉴 적용
+            if (scTop > 200) topMenu.classList.add("on");
+            else topMenu.classList.remove("on");
+
+            // 상단이동버튼 적용
+            if (scTop > 300) tbtn.classList.add("on");
+            else tbtn.classList.remove("on");
+        }; //////// chkSlim 함수 /////////
+
+        // 스크롤 이벤트 적용하기 : scroll이벤트
+        window.addEventListener("scroll", chkSlim);
+        // 부드러운 스크롤 초기값 0
+        setPos(0);
+
+        console.log("메인에어리어 시작!");
+
+        // 컴포넌트 소멸시(unmounting) 리턴함수사용! 코드 삭제 구역///////////////////
+        // 리턴함수안의 함수나 함수구역이 소멸시 실행된다!
+        return () => {
+            console.log(
+                "메인에어리어 종료!, 부드러운스크롤 삭제, 슬림스크롤 삭제,"
+            );
+            // 이 구역에서 전역적으로 셋팅된 이벤트 함수를
+            // 삭제 처리하면 된다!
+            // 'window', 'document', 'body' 이 세가지의 경우는
+            // 컴포넌트가 소멸해도 그대로 존재하게 되므로
+            // 이벤트를 removeEventListener로 지운다.
+
+            // 부드러운 스크롤 초기값 0
+            setPos(0);
+
+            // [1]부드러운 스크롤 이벤트 삭제
+            document.removeEventListener("wheel", scrolled, { passive: false });
+            // [2]슬림스크롤 이벤트 삭제
+            window.removeEventListener("scroll", chkSlim);
+            // // [3]클래스가 들어가 있을 수 있으므로 삭제코드 실행
+            // topMenu.classList.remove("on");
+            // tbtn.classList.remove("on");
+            
+
+            // 참고로 이벤트를 개별 셋팅한 요소의 이벤트를 지울경우
+            // 속성 할당방식의 이벤트는 빈값을 할당해서 지우거나  예) tbtn.onclick="";
+            // 제이쿼리일 경우 off() 메서드로 삭제한다!
+            // 예) $(".my").off("click");
+            // 이벤트 등록으로 설정한 것은 removeEventListener로 삭제
+        }; //////소멸시 return함수////////
+    }, []); //<- [] 있으면 한번만 실행, useLayoutEffect구역//////////////////
+
     // 코드 리턴구역 /////
     return (
         <div id="main-area">

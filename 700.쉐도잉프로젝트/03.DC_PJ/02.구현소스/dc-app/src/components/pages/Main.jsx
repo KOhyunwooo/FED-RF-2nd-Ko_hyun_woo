@@ -3,6 +3,7 @@
 import Banner from "../modules/Banner";
 import SecIntro from "../modules/SecIntro";
 import VidIntro from "../modules/VidIntro";
+import VidSwipe from "../modules/VidSwipe";
 
 export default function Main(){
 
@@ -20,6 +21,9 @@ export default function Main(){
            catName 카테고리명, clsName 배경색넣을 클래스(on/off) */}
            <VidIntro catName="main" clsName="off" />
 
+           <VidSwipe catName="main"/>
+
+           {/* 4. 비디오스와이프 컴포넌트 */}
         </>
     );
 
