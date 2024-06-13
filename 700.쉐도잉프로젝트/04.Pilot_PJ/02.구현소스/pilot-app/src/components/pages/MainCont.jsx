@@ -5,10 +5,16 @@ import Banner from "../../modules/Banner";
 
 function MainCont(props) {
     return (
-      <>
-        {/* 1.배너 컴포넌트 */}
-        <Banner/>
-      </>
+        <>
+            {/* 1.배너 컴포넌트 */}
+            <section
+                id="ban"
+                className="page none-sel"
+                style={{ background: "lightblue" }}
+            >
+                <Banner />
+            </section>
+        </>
     );
 }
 

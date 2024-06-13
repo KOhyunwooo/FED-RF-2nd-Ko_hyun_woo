@@ -2,6 +2,7 @@ import React from "react";
 
 function FooterArea(props) {
     return (
+        
         <footer id="info" className="page">
             <address>
                 서울특별시 강남구 언주로 541 에프앤에프빌딩
