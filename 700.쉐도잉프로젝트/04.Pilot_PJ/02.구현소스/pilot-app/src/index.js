@@ -2,12 +2,17 @@
 import ReactDOM, { createRoot } from 'react-dom/client';
 
 import React from 'react';
+import TopArea from './components/layout/TopArea';
+import MainArea from './components/layout/MainArea';
+import FooterArea from './components/layout/FooterArea';
 
 function MainComponent(props) {
   return (
-    <div>
-      <h1>파일럿PJ입니다~</h1>
-    </div>
+    <>
+      <TopArea/>
+      <MainArea/>
+      <FooterArea/>
+    </>
   );
 }
 
