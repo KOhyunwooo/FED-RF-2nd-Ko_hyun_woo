@@ -6,6 +6,10 @@ import TopArea from './components/layout/TopArea';
 import MainArea from './components/layout/MainArea';
 import FooterArea from './components/layout/FooterArea';
 
+//인덱스 css불러오기
+import "../src/css/index.scss";
+
+
 function MainComponent(props) {
   return (
     <>
