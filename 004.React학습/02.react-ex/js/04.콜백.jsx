@@ -19,7 +19,8 @@ function MarkLike() {
 
     // useCallback사용한 함수///
     // useCallback();을 사용하여 변경시에만 업데이트 함!
-    const toggleSon=React.useCallback(()=>{setSon(!son)},[son]);//1.useCallback을 쓰고 뒤에를 ()괄호로 감싸준다. 2.son이 변경되니까 son에다가 의존성 심어준다.//[son]이 업데이트 되면React.useCallback(()=>{setSon(!son)}를 실행할께 라는뜻
+    const toggleSon=React.useCallback(()=>{setSon(!son)},[son]);//1.기존함수에서 useCallback을 쓰고 뒤에를 ()괄호로 감싸준다. 
+    //2.son이 변경되니까 son에다가 의존성 심어준다.//[son]이 업데이트 되면React.useCallback(()=>{setSon(!son)}를 실행할께 라는뜻
     const toggleDanaka=React.useCallback(()=>{setDanaka(!danaka)},[danaka]);//setDanaka이라는 상태관리변수가 Danaka이 아니면;
     const toggleLee=React.useCallback(()=>{setLee(!lee)},[lee]);//setLee이라는 상태관리변수가 Lee이 아니면;
     
