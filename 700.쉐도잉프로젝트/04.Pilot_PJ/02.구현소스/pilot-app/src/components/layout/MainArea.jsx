@@ -4,7 +4,7 @@ import MainCont from '../pages/MainCont';
 function MainArea(props) {
     return (
         <>
-            <MainCont/>
+            <MainCont />
         </>
     );
 }

@@ -1,4 +1,5 @@
-// DC PJ 캐릭터 리스트 컴포넌트
+// DC PJ 캐릭터 리스트 컴포넌트: 메인페이지에 WHO'S WHO: THE JUSTICE LEAGUE 캐릭터7개 있는 부분
+
 import React from "react";
 
 //캐릭터리스트 css 불러오기
