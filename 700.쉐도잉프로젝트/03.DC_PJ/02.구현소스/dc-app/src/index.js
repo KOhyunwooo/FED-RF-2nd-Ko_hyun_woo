@@ -4,6 +4,7 @@ import "../src/css/index.scss";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+//레이아웃컴포넌트 불러오기
 import Layout from "./components/layout/Layout";
 
 import Main from "./components/pages/Main";
@@ -15,6 +16,7 @@ import Games from "./components/pages/Games";
 import News from "./components/pages/News";
 import Video from "./components/pages/Video";
 import Board from "./components/pages/Board";
+import CatDetail from "./components/pages/CatDetail";
 /********************************************* 
     [ 리액트 라우터 ]
     -> 컴포넌트를 연결하여 특정 이벤트에 모듈을
@@ -56,11 +58,11 @@ export default function MainComponent() {
         <BrowserRouter>
             <Routes>
                 {/* 중요!!! 레이아웃 컴포넌트를 루트로 설정! 
-        루트 Route는 홀로 닫지말고 반드시 다른 하위 라우트를 감싸도록한다*/}
+                    루트 Route는 홀로 닫지말고 반드시 다른 하위 라우트를 감싸도록한다*/}
                 <Route path="/" element={<Layout />}>
                     {/* 하위 라우트 셋팅 
-        -> path설정대신 index키워드를 쓰면 첫페이지로 구성됨
-        =>MainArea컴포넌트<Outlet/>에 출력된다!*/}
+                    -> path설정대신 index키워드를 쓰면 첫페이지로 구성됨
+                    =>MainArea컴포넌트<Outlet/>에 출력된다!*/}
                     <Route index element={<Main />} />
                     {/* path이름으로 부르면 element={<Character />로 호출됨 */}
                     <Route path="character" element={<Character />} />
@@ -71,6 +73,7 @@ export default function MainComponent() {
                     <Route path="news" element={<News />} />
                     <Route path="video" element={<Video />} />
                     <Route path="board" element={<Board />} />
+                    <Route path="detail" element={<CatDetail />} />
                 </Route>
             </Routes>
         </BrowserRouter>
