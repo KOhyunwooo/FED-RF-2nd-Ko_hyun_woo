@@ -1,7 +1,7 @@
 // DC PJ 캐릭터 상세페이지
 // -> 캐릭터 리스트로 부터 라우팅 이동하여 보이는 페이지
 
-import React from "react";
+import React, { useEffect } from "react";
 
 // 라우터로 전달한 state값을 읽기 위한 객체
 import { useLocation } from "react-router-dom";
@@ -18,7 +18,14 @@ function CatDetail() {
     const cdesc = loc.state.cdesc;
     const facts = loc.state.facts;
     const itx = loc.state.itx;
-    console.log(cname, cdesc, facts);
+    // console.log(cname, cdesc, facts);
+
+    // 화면 렌더링후 실행할것///
+    // 매번 실행해야 이미 생성된 컴포넌트의
+    // 렌더링 실행구역이 작동한다 useEffect(()=>{},[]) <-여기서는 [] 사용하지 않는다.
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    });
 
     return (
         <>
@@ -31,20 +38,38 @@ function CatDetail() {
                     {/* 캐릭터명 */}
                     <h2>{cname}</h2>
                     {/* 캐릭터소개 */}
-                    <p>{cdesc}</p>
-                </div>
-                {/* 2-2. 캐릭터명세 */}
-                <div className={facts}>
-                    <div>
-                        <h3>CHARACTER FACTS</h3>
-                        {/* 테이블로 명세배열만큼 tr을 만들어준다! */}
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>{facts}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    {
+                        // 문자데이터중 "^"로 잘라서
+                        // 배열로 만들고 각각 p태그로
+                        // 랩핑해 준다! ->split(문자열)
+                        // cdesc.split("^") <- 이렇게 하는 순간 배열이 됨.
+                        // console.log(cdesc.split("^"))
+                        cdesc.split("^").map((v, i) => (
+                            <p key={i}>{v}</p>
+                        ))
+                    }
+
+                    {/* 2-2. 캐릭터명세 */}
+                    <div className={facts}>
+                        <div>
+                            <h3>CHARACTER FACTS</h3>
+                            {/* 테이블로 명세배열만큼 tr을 만들어준다! */}
+                            <table>
+                                <tbody>
+                                    {facts.split("^").map((v, i) => (
+                                        <tr key={i}>
+                                            {v.split(":").map((v, i) => (
+                                                <td key={i}>
+                                                    {v}
+                                                    {i == 0 && ":"}
+                                                    {/* i가 0이면 : 출력해라 */}
+                                                </td>
+                                            ))}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

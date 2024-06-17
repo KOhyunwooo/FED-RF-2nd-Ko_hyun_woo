@@ -21,6 +21,10 @@ Root >
                 div.cat-tit2 > h3
 */
 const Catlist = () => {
+
+
+
+    
     return (
         <section className="cat-swbox">
             {/* 1. 모듈타이틀 */}
