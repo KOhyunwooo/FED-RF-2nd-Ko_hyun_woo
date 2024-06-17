@@ -61,7 +61,7 @@
   color: aqua;
 }
 
-/* 햄버거버튼 */
+/* 햄버거버튼 ************************************************************8888*/
 .ham {
   position: absolute;
   top: 50%;
@@ -84,29 +84,44 @@
   background-color: #fff;
   box-shadow: 0 0 4px #777; /* 박스그림자 */
   /* 트랜지션 */
-  transition: all 0.4s ease-out;
+  transition: all 0.2s ease-out;
 }
 
 /* 햄버거 막대 개별위치이동 */
 /* 1번막대 */
 .ham span:nth-child(1) {
   top: 0;
+  transform: rotate(5deg);
+}
+.ham:hover span:nth-child(1) {
+  top: 0;
+  transform: rotate(0deg);
 }
 
 /* 2번막대 */
 .ham span:nth-child(2) {
-  top: 10px;
-  left: -50%;
+  top: 12px;
+  left: 13%;
   /* 트랜지션 때문에 초기값필요!(기본값이 auto라서!) */
+  transform: rotate(-3deg);
 }
 /* 오버시 2번막대 이동! */
 .ham:hover span:nth-child(2) {
+  top: 10px;
   left: 0;
+  transform: rotate(0deg);
 }
 
 /* 3번막대 */
 .ham span:nth-child(3) {
+  top: 25px;
+  transform: rotate(5deg);
+}
+
+/* 오버시 3번막대 이동 */
+.ham:hover span:nth-child(3) {
   top: 20px;
+  transform: rotate(0deg);
 }
 
 /* .ham에 class="on"을 주면 span막대 변경하기 */
@@ -130,7 +145,7 @@
   transform: rotate(-45deg);
   box-shadow: none;
 }
-
+/* ********************************************************************* */
 /*********** 전체메뉴 ************/
 .mbox {
   position: fixed;
