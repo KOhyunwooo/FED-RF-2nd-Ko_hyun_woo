@@ -31,8 +31,8 @@ export default function TopArea() {
     // 검색관련 함수들//////////////
     // 1. 검색창 보이기함수
     const showSearch = (e) => {
-        //기본기능막기(# 이동을 막음)
-        // e.preventDefault();
+        //기본기능막기(a태그 이동을 막음) ***개중요
+        e.preventDefault();
         //1. 검색창 보이기
         $(".searchingGnb").show();
         // show() - display를 보이게함
@@ -42,15 +42,17 @@ export default function TopArea() {
 
     // 2. 검색창에 엔터키 누르면 검색함수 호출
     const enterKey = (e) => {
-        //e.keyCode는 숫자, e.key문자로 리턴함    
+        //e.keyCode는 숫자, e.key문자로 리턴함
         // console.log(e.key, e.keyCode);  /콘솔찍어봤을떄 키보드 enter키가 13번으로 나옴.
-        if(e.key=="Enter"){
+        if (e.key == "Enter") {
             //입력창의 입력값 읽어오기:val()사용,trim() 은 앞뒤 공백지우기
             let txt = $(e.target).val().trim();
             console.log(txt);
             // 빈값이 아니면 검색함수 호출(검색어 전달!)
-            if(txt != ""){//txt가 빈값이 아니면
-                // 입력창 비우고 부모박스 닫기
+            if (txt != "") {
+                //txt가 빈값이 아니면
+                // 입력창 비우고: $(e.target).val(""),부모박스 닫기: .parent().hide();
+                $(e.target).val("").parent().hide();
 
                 // 검색 보내기
                 goSearch(txt);
@@ -61,12 +63,9 @@ export default function TopArea() {
     const goSearch = (txt) => {
         console.log("나는 검색하러 간다구~");
         //라우터로 이동함수 이동하기
-        // goNav("라우터 주소(보낼주소)",{state:{보낼 객체}}) 
-        goNav("search",{state:{ keyword:txt}}) 
-
+        // goNav("라우터 주소(보낼주소)",{state:{보낼 객체}})
+        goNav("search", { state: { keyword: txt } });
     };
-
-   
 
     //// 코드 리턴구역 //////////////
     return (
@@ -142,6 +141,7 @@ export default function TopArea() {
                                 <FontAwesomeIcon
                                     icon={faSearch}
                                     className="schbtnGnb"
+                                    title="Open search"
                                 />
                                 {/* 입력창 */}
                                 <input
@@ -153,7 +153,7 @@ export default function TopArea() {
                                 />
                             </div>
                             {/* 검색기능 링크_ 클릭시 검색창보이기 */}
-                            <a href="#" onClick={showSearch()}>
+                            <a href="#" onClick={showSearch}>
                                 <FontAwesomeIcon icon={faSearch} />
                             </a>
                         </li>
