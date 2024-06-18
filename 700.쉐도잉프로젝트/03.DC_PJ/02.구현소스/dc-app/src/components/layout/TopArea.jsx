@@ -12,6 +12,7 @@ import Logo from "../modules/Logo";
 /* 폰트어썸 불러오기 */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import $ from "jquery";
 
 export default function TopArea() {
     // 이동함수 만들기///
@@ -27,6 +28,46 @@ export default function TopArea() {
     // 슬래쉬 없이 써도 루트로 인식함
     // ->빈값이면 루트로 이동함!
 
+    // 검색관련 함수들//////////////
+    // 1. 검색창 보이기함수
+    const showSearch = (e) => {
+        //기본기능막기(# 이동을 막음)
+        // e.preventDefault();
+        //1. 검색창 보이기
+        $(".searchingGnb").show();
+        // show() - display를 보이게함
+        //2.입력창에 포커스 보내기: 검색창이 보이면 포커스를 #schinGnb에 넣어라.
+        $("#schinGnb").focus();
+    };
+
+    // 2. 검색창에 엔터키 누르면 검색함수 호출
+    const enterKey = (e) => {
+        //e.keyCode는 숫자, e.key문자로 리턴함    
+        // console.log(e.key, e.keyCode);  /콘솔찍어봤을떄 키보드 enter키가 13번으로 나옴.
+        if(e.key=="Enter"){
+            //입력창의 입력값 읽어오기:val()사용,trim() 은 앞뒤 공백지우기
+            let txt = $(e.target).val().trim();
+            console.log(txt);
+            // 빈값이 아니면 검색함수 호출(검색어 전달!)
+            if(txt != ""){//txt가 빈값이 아니면
+                // 입력창 비우고 부모박스 닫기
+
+                // 검색 보내기
+                goSearch(txt);
+            }
+        }
+    };
+    // 3. 검색페이지로 검색어와 함께 이동하기 함수
+    const goSearch = (txt) => {
+        console.log("나는 검색하러 간다구~");
+        //라우터로 이동함수 이동하기
+        // goNav("라우터 주소(보낼주소)",{state:{보낼 객체}}) 
+        goNav("search",{state:{ keyword:txt}}) 
+
+    };
+
+   
+
     //// 코드 리턴구역 //////////////
     return (
         <>
@@ -37,7 +78,7 @@ export default function TopArea() {
                 {/* 네비게이션 GNB파트 */}
                 <nav className="gnb">
                     <ul>
-                        {/* 1. 로고 컴포넌트 */}
+                        {/* 1. 로고 컴포넌트 ****************************************/}
                         <li>
                             <a
                                 href="#"
@@ -54,7 +95,7 @@ export default function TopArea() {
                                 <Logo logoStyle="top" />
                             </Link> */}
                         </li>
-                        {/* 2. GNB메뉴 데이터 배열로 만들기 */}
+                        {/* 2. GNB메뉴 데이터 배열로 만들기 ******************************/}
                         {menu.map((v, i) => (
                             <li key={i}>
                                 {
@@ -67,7 +108,7 @@ export default function TopArea() {
                                     )
                                 }
                                 {
-                                    // 서브 메뉴 데이터가 있으면 하위 그리기
+                                    // 서브 메뉴 데이터가 있으면 하위 그리기////////////
                                     v.sub && (
                                         <div className="smenu">
                                             <ol>
@@ -84,7 +125,7 @@ export default function TopArea() {
                                 }
                             </li>
                         ))}
-                        {/* 3. 검색, 회원가입, 로그인 링크 */}
+                        {/* 3. 검색, 회원가입, 로그인 링크 *************************************************/}
                         <li
                             style={{
                                 marginLeft:
@@ -92,21 +133,29 @@ export default function TopArea() {
                                 marginRight: "25px",
                             }}
                         >
-                            <h1>난 검색,회원가입,로그인링크</h1>
                             {/* 검색입력박스 */}
-                            <div className="searchingGnb" style={{display:"block"}}>
+                            <div
+                                className="searchingGnb"
+                                // style={{ display: "block" }}
+                            >
                                 {/* 검색버튼 돋보기 아이콘 */}
-                                <FontAwesomeIcon icon={faSearch} className="schbtnGnb"/>
+                                <FontAwesomeIcon
+                                    icon={faSearch}
+                                    className="schbtnGnb"
+                                />
                                 {/* 입력창 */}
                                 <input
                                     type="text"
-                                    name="schinGnb" /* name은 백엔드 개발자를 위한 약속, 보통id랑 같은이름으로 함 */ 
-                                    
+                                    name="schinGnb" /* name은 백엔드 개발자를 위한 약속, 보통id랑 같은이름으로 함 */
                                     id="schinGnb"
-                                    placeholder="Filter by keyword"
+                                    placeholder="검색"
+                                    onKeyUp={enterKey}
                                 />
-
                             </div>
+                            {/* 검색기능 링크_ 클릭시 검색창보이기 */}
+                            <a href="#" onClick={showSearch()}>
+                                <FontAwesomeIcon icon={faSearch} />
+                            </a>
                         </li>
                     </ul>
                 </nav>
