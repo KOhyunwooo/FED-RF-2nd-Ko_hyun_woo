@@ -3,3 +3,25 @@
 
 https://www.justgowiththeflow.com/
 aboutZARA할때 여기 참고하기
+
+
+
+
+////////////////////////6월 20일 오전 dc.pj수업 다시 듣기
+
+[박석호강사] [오전 10:34] h1 b{
+        color: hotpink;
+        -webkit-text-stroke: 0.5px #000;
+        text-shadow: 2px 2px 2px #000000c2;
+      }
+      h1 span{
+        color: lightgreen;
+        font-size: 4.5vw;
+      }
+[박석호강사] [오전 10:35] <h1>
+            1. useState 출력
+            <br />
+            <b>
+              나는 <span className="name">{stsName}</span> 좋아해!
+            </b>
+          </h1>

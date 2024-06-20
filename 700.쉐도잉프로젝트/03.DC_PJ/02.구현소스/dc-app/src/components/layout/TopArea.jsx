@@ -85,7 +85,7 @@ export default function TopArea() {
                                     //기본이동막기
                                     e.preventDefault();
                                     //라우터 이동 메서드 호출
-                                    goNav("/movies");
+                                    goNav("/");
                                 }}
                             >
                                 <Logo logoStyle="top" />

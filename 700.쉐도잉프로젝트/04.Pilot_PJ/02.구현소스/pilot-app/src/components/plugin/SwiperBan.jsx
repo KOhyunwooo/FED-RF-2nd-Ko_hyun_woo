@@ -83,6 +83,10 @@ export function SwiperBan({ cat }) {
                     // activeIndex는 loop시 오류있음
                     // realIndex는 loop에도 잘나옴
 
+                    // (style에는 영상이 없으므로)스타일일때는 여기서 리턴
+                    if(cat=="style") return;
+                    
+
                     // 현재 진짜 순번
                     let idx = swp.realIndex;
 
