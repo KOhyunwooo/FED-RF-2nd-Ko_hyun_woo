@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 
 // 부드러운 스크롤 JS
 import { scrolled, setPos } from "../../js/func/smoothScroll24";
@@ -12,7 +12,8 @@ import $ from "jquery";
 // CSS불러오기
 import "../../css/fashion.scss";
 import { SwiperBan } from "../plugin/SwiperBan";
-import SinSang from "../modules/sinsang";
+// SinSang 모듈 불러오기
+import SinSang from "../modules/SinSang";
 
 
 
@@ -97,7 +98,7 @@ function Fashion({subCat}) {
     <>
       {/* 1. 배너영역 */}
       <section id="ban" className="page">
-        <SwiperBan cat={subCat}/> {/* 스와이퍼 밴에 cat에 subCat을 보내라 */}
+        <SwiperBan cat={subCat}/> {/* SwiperBan컴포넌트를 불러올껀데 SwiperBan({ cat })의 cat을 subCat으로 바꿔 */}
       </section>
       {/* 2. 신상품영역 */}
       <section id="c1" className="cont sc-ani c1">

@@ -1,70 +1,93 @@
-import React from "react";
-
-// 신상 함수 불러오기 ////
-import { showInfo,removeInfo,flowList } from "../../js/func/sinsang_fn";
+import React, { useRef } from "react";
+import { useLayoutEffect } from "react";
 
 // 제이쿼리 불러오기
 import $ from "jquery";
+
+// 신상 함수 불러오기 ////
+import { showInfo, removeInfo, flowList } from "../../js/func/sinsang_fn";
+
 // 신상 데이터 불러오기 /////
 import { sinsangData } from "../../js/data/sinsang";
 
-function SinSang({cat, chgItemFn}) {
+function SinSang({ cat, chgItemFn }) {
     // cat - 카테고리 분류명 (men/women/style)
     // chgItemFn - 선택상품정보 변경 부모함수
+
+    // 신상품 리스트 이동함수 사용변수 ///
+    // 위치값변수(left값) -> 리랜더링시 기존값을 유지하도록
+    // ->  useRef를 사용한다!! -> 변수명.current로 사용!
+    const lpos = useRef(0);
+    // 재귀호출 상태값(1-호출,0-멈춤)
+    const callSts = useRef(1);
+
+    // 전달변수 cat 카테고리명이 다를 경우에만 업데이트!
+    useLayoutEffect(() => {
+        // 신상 흘러가기 변수 초기화
+        lpos.current = 0;
+        // 신상 멈춤/가기 상태변수 초기화
+        callSts.current = 1;
+    }, [cat]); /////// cat이 다를때
 
     // 신상품 선택 데이터 만들기
     const selData = sinsangData[cat];
 
-  // [신상품 리스트 코드생성 함수] //////////
-  const makeList = () => {
-    // 코드 담을 배열
-    let temp = [];
-    // 원하는 반복수 만큼 for문실행하여 배열에 JSX태그 담기
-    for (let x = 0; x < 9; x++) {
-      temp[x] = (
-        <li
-          className={"m" + (x + 1)}
-          key={x}
-          onMouseEnter={()=>showInfo(selData)}
-          onMouseLeave={removeInfo}
-        >
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              chgItemFn("m" + (x + 1));
-            }}
-          >
-            <img
-              src={"./images/goods/" + cat + "/m" + (x + 1) + ".png"}
-              alt="신상품"
-            />
-          </a>
-        </li>
-      );
-    } ///// for /////
-    // JSX태그를 담은 배열을 리턴->자동태그변환!
-    return temp;
-  };
+    // [신상품 리스트 코드생성 함수] //////////
+    const makeList = () => {
+        // 코드 담을 배열
+        let temp = [];
+        // 원하는 반복수 만큼 for문실행하여 배열에 JSX태그 담기
+        for (let x = 0; x < 9; x++) {
+            temp[x] = (
+                <li
+                    className={"m" + (x + 1)}
+                    key={x}
+                    onMouseEnter={(e) => showInfo(e, selData)}
+                    onMouseLeave={removeInfo}
+                >
+                    <a
+                        href="#"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            chgItemFn("m" + (x + 1));
+                        }}
+                    >
+                        <img
+                            src={
+                                "./images/goods/" +
+                                cat +
+                                "/m" +
+                                (x + 1) +
+                                ".png"
+                            }
+                            alt="신상품"
+                        />
+                    </a>
+                </li>
+            );
+        } ///// for /////
+        // JSX태그를 담은 배열을 리턴->자동태그변환!
+        return temp;
+    };
 
-  // 코드리턴구역 /////////////////////
-  return (
-    <>
-      <h2 className="c1tit">
-        NEW MEN'S ARRIVAL
-        <button>전체리스트</button>
-      </h2>
-      <div className="flowbx"      
-      onMouseEnter={() => {}}
-      onMouseLeave={() => {
-        callSts.current = 1;
-        flowList($(".flist"));
-      }}
-      >
-        <ul className="flist">{makeList()}</ul>
-      </div>
-    </>
-  );
+    // 코드리턴구역 /////////////////////
+    return (
+        <>
+            <h2 className="c1tit">
+                NEW MEN'S ARRIVAL
+                <button>전체리스트</button>
+            </h2>
+            <div
+                className="flowbx"
+                onMouseEnter={() => {}}
+                onMouseLeave={() => {
+                    // callSts.current = 1;
+                    flowList($(".flist"), lpos, callSts);
+                }}
+            >
+                <ul className="flist">{makeList()}</ul>
+            </div>
+        </>
+    );
 }
-
 export default SinSang;
