@@ -21,8 +21,12 @@ function Searching({kword}) { //()안에 받는 키워드 해야함.
     //[1] 검색어 상태관리 변수
     const [kw,setKw]=useState(kword); //useState 초기값이 전달받은값
     //[2] 정렬기준 상태관리 변수
-    const [solt,setSolt] =useState("asc")
-    // 값: 오름차순 -asc/ 내림차순-desc (내가)설정함
+    const [sort,setSort] =useState("up")
+    // 값: 오름차순 -up/ 내림차순-down (내가)설정함
+    //[3] 체크박스 체크여부 상태관리변수
+    const [check,setCheck] = useState([true,true,true])//useState기본값:true,ture,ture(체크됨,체크됨,체크됨)
+
+
 
     //검색어가 있는 데이터 필터하기(filter):filter는 검색결과가 항상 배열로 나옴//////
     const newList= catListData.filter(v=>{
@@ -34,7 +38,25 @@ function Searching({kword}) { //()안에 받는 키워드 해야함.
         //((중요!!)) 상태변수인 kw로 대체한다
         let key = kw.toLocaleLowerCase();
         //문자열이 있는값만 배열로 재수집!
-        if(newVal.indexOf(key) !==-1) return true;
+        if(
+            //1과 2의 조건이 모두 true여야 리턴 
+            //1.검색어 조건(cname속성)
+            (newVal.indexOf(key) !==-1) && //<-&&로 연결하면 둘다true여야함.
+            //2.체크박스항목 조건(aliment속성)
+            // 주의: 조건문내의 삼항연산자는 반드시 소괄호로 묶어서 논리연산자(&&,||,!)와의 충돌을 막아줘야함
+            // or문의 결과가 false이려면 모두 false여야함!
+            // 체크박스 모두 불체크시 false로 처리!!    
+            (
+             (check[0] ? v.alignment=="hero":false)||//check[0]이 트루냐? v.alignment=="hero" 아니면 false)
+             (check[1] ? v.alignment=="comp":false)||//check[1]이 트루냐? v.alignment=="comp" 아니면 false)
+             (check[2] ? v.alignment=="villain":false) //check[2]이 트루냐? v.alignment=="villain" 아니면 false)
+             //https://youtu.be/zluPurKIrWw?t=2046 이해 못함.
+            )    
+             //true && (true||false||false)
+             // -> &&문은 모두 true여야 true
+             // -> ||문은 하나만 true면 true
+
+        ) return true;
         // indexOf(key) !==-1 이 아니면 리턴(:filter가 해당항목 수집해서 newList에 들어감)
         // 문자열.indexOf(문자) 문자열 위치번호 리턴함
         // 그런데 결과가 없으면 -1을 리턴함
@@ -51,9 +73,27 @@ function Searching({kword}) { //()안에 받는 키워드 해야함.
         ->filter는 결과값도 배열, 결과가 없어도 빈배열. 항상 배열로 나옴.    
     */
 
-        // [정렬기능 추가하기]//////////////////////////
-        //FED-RF-2024 : 90일차 - 3. DC PJ 17편 : [7] 검색모듈3  28:14
-        //https://youtu.be/fEtKKDfQE8k?t=1694
+        //결과내 재검색[데이터 항목중 aliment값으로 검색함! ]////
+
+        //[[정렬기능 추가하기]]// //////////////////////
+        //(1)오름차순일 경우
+        if(sort=="up"){
+            newList.sort((a,b)=>//중괄호 없으면 바로 리턴
+                a.cname > b.cname
+                ? 1   : a.cname <b.cname 
+                ? -1  :0 
+                //a.cname > b.cname보다 크냐? 그럼 1(일)단 바꿔 a.cname < b.cname보다 작냐? 그럼 -1(마)꾸지마
+            );
+        }
+        //(2)내림차순일 경우
+        else if(sort=="down"){
+            newList.sort((a,b)=>//중괄호 없으면 바로 리턴
+            a.cname > b.cname
+            ? -1   : a.cname <b.cname 
+            ? 1  :0 
+            
+        );
+        }
 
 
 
@@ -85,8 +125,17 @@ function Searching({kword}) { //()안에 받는 키워드 해야함.
                             // 검색어 상태변수만 업데이트 하면 끝!
                             // ->setKw(검색어)
                             onKeyUp={(e)=>{
-                                if(e.key=="Enter") setKw(e.target.value)
-                                    //input의 값이 value
+
+                                if(e.key=="Enter") 
+                                    //검색어 상태값 변겯ㅇ
+                                    setKw(e.target.value)//input의 값이 value
+                                    
+                                    //처음검색시 정렬은 기본정렬 오름차순("up")
+                                    setSort("up") //<-근데 이렇게하면 우측 셀렉트박스(A-Z,Z-A)는 안바뀜 그래서
+                                    document.querySelector("#sel").value="up";//<-이것도 해줘야함
+
+                                    //처음 검색시(엔터시) 모두 체크
+                                    setCheck([true,true,true]);
                             }}
                         />
                     </div>
@@ -108,6 +157,20 @@ function Searching({kword}) { //()안에 받는 키워드 해야함.
                                             type="checkbox"
                                             id="hero"
                                             className="chkhdn"
+                                            // checked={true}//<-이렇게 하면 체크되서 나옴
+                                            //체크박스 체크속성값으로 훅연결!
+                                            checked={check[0]}//<-useState첫번째배열임(true)
+                                            //체크 변경시onChange
+                                            onChange={(e)=>{
+                                                console.log("체크박스 체크됐으면 true임",e.target.checked)
+                                                //checked는 체크됐으면 true 체크 안됐으면false가 나옴
+                                                //훅값 업데이트
+                                                setCheck([
+                                                    e.target.checked,
+                                                    check[1],
+                                                    check[2],
+                                                ])
+                                            }}
                                         />
                                         {/* 디자인노출 라벨 */}
                                         <label
@@ -122,6 +185,18 @@ function Searching({kword}) { //()안에 받는 키워드 해야함.
                                             type="checkbox"
                                             id="comp"
                                             className="chkhdn"
+                                            checked={check[1]}//<-useState두번째배열임(true)
+                                            //체크 변경시onChange
+                                            onChange={(e)=>{
+                                                console.log("체크박스 체크됐으면 true임",e.target.checked)
+                                                //checked는 체크됐으면 true 체크 안됐으면false가 나옴
+                                                //훅값 업데이트
+                                                setCheck([
+                                                    check[0],
+                                                    e.target.checked,
+                                                    check[2],
+                                                ])
+                                            }}
                                         />
                                         {/* 디자인노출 라벨 */}
                                         <label
@@ -136,6 +211,18 @@ function Searching({kword}) { //()안에 받는 키워드 해야함.
                                             type="checkbox"
                                             id="villain"
                                             className="chkhdn"
+                                            checked={check[2]}//<-useState세번째배열임(true)
+                                            //체크 변경시onChange
+                                            onChange={(e)=>{
+                                                console.log("체크박스 체크됐으면 true임",e.target.checked)
+                                                //checked는 체크됐으면 true 체크 안됐으면false가 나옴
+                                                //훅값 업데이트
+                                                setCheck([
+                                                    check[0],
+                                                    check[1],
+                                                    e.target.checked,
+                                                ])
+                                            }}
                                         />
                                         {/* 디자인노출 라벨 */}
                                         <label
@@ -154,9 +241,19 @@ function Searching({kword}) { //()안에 받는 키워드 해야함.
                     <h2 className="restit">BROWSE CHARACTERS</h2>
                     {/* 2-2. 정렬선택박스 */}
                     <aside className="sortbx">
-                        <select name="sel" id="sel" className="sel">
-                            <option value="0">A-Z</option>
-                            <option value="1">Z-A</option>
+                        <select 
+                        name="sel" 
+                        id="sel" 
+                        className="sel"
+                        //값을 변경할때 이벤트발생:onChange
+                        onChange={(e)=>{
+                            console.log("솔트",e.target.value);//여기서 value는 옵션에 들어있는 value이다.
+                            //정렬기준 상태변수 업데이트
+                            setSort(e.target.value);
+                        }}
+                        >
+                            <option value="up">A-Z</option>
+                            <option value="down">Z-A</option>
                         </select>
                     </aside>
                     {/* 2-3. 캐릭터 리스트 컴포넌트 : 데이터 상태변수 중 첫번째값만 보냄 SearchingCat.jsx불러야함*/}
