@@ -22,7 +22,7 @@ function SecIntro(props) {
                         <Link to={v.link}>{/* a태그랑 비슷함 */}
                             {/* 1. 이미지박스 */}
                             <div className="imbx">
-                                <img src={v.isrc} alt={v.tit.split("^")[0]} />
+                                <img src={process.env.PUBLIC_URL+v.isrc} alt={v.tit.split("^")[0]} />
                                 {/* split()으로 자르면 배열이된다! */}
                             </div>
                             {/* 2. 타이틀박스 */}

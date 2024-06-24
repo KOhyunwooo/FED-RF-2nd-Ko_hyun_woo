@@ -27,7 +27,7 @@ function Banner({ catName }) {
                     <li key={i}>
                         {/* 정보를 뿌릴때 {} 사용 */}
                         <img
-                            src={v.src}
+                            src={process.env.PUBLIC_URL+v.src}
                             alt={v.tit1 == "" ? "banner image" : v.tit1}
                         />
                         <section className="bantit">
