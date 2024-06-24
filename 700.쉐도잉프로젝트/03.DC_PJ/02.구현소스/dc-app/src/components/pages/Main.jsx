@@ -29,6 +29,9 @@ export default function Main(){
 
            {/* 5. 캐릭터 리스트 컴포넌트 */}
            <Catlist/>
+
+           {/* 6. 캐릭터 배너 컴포넌트 */}
+           <Banner catName="CHARACTERS" />
         </>
     );
 
