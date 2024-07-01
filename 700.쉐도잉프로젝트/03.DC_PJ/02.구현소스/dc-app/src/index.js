@@ -18,6 +18,7 @@ import Video from "./components/pages/Video";
 import Board from "./components/pages/Board";
 import CatDetail from "./components/pages/CatDetail";
 import SearchPage from "./components/pages/SearchPage";
+import Member from "./components/pages/Member";
 /********************************************* 
     [ 리액트 라우터 ]
     -> 컴포넌트를 연결하여 특정 이벤트에 모듈을
@@ -79,6 +80,7 @@ export default function MainComponent() {
                     <Route path="board" element={<Board />} />
                     <Route path="detail" element={<CatDetail />} />
                     <Route path="search" element={<SearchPage />}/>
+                    <Route path="member" element={<Member />}/>
                 </Route>
             </Routes>
         </BrowserRouter>
