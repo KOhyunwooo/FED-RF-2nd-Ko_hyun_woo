@@ -35,7 +35,7 @@ const clearData = () => {
                   "pwd":"1111",
                   "unm":"Tom",
                   "eml":"tom@gmail.com"
-              },
+              }
           ]
       `
       );
