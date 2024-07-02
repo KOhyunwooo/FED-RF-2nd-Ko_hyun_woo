@@ -6,8 +6,13 @@ import "../../css/footer_area.scss";
 
 // 하단메뉴 데이터 불러오기
 import { BottomMenuData } from "../data/bottom_menu";
+import { memo } from "react";
 
-export default function FooterArea() {
+
+// React.memo()를 사용한 컴포넌트 메모이제이션
+// ->컴포넌트를 할당형으로 변경한다!
+export const FooterArea = memo(() => {
+    console.log("하단영역!!!")
     //// 코드 리턴구역 //////////////
     return (
         <footer className="info">
@@ -34,4 +39,4 @@ export default function FooterArea() {
             </ul>
         </footer>
     );
-} /////////// FooterArea /////////////////////
+}); /////////// FooterArea /////////////////////

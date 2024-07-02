@@ -1,0 +1,8 @@
+////////////////////////////////////////footer-area/////////////////////////////////////////////////
+1. 기존 컴포넌트를 화살표 함수로 만들고 memo( ) 로 감싸준다.
+예시) export default function FooterArea() {}       =>      export const FooterArea = memo(() => {})
+2. footer-area를 불러온곳( 예)Layout.jsx)에서 구조분해 할당 형식으로 바꾼다.
+예시) import FooterArea from "./FooterArea";      =>      import {FooterArea} from "./FooterArea";
+    
+
+    

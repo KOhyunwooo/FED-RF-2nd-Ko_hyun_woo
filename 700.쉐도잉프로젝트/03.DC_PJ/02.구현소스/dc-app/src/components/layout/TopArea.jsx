@@ -13,8 +13,25 @@ import Logo from "../modules/Logo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import $ from "jquery";
+import { memo, useContext } from "react";
+import { dCon } from "../func/dCon";
 
-export default function TopArea() {
+// 메모이제이션 적용하기! /////
+// -> 그.러.나... 단순히 적용하면 효과가 없음!
+// 이유는? 컨텍스트 API가 전역적인 함수/변수를 전달하고 있어서
+// 매번 새롭게 리랜더린 됨으므로 인해 메모이제이션 갱신을
+// 하게끔 하기에 효가가 없는것!!!
+// ->>> 방법은? 컨텍스트API를 사용하지 말고
+// props로 전달하는 방식으로 전환하면 효과를 볼 수 있다!
+// -> React.memo는 전달속성이 변경됨을 기준하여
+// 메모이제이션 기능를 제공하기 때문이다!
+// -> 전달되는 함수가 반드시 useCallback() 처리가 되어야 한다!!!
+export const TopArea=memo(()=> {
+    console.log("상단영역!!!")
+    
+    // 컨텍스트 사용하기
+    const myCon=useContext(dCon);
+
     // 이동함수 만들기///
     const goNav = useNavigate();
     // 사용시 goNav(라우터주소, {전달객체})
@@ -73,7 +90,7 @@ export default function TopArea() {
             {/* 1.상단영역 */}
             <header className="top-area">
                 {/* 로그인 환영메시지 박스 */}
-
+                <div className="logmsg">{myCon.loginMsg}</div>
                 {/* 네비게이션 GNB파트 */}
                 <nav className="gnb">
                     <ul>
@@ -158,16 +175,40 @@ export default function TopArea() {
                             </a>
                         </li>
 
-                            {/* 회원가입 로그인버튼 //////////////////////////////// */}
-                        <li>
-              <Link to="/member">JOIN US</Link>
-            </li>
-            <li>
-              <Link to="/login">LOGIN</Link>
-            </li>
+                        {
+                            /* 회원가입 로그인버튼 은 로그인상태가 null 일때 나옴//////////////////////////////// */
+                            myCon.loginSts===null&&
+                            <>
+                                <li>
+                                    <Link to="/member">JOIN US</Link>
+                                </li>
+                                <li>
+                                    <Link to="/login">LOGIN</Link>
+                                </li>
+                            </>
+                        }
+                        {
+                            /* 로그인 상태이면 로그아웃 버튼 보임 */
+                            myCon.loginSts !== null&&
+                            <>
+                                
+                                <li>
+                                    <a href="#" onClick={(e)=>{
+                                        // 기본기능막기
+                                        e.preventDefault();
+                                        // 로그아웃처리함수 호출
+                                        myCon.logoutFn();
+                                    
+
+                                    }}>
+                                        LOGOUT
+                                    </a>
+                                </li>
+                            </>
+                        }
                     </ul>
                 </nav>
             </header>
         </>
     );
-} /////////// TopArea ///////////////////
+}) /////////// TopArea ///////////////////

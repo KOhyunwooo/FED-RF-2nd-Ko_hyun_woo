@@ -139,7 +139,30 @@ function Login(props) {
                 // 로그인 성공시 메시지 출력
                 if (pwd === result.pwd) {
                     // 같을 경우 로그인 성공처리
-                    alert("로그인 성공!");
+                    // alert("로그인 성공!");
+                //**************[로그인 후 셋팅작업] ****************//
+                // 1. 로그인한 회원정보 세션스에 셋팅!
+                // -> 서버 세션을 대신하여 사용함!
+                // -> 결과기 result에 배열로 담김
+                // -> 넣을때는 JSON.stringify()
+                sessionStorage.setItem("minfo", JSON.stringify(result));
+                // 2. 컨텍스트API의 로그인상태 업데이트
+                myCon.setLoginSts(sessionStorage.getItem("minfo"));
+                // ->업데이트된 minfo 세션스 값을 넣음!
+
+                // 3. 로그인 환영메시지 셋팅함수 호출
+                myCon.makeMsg(result.unm);
+
+                // 4. 로그인 성공 메시지 버튼에 출력하기
+                document.querySelector(".sbtn").innerText = "로그인 성공~!";
+
+                // 5.라우팅 페이지 이동
+                // 1초후 메인 페이지 이동
+                setTimeout(() => {
+                    myCon.goPage("/");
+                }, 1000);
+
+
                 }
                 // 로그인 실패시 메시지 출력
                 else {
