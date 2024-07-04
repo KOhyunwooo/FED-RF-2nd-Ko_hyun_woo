@@ -2,6 +2,7 @@
 
 import { useContext } from "react";
 import { pcon } from "./pcon";
+import ItemList from "../pages/ItemList";
 
 export function TotalMenu() {
  //컨텍스트 사용하기
@@ -11,6 +12,8 @@ export function TotalMenu() {
     //이동할 서브 페이지명: a 요소의  글자를 소문자로!
     let pgName = e.target.innerText.toLowerCase();
     console.log("이동할 페이지 소문자로 바꾸기:",pgName)
+    // -> 아이템 리스트 페이지는 중간 공백을 데쉬로 변경
+    pgName = pgName.replace(" ","-")
     //기본이동막기
     e.preventDefault();
     //서브페이지 이동위해 상태변수 업데이트
@@ -80,6 +83,14 @@ export function TotalMenu() {
               <dd>
                 <a href="#" onClick={gosub}>MAIN ITEM</a>
               </dd>
+            </dl>
+            <dl>
+              <dt>
+                <a href="#" onClick={gosub}>ITEM LIST</a>
+              </dt>
+              <dd>
+              </dd>
+             
             </dl>
           </nav>
         </div>
