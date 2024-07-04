@@ -57,8 +57,8 @@ function SinSang({ cat, chgItemFn }) {
                         }}
                     >
                         <img
-                            src={
-                                "./images/goods/" +
+                            src={process.env.PUBLIC_URL+
+                                "/images/goods/" +
                                 cat +
                                 "/m" +
                                 (x + 1) +

@@ -64,7 +64,7 @@ export function SwiperBan({ cat }) {
             />
           ) : (
             <img
-              src={"./images/sub/" + cat + "/banner/ban" + (x + 1) + ".png"}
+              src={process.env.PUBLIC_URL+"./images/sub/" + cat + "/banner/ban" + (x + 1) + ".png"}
             />
           )}
         </SwiperSlide>
