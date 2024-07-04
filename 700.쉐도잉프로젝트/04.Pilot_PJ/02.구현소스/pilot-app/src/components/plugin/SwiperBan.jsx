@@ -55,7 +55,7 @@ export function SwiperBan({ cat }) {
         <SwiperSlide key={x}>
           {(cat == "men" || cat == "women") && x == 0 ? (
             <video
-              src={"./images/sub/" + cat + "/banner/mv.mp4"}
+              src={process.env.PUBLIC_URL+"./images/sub/" + cat + "/banner/mv.mp4"}
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
               // muted
               // loop ->루프는 동영상멈춤이벤트체크시 주석
