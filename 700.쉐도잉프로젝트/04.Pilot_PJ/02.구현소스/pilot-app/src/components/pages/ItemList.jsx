@@ -15,22 +15,21 @@ import $ from "jquery";
 import ItemDetail from "../modules/ItemDetail";
 
 function ItemList() {
+  // 상태변수 만들기 //////
+  // [1] 카테고리정보
+  const [cat, setCat] = useState(itemListData[0].cat);
+  // [2] 상품정보
+  const [ginfo, setGinfo] = useState(itemListData[0].ginfo);
 
-  // 상태변수 만들기 ///////////
-  //[1] 카테고리정보
-  const [cat,setCat]=useState(itemListData[0].cat);//받아가지고 들어오는게 아니기 때문에 null 사용
-  //[2] 상품정보
-  const [ginfo,setGinfo]= useState(itemListData[0].ginfo);
 
 
-    // 화면랜더링구역 ////////
-    useEffect(()=>{
-        // 전체 스크롤바 살리기
-        $("html,body").css({overflow: "visible"});
+  // 화면랜더링구역 ////////
+  useEffect(() => {
+    // 전체 스크롤바 살리기
+    $("html,body").css({ overflow: "visible" });
+  }, []); ////// useEffect ///////
 
-    },[]); ////// useEffect ///////
-
-    // 코드리턴구역 //////////////////
+  // 코드리턴구역 //////////////////
   return (
     <main id="cont">
       <h1 className="tit">All ITEMS LIST</h1>
@@ -44,26 +43,31 @@ function ItemList() {
           <input type="checkbox" className="chkbx" id="style" defaultChecked />
         </div>
         <div className="grid">
-          {itemListData.map((v, i) => 
-        <div key={i}>
-            <a href="#"
-            onClick={(e)=>{
-              e.preventDefault();
-              //상품상세모듈 전달변수 변경
-              setCat(v.cat);
-              setGinfo(v.ginfo);
-              // 상세 상품정보 박스 보이기
-              $(".bgbx").show();
-            }}>
-              [{i+1}]
-              <img src={process.env.PUBLIC_URL+`/images/goods/${v.cat}/${v.ginfo[0]}.png`} alt="dress" />
-              <aside>
-                <h2>{v.ginfo[1]}</h2>
-                <h3>{addComma(v.ginfo[3])}원</h3>
-              </aside>
-            </a>
-          </div>
-          )}
+          {itemListData.map((v, i) => (
+            <div key={i}>
+              <a href="#"
+              onClick={(e)=>{
+                // 기본이동막기
+                e.preventDefault();
+                // 상품상세모듈 전달 상태변수 변경
+                setCat(v.cat);
+                setGinfo(v.ginfo);
+                // 상세상품정보 박스 보이기
+                $(".bgbx").show();
+                
+              }}>
+                [{i+1}]
+                <img
+                  src={process.env.PUBLIC_URL + `/images/goods/${v.cat}/${v.ginfo[0]}.png`}
+                  alt="dress"
+                />
+                <aside>
+                  <h2>{v.ginfo[1]}</h2>
+                  <h3>{addComma(v.ginfo[3])}원</h3>
+                </aside>
+              </a>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -73,15 +77,27 @@ function ItemList() {
         style={{
           position: "fixed",
           top: "0px",
-          paddingTop: "12vh",
+          padding: "12vh 4vw 0",
+          boxSizing: "border-box",
           backdropFilter: "blur(8px)",
+          width: "100%",
           height: "100vh",
           zIndex: "9999",
         }}
       >
-
-        {/* 아이템 디테일 컴포넌트 불러오기 */}
-        <ItemDetail cat={cat} ginfo={ginfo}/> 
+        {/* 아이템 디테일 컴포넌트 불러오기
+          cat - 카테고리, ginfo - 상품정보, 
+          dt - 상품데이터, setGinfo - ginfo값 변경메서드
+        */}
+        <ItemDetail 
+        //cat, ginfo는 개별 상품정보
+          cat={cat} 
+          ginfo={ginfo} 
+        //dt 전체데이터( 한줄리스트 떄문)
+          dt={itemListData} 
+          //setGinfo-한줄리스트 정보 때문
+          setGinfo={setGinfo}
+        />
       </div>
     </main>
   );
