@@ -60,7 +60,7 @@ export default function Board() {
 
     /********************************************** 
         함수명: bindList
-        기능 : 페이지별 리스트를 생성하여 바인딩함
+        기능 : 페이지별 리스트를 생성하여 바인딩함(화면에 데이터 뿌려주는 함수)
     **********************************************/
     const bindList = () => {
         //console.log(baseData);
@@ -115,7 +115,7 @@ export default function Board() {
                             selRecord.current = v; // 해당 데이터 저장하기
                         }}
                     >
-                        {v.cont}
+                        {v.tit}
                     </a>
                 </td>
                 <td>{v.unm}</td>
