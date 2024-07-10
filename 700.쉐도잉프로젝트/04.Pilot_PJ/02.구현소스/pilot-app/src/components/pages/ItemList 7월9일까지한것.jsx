@@ -16,9 +16,12 @@ import ItemDetail from "../modules/ItemDetail";
 
 function ItemList() {
   // 상태변수 만들기 //////
-  // 상품토탈정보
-  const [tot, setTot] = useState(itemListData[0]); 
-
+  // [1] 카테고리정보
+  const [cat, setCat] = useState(itemListData[0].cat);
+  // [2] 상품정보
+  const [ginfo, setGinfo] = useState(itemListData[0].ginfo);
+  // 상품고유번호 참조변수
+  const gIdx = useRef(0);
 
 
   // 화면랜더링구역 ////////
@@ -47,11 +50,15 @@ function ItemList() {
               onClick={(e)=>{
                 // 기본이동막기
                 e.preventDefault();
-                // 상품토탈정보 업데이트
-                setTot(v);
+                // 상품상세모듈 전달 상태변수 변경
+                setCat(v.cat);
+                setGinfo(v.ginfo);
+                // 상품 고유번호 idx업데이트
+                gIdx.current=v.idx;
                 // 상세상품정보 박스 보이기
                 $(".bgbx").show();
-                // console.log("data:",v);
+                console.log("dataaaaaaaaaaaaaaaaaaa:",v)
+                
               }}>
                 [{i+1}]
                 <img
@@ -87,12 +94,15 @@ function ItemList() {
           dt - 상품데이터, setGinfo - ginfo값 변경메서드
         */}
         <ItemDetail 
-          // 상품토탈정보
-          tot={tot}
-          // dt 전체데이터(한줄리스트때문)
+        //cat, ginfo는 개별 상품정보
+          cat={cat} 
+          ginfo={ginfo} 
+        //dt 전체데이터( 한줄리스트 떄문)
           dt={itemListData} 
-          // setTot - 한줄리스트 클릭시 변경
-          setTot={setTot}
+          //setGinfo-한줄리스트 정보 때문
+          setGinfo={setGinfo}
+          // 상품고유번호 전달
+          gIdx={gIdx.current}
         />
       </div>
     </main>

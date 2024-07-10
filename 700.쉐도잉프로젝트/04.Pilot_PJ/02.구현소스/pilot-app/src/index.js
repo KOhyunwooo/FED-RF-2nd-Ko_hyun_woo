@@ -5,7 +5,7 @@ import MainArea from './components/layout/MainArea';
 import FooterArea from './components/layout/FooterArea';
 
 // 컨텍스트 API불러오기
-import { pcon } from './components/modules/pcon';
+import { pCon } from './components/modules/pCon';
 
 // 전체 공통 CSS
 import "./css/index.scss";
@@ -27,7 +27,7 @@ function MainComponent(props) {
     ***************************************************************/
   return (
     /* 전역으로 공개할 변수는{{ }}안에 쓴다. */
-    <pcon.Provider value={{setPgName,setCartSts}}>
+    <pCon.Provider value={{setPgName,setCartSts}}>
 
     
       <TopArea />
@@ -38,7 +38,7 @@ function MainComponent(props) {
       {/* 카트리스트: 카트 상태값 true출력 */}
       {cartSts && <CartList/>}
     
-    </pcon.Provider>
+    </pCon.Provider>
   );
 }
 

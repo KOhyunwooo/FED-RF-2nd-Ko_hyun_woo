@@ -2,7 +2,7 @@
 import React from "react";
 
 // 컨텍스트 API불러오기:전역변수
-import { pcon } from "./pcon";
+import { pCon } from "./pCon";
 
 // 데이터 불러오기
 import { fsData } from "../../js/data/fashion_intro";
@@ -19,7 +19,7 @@ function FashionIntro({ catName, subCat, opt }) {
     //  (역방향은 flex-direction: row-reverse 적용!)
 
     //컨텍스트API사용하기
-    const myCon = useContext(pcon); //useContext에서 pcon을 가져옴
+    const myCon = useContext(pCon); //useContext에서 pcon을 가져옴
 
     // 선택 데이터 변수할당
     const selData = fsData[catName];

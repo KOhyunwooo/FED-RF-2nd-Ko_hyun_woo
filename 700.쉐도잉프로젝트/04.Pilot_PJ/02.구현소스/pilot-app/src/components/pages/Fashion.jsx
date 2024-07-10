@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { scrolled, setPos } from "../../js/func/smoothScroll24";
 
 // 컨텍스트 API 불러오기
-import { pcon } from "../modules/pcon";
+import { pCon } from "../modules/pCon";
 
 // 제이쿼리 불러오기
 import $ from "jquery";
@@ -21,7 +21,7 @@ function Fashion({subCat}) {
   // subCat-서브 카테고리명: men/women/style
 
   // 컨텍스트 API사용하기
-  const myCon = useContext(pcon);
+  const myCon = useContext(pCon);
 
   // 화면랜더링 실행구역
   // 실제DOM이 화면출력전 가상 DOM에서 태그가

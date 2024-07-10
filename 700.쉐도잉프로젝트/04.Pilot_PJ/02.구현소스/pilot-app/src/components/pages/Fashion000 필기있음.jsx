@@ -10,7 +10,7 @@ import { useLayoutEffect } from "react";
 
 //use컨텍스트, pcon 불ㄹ어오기
 import { useContext } from "react";
-import { pcon } from "../modules/pcon";
+import { pCon } from "../modules/pCon";
 import { useEffect } from "react";
 
 function Fashion(props) {//fashion컴포넌트 마운트/////////////////////////////////////////////////////////////////////////////

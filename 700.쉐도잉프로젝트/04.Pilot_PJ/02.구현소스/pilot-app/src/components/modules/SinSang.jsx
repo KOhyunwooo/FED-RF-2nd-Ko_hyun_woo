@@ -9,14 +9,14 @@ import { showInfo, removeInfo, flowList } from "../../js/func/sinsang_fn";
 
 // 신상 데이터 불러오기 /////
 import { sinsangData } from "../../js/data/sinsang";
-import { pcon } from "./pcon";
+import { pCon } from "./pCon";
 
 function SinSang({ cat, chgItemFn }) {
     // cat - 카테고리 분류명 (men/women/style)
     // chgItemFn - 선택상품정보 변경 부모함수
 
     // 전역 컨텍스트 사용하기
-    const myCon=useContext(pcon);
+    const myCon=useContext(pCon);
 
     // 신상품 리스트 이동함수 사용변수 ///
     // 위치값변수(left값) -> 리랜더링시 기존값을 유지하도록

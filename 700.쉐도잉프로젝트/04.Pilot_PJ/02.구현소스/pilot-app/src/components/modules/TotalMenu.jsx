@@ -1,12 +1,12 @@
 // Pilot PJ 전체메뉴 컴포넌트
 
 import { useContext } from "react";
-import { pcon } from "./pcon";
+import { pCon } from "./pCon";
 import ItemList from "../pages/ItemList";
 
 export function TotalMenu() {
  //컨텍스트 사용하기
- const myCon=useContext(pcon);
+ const myCon=useContext(pCon);
 // 서브페이지 이동함수//
   const gosub=(e)=>{
     //이동할 서브 페이지명: a 요소의  글자를 소문자로!
