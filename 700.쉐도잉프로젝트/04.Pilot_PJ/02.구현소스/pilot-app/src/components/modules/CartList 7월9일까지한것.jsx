@@ -7,7 +7,7 @@ import { pCon } from "./pCon";
 function CartList(props) {
 
     //컨텍스트 사용
-    const myCon=useContext(pcon);
+    const myCon=useContext(pCon);
     return (
         <section id="cartlist" style={{right: "0px"}}>
             <a href="#" className="cbtn cbtn2" onClick={e=>{

@@ -13,7 +13,7 @@ function ItemDetail({ cat, ginfo, dt, setGinfo, gIdx }) {
     console.log(cat, ginfo, gIdx);
 
     // 전역 카트 사용여부값 업데이트 사용위해 전역 컨텍스트 사용/////
-    const myCon = useContext(pcon);
+    const myCon = useContext(pCon);
 
     // 제이쿼리 이벤트함수에 전달할 ginfo값 참조변수
     const getGinfo = useRef(ginfo);
