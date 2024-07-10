@@ -110,6 +110,7 @@ function ItemDetail({ tot, setTot, dt }) {
           // 창닫기
           $(".bgbx").hide();
           // 창닫을때 초기화하기!  
+
           // 수량초기화!
           $("#sum").val(1);
           // 총합계 초기화
@@ -285,7 +286,8 @@ function ItemDetail({ tot, setTot, dt }) {
                   // 로컬스에 넣기
                   // 로컬스 없으면 만들어라!
                   if (!localStorage.getItem("cart-data")) {
-                    localStorage.setItem("cart-data", "[]");
+                     //localStorage.getItem("cart-data")가 없으면
+                    localStorage.setItem("cart-data", "[]");// localStorage.setItem(키,값);해라. 키:cart-data, 값[ ]
                   } //// if /////
 
                   // 로컬스 읽어와서 파싱하기
@@ -298,7 +300,7 @@ function ItemDetail({ tot, setTot, dt }) {
                     idx: gIdx,
                     cat: cat,
                     ginfo: ginfo,
-                    cnt: $("#sum").val()
+                    cnt: $("#sum").val() //#sum은 구매수량input박스id임
                   });
                   /************************** 
                     [데이터 구조정의]
@@ -308,7 +310,8 @@ function ItemDetail({ tot, setTot, dt }) {
                     4. cnt : 상품개수
                   **************************/
 
-                  // 로컬스에 문자화하여 입력하기
+                  // 로컬스에 문자화 하여 입력하기////
+                  //넣을때:stringify, 불러올때:parse
                   localStorage.setItem(
                     "cart-data", JSON.stringify(locals));
 

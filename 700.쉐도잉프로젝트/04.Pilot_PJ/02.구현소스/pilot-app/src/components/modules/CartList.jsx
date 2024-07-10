@@ -9,216 +9,200 @@ import { addComma } from "../../js/func/common_fn";
 import $ from "jquery";
 
 function CartList(props) {
-    // 컨텍스트 사용
-    const myCon = useContext(pCon);
+  // 컨텍스트 사용
+  const myCon = useContext(pCon);
 
-    // 로컬스 데이터 가져오기
-    const selData = JSON.parse(localStorage.getItem("cart-data"));
-    console.log("로컬스:", selData);
+  // 로컬스 데이터 가져오기
+  const selData = JSON.parse(localStorage.getItem("cart-data"));
+  console.log("로컬스:", selData);
 
-    // 총합계함수 /////////////
-    const totalFn = () => {
-        // 합계금액은 모든 합계 히든필드 값을 더한다!
-        // 제이쿼리 forEach는 each((순번,요소)=>{}) 메서드다!
+  // 총합계함수 /////////////
+  const totalFn = () => {
+      
+      let result = 0;
+      
+      // 합계금액은 모든 합계 히든필드 값을 더하여 구함.
+      // 제이쿼리 forEach는 each((순번,요소)=>{}) 메서드다!
+    $(".sum-num2").each((idx, ele) => {
+      console.log("값:", $(ele).val());
+      // 숫자로 변환후 기존값에 더하기함!
+      result += Number($(ele).val());
+    });
 
-        let result = 0;
+    // 호출한 곳에 합계리턴
+    return result;
+  }; ////////// totalFn ///////////
 
-        $(".sum-num2").each((idx, ele) => {
-            console.log("값:", $(ele).val());
-            // 숫자로 변환후 기존값에 더하기함!
-            result += Number($(ele).val());
-        });
+  // 화면랜더링 구역 : 한번만 /////////////
+  useEffect(() => {
+    // 총합계 찍기 : 3자리마다 콤마함수호출도함
+    $(".total-num").text(addComma(totalFn())); //.total-num에 text를 넣어라 totalFn을 호출해서, addComma함수는 세자리마다 콤마찍기임
+  }, []); /////// useEffect /////////////
 
-        // 호출한 곳에 합계리턴
-        return result;
-    }; ////////// totalFn ///////////
-
-    // 화면랜더링 구역 : 한번만 /////////////
-    useEffect(() => {
-        // 총합계 찍기 : 3자리마다 콤마함수호출도함
-        $(".total-num").text(addComma(totalFn())); //.total-num에 text를 넣어라 totalFn을 호출해서, addComma함수는 세자리마다 콤마찍기임
-    }, []); /////// useEffect /////////////
-
-    ///// 코드리턴구역 /////////////
-    return (
-        <section id="cartlist" style={{ right: "0px" }}>
-            <a
-                href="#"
-                className="cbtn cbtn2"
-                onClick={(e) => {
-                    e.preventDefault();
-                    // 카트 상태값 업데이트
-                    myCon.setCartSts(false);
+  ///// 코드리턴구역 /////////////
+  return (
+    <section id="cartlist" style={{ right: "0px" }}>
+      <a
+        href="#"
+        className="cbtn cbtn2"
+        onClick={(e) => {
+          e.preventDefault();
+          // 카트 상태값 업데이트
+          myCon.setCartSts(false);
+        }}
+      >
+        <span>닫기버튼</span>
+      </a>
+      <table>
+        {/* 항목별 세로 비율설정 */}
+        <colgroup>
+          <col span="1" style={{ width: "8%" }} />
+          <col span="1" style={{ width: "5%" }} />
+          <col span="1" style={{ width: "38%" }} />
+          <col span="1" style={{ width: "14%" }} />
+          <col span="1" style={{ width: "10%" }} />
+          <col span="1" style={{ width: "8%" }} />
+          <col span="1" style={{ width: "11%" }} />
+          <col span="1" style={{ width: "5%" }} />
+        </colgroup>
+        {/* 테이블 제목 */}
+        <caption>
+          <h1> 카트 리스트</h1>
+        </caption>
+        {/* 테이블 상단영역 : 분류항목 출력 */}
+        <thead>
+          <tr>
+            <th>상품</th>
+            <th>번호</th>
+            <th>상품명</th>
+            <th>상품코드</th>
+            <th>단가</th>
+            <th>수량</th>
+            <th>합계</th>
+            <th>삭제</th>
+          </tr>
+        </thead>
+        {/* 테이블 메인영역////////////////////////////////////////////// */}
+        <tbody>
+          <tr>
+            <td colSpan={8}>
+              {/* 내부 스크롤박스 div */}
+              <div
+                className="scbar"
+                style={{
+                  overflowY: "auto",
+                  height: "60vh",
+                  width: "100%",
                 }}
-            >
-                <span>닫기버튼</span>
-            </a>
-            <table>
-                {/* 항목별 세로 비율설정 */}
-                <colgroup>
-                    <col span="1" style={{ width: "8%" }} />
-                    <col span="1" style={{ width: "5%" }} />
-                    <col span="1" style={{ width: "38%" }} />
-                    <col span="1" style={{ width: "14%" }} />
-                    <col span="1" style={{ width: "10%" }} />
-                    <col span="1" style={{ width: "8%" }} />
-                    <col span="1" style={{ width: "11%" }} />
-                    <col span="1" style={{ width: "5%" }} />
-                </colgroup>
-                {/* 테이블 제목 */}
-                <caption>
-                    <h1> 카트 리스트</h1>
-                </caption>
-                {/* 테이블 상단영역 : 분류항목 출력 */}
-                <thead>
-                    <tr>
-                        <th>상품</th>
-                        <th>번호</th>
-                        <th>상품명</th>
-                        <th>상품코드</th>
-                        <th>단가</th>
-                        <th>수량</th>
-                        <th>합계</th>
-                        <th>삭제</th>
-                    </tr>
-                </thead>
-                {/* 테이블 메인영역 */}
-                <tbody>
-                    <tr>
-                        <td colSpan={8}>
-                            {/* 내부 스크롤박스 div */}
-                            <div
-                                className="scbar"
-                                style={{
-                                    overflowY: "auto",
-                                    height: "60vh",
-                                    width: "100%",
-                                }}
-                            >
-                                {/* 내부용 스크롤되는 테이블 */}
-                                <table
-                                    style={{
-                                        margin: "0",
-                                        width: "100%",
-                                    }}
-                                >
-                                    <tbody>
-                                        {/* 카트데이터 연동파트
-                                         ************************** 
-                                           [데이터 구조정의]
-                                           1. idx : 상품고유번호
-                                           2. cat : 카테고리
-                                           3. ginfo : 상품정보
-                                           4. cnt : 상품개수
-                                         **************************        
-                                         */}
-                                        {selData.map((v, i) => (
-                                            <tr key={i}>
-                                                <td>
-                                                    <img
-                                                        src={
-                                                            process.env
-                                                                .PUBLIC_URL +
-                                                            `/images/goods/${v.cat}/${v.ginfo[0]}.png`
-                                                        }
-                                                        alt="item"
-                                                    />
-                                                </td>
-                                                <td>{v.num}</td>
-                                                <td>{v.ginfo[1]}</td>
-                                                <td>{v.ginfo[2]} </td>
-                                                <td>
-                                                    {addComma(v.ginfo[3])}원
-                                                </td>
-                                                <td className="cnt-part">
-                                                    <div>
-                                                        <span>
-                                                            <input
-                                                                type="text"
-                                                                className="item-cnt"
-                                                                readOnly
-                                                                value={v.cnt}
-                                                                onChange={() => {}}
-                                                            />
-                                                            <button
-                                                                className="btn-insert"
-                                                                data-idx="20"
-                                                            >
-                                                                반영
-                                                            </button>
-                                                            <b className="btn-cnt">
-                                                                <img
-                                                                    src={
-                                                                        process
-                                                                            .env
-                                                                            .PUBLIC_URL +
-                                                                        "/images/cnt_up.png"
-                                                                    }
-                                                                    alt="증가"
-                                                                />
-                                                                <img
-                                                                    src={
-                                                                        process
-                                                                            .env
-                                                                            .PUBLIC_URL +
-                                                                        "/images/cnt_down.png"
-                                                                    }
-                                                                    alt="감소"
-                                                                />
-                                                            </b>
-                                                        </span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span className="sum-num1">
-                                                        {addComma(
-                                                            v.ginfo[3] * v.cnt
-                                                        )}
-                                                    </span>
-                                                    원
-                                                    {/* 계산된 합계금액 숫자만 히든필드에 넣어놓고 총합계 계산에 사용함! */}
-                                                    <input
-                                                        className="sum-num2"
-                                                        type="hidden"
-                                                        defaultValue={
-                                                            v.ginfo[3] * v.cnt
-                                                        }
-                                                    />
-                                                </td>
-                                                <td>
-                                                    <button
-                                                        className="cfn"
-                                                        data-idx="20"
-                                                    >
-                                                        ×
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-                {/* 테이블 하단영역 */}
-                <tfoot>
-                    <tr>
-                        <td colSpan="6">총합계 :</td>
+              >
+                {/* 내부용 스크롤되는 테이블 */}
+                <table
+                  style={{
+                    margin: "0",
+                    width: "100%",
+                  }}
+                >
+                  <tbody>
+                    {/* 카트데이터 연동파트
+                    ************************** 
+                      [데이터 구조정의]
+                      1. idx : 상품고유번호
+                      2. cat : 카테고리
+                      3. ginfo : 상품정보
+                      4. cnt : 상품개수
+                    **************************        
+                    */}
+                    {selData.map((v, i) => (
+                      <tr key={i}>
                         <td>
-                            <span className="total-num"></span>원
+                          <img
+                            src={
+                              process.env.PUBLIC_URL +
+                              `/images/goods/${v.cat}/${v.ginfo[0]}.png`
+                            }
+                            alt="item"
+                          />
                         </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td colSpan="8" className="paging">
-                            <button>Buy Now</button>
+                        <td>{v.num}</td>
+                        <td>{v.ginfo[1]}</td>
+                        <td>{v.ginfo[2]} </td>
+                        <td>{addComma(v.ginfo[3])}원</td>
+                        <td className="cnt-part">
+                          <div>
+                            <span>
+                              <input
+                                type="text"
+                                className="item-cnt"
+                                readOnly
+                                value={v.cnt}
+                                onChange={() => {}}
+                              />
+                              <button className="btn-insert" data-idx="20">
+                                반영
+                              </button>
+                              <b className="btn-cnt">
+                                <img
+                                  src={
+                                    process.env.PUBLIC_URL +
+                                    "/images/cnt_up.png"
+                                  }
+                                  alt="증가"
+                                />
+                                <img
+                                  src={
+                                    process.env.PUBLIC_URL +
+                                    "/images/cnt_down.png"
+                                  }
+                                  alt="감소"
+                                />
+                              </b>
+                            </span>
+                          </div>
                         </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </section>
-    );
+                        <td>
+                          <span className="sum-num1">{/* .sum-num1은 합계 항목 한개의 값/ex)99,000원 */}
+                            {addComma(v.ginfo[3] * v.cnt)}
+                          </span>
+                          원
+                          {/* 계산된 합계금액 숫자만 히든필드에 넣어놓고 총합계 계산에 사용함! */}
+                          {/* 히든필드는(type="hidden): 화면에 표시는 안됨 */}
+                          <input
+                            className="sum-num2"
+                            type="hidden"
+                            defaultValue={v.ginfo[3] * v.cnt}
+                          />
+                        </td>
+                        <td>
+                          <button className="cfn" data-idx="20">
+                            ×
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        {/* 테이블 하단영역//////////////////////////////////////////////// */}
+        <tfoot>
+          <tr>
+            <td colSpan="6">총합계 :</td>
+            <td>
+              <span className="total-num"></span>원
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colSpan="8" className="paging">
+              <button>Buy Now</button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+  );
 }
 
 export default CartList;
