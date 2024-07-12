@@ -155,18 +155,69 @@ function CartList(props) {
                                                                     type="text"
                                                                     className="item-cnt"
                                                                     readOnly
-                                                                    value={
+                                                                    defaultValue={
                                                                         v.cnt
                                                                     }
-                                                                    onChange={() => {}}
+                                                                    onBlur={() => {
+                                                                        console.log("ggg")
+                                                                    }}
                                                                 />
+                                                                {/* 반영버튼////////////////////////////////// */}
                                                                 <button
                                                                     className="btn-insert"
-                                                                    data-idx="20"
+                                                                    onClick={(e)=>{
+                                                                        // 클릭시 실제 데이터 수량변경 반영하기
+                                                                        // 대상: selData-> 배열변환 데이터
+                                                                        //i는 배열 순번임(map돌때 i가 들어옴)
+                                                                        selData[i].cnt= $(e.currentTarget).siblings(".item-cnt").val();//????????????????????????
+                                                                        console.log("수량업데이트:",selData)
+
+
+                                                                        // 2.데이터 문자화하기: 변경된 원본을 문자화(문자화: json형식)
+                                                                        let res =JSON.stringify(selData);
+                                                                        // 3. 로컬스("cart-data")에 반영하기
+                                                                        localStorage.setItem("cart-data",res);
+                                                                        
+                                                                        // 4.카트리스트 전역상태변수 설정
+                                                                        myCon.setLocalsCart(res);
+
+                                                                        // 5. 반영버튼 숨기기
+                                                                        $(e.currentTarget).css({width:"0"});
+
+                                                                        // 6. 전체 총합계 계산 다시하기
+                                                                        $(".total-num").text(addComma(totalFn()));
+                                                                    }}
                                                                 >
                                                                     반영
                                                                 </button>
-                                                                <b className="btn-cnt">
+                                                                {/* 증감버튼/////////////////////////////////////////// */}
+                                                                <b className="btn-cnt" onClick={(e)=>{
+                                                                    // 업데이트 대상(input박스임)
+                                                                    let tg= $(e.currentTarget).siblings("input");
+
+                                                                    // 입력창의 blur이벤트 발생을 위해
+                                                                    // 강제로 포커스를 준다.
+                                                                    tg.focus();
+
+
+                                                                    // 하위 클릭된 이미지 종류파악하기
+                                                                    // e.target으로 설정하여 하위요소인 이미지가 선택되게 해준다!
+                                                                    // e.currentTarget은 이벤트가 걸린  요소 자신이다!(비교할것!)
+                                                                    // let btn= $(e.target);//traget은 이벤트가 발생한 원본 하위 자식요소, currentTarget은 현재의 찍은값
+                                                                    let btnAlt= $(e.target).attr("alt");
+                                                                    console.log(btnAlt);
+                                                                    //증가 감소 분기하여 숫자변경 반영하기
+                                                                    if(btnAlt=="증가"){
+                                                                        tg.val(Number(tg.val())+1);
+                                                                    }
+                                                                    else if(btnAlt=="감소"){
+                                                                        tg.val(Number(tg.val())==1? 1: Number(tg.val())-1);//1 이하로 가면 안되게 하는법
+                                                                        
+                                                                    }
+                                                                    // 클릭시 반영버튼 나타나기
+                                                                    $(e.currentTarget).siblings(".btn-insert")
+                                                                    .css({width:"auto"});
+                                                                }}>
                                                                     <img
                                                                         src={
                                                                             process
@@ -210,20 +261,20 @@ function CartList(props) {
                                                         />
                                                     </td>
                                                     <td>
-                                                        {/********************************* 데이터 삭제기능 X버튼 *********************************/}
+                                                        {/********************************* 데이터 삭제기능만들기 [X버튼] *********************************/}
                                                         <button
                                                             className="cfn"
                                                             onClick={() => {
                                                                 //confirm()의 "확인" 클릭시 true
                                                                 if (window.confirm("정말 삭제하시겠습니까?")) {
-                                                                    //window.confirm은 alert와 다르게 "확인","취소" 두개의 버튼이있다.
+                                                                    //window.confirm은 alert와 다르게 "확인","취소" 두개의 버튼이있다.확인하면=true반환,취소하면=false반환
                                                                     // console.log("삭제함!!!");
                                                                     // console.log("현재객체:",selData);
                                                                     // console.log("지울순번:",i);
                                                                     // console.log("지우기",selData.splice(i,1)); 
-                                                                    // // splice사용법: 지울배열.splice(지울순번,지울개수)
+                                                                    // // splice사용법: 자를배열.splice(자를순번,자를개수)
                                                                     /* 
-                                                                       주의)let fruits = ['apple', 'banana', 'cherry'];
+                                                                        *주의)let fruits = ['apple', 'banana', 'cherry'];
                                                                             let removed = fruits.splice(1, 1);
                                                                             console.log(fruits); // ['apple', 'cherry']
                                                                             console.log(removed); // ['banana']

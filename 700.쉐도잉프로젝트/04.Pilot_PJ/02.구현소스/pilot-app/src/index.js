@@ -15,24 +15,29 @@ import CartList from './components/modules/CartList';
 function MainComponent(props) {
   // 로컬스 카트 데이터 상태변수
   const [localsCart, setLocalsCart]= useState(localStorage.getItem("cart-data"));
-  
+   
   // 로컬스 카트 존재여부 변수
   let cartTemp= false;  
-  // 로컬스 카트 데이터 존재여부에 따라 상태값 변경
+
+  // 상태관리 변수 셋팅//////
+    // 1. 페이지변경 상태 변수
+    const [pgName,setPgName] = useState("main");
+    // 2. 카트리스트 사용여부 상태변수: true일때 사용
+    const [cartSts,setCartSts] = useState(cartTemp);
+    // const [cartSts,setCartSts] = useState(false);
+
+ 
+  // 로컬스 카트 데이터 존재여부에 따라 상태값 변경: 이제 다른 컴포넌트에 true할 필요 없음.
     if(localsCart){
       // 데이터가 있으면 cartTemp true로 변경
       // 데이터 개수가 0이 아니어야함!
       let cartCnt=JSON.parse(localsCart).length;//localStorage.getItem("cart-data")에서 데이터 갯수 불러옴.
       console.log("카트 데이터수:",cartCnt);
       if(cartCnt>0){cartTemp=true}//cartCnt가 0보다크면 cartTemp를 true로 해라.//cartTemp가 true이면 cartSts=true로 되면서 <CartList/>출력됨.
-      
+      //  if(cartCnt>0){setCartSts(true)}
     }
 
-    // 상태관리 변수 셋팅//////
-    // 1. 페이지변경 상태 변수
-    const [pgName,setPgName] = useState("main");
-    // 2. 카트리스트 사용여부 상태변수: true일때 사용
-    const [cartSts,setCartSts] = useState(cartTemp);
+  
 
 
     /*************************************************************** 
@@ -47,7 +52,7 @@ function MainComponent(props) {
     <pCon.Provider value={{setPgName,setCartSts,setLocalsCart,localsCart}}>
 
     
-      <TopArea />
+      <TopArea pgName={pgName} />
       {/* page={main}:페이지 전달 연결된데에서 function MainArea({ page }) page를 써서 전달, 받는곳에서 page={main} 받기 */}
       {/*  */}
       <MainArea page={pgName}/>

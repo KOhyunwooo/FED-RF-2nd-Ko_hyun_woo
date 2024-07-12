@@ -10,6 +10,7 @@ export const gnbData = {
     ],
     style: ["SPECIAL SUMMER STYLE", 
     "GOLF LIFE", "CAMPING STYLE", "SPORT STYLE"],
-    glist: ["Filter List", "Paging List", "More List"],
+    "item-list": ["Filter List", "Paging List", "More List"],
+    //"item-list"에 ""해준 이유는 "-" 때문에 문자형으로 써야해서.
   }; /////////// gnbData ////////////////
   
