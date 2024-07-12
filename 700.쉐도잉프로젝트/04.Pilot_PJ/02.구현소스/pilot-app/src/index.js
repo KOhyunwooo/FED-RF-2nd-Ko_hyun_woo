@@ -33,7 +33,7 @@ function MainComponent(props) {
       // 데이터 개수가 0이 아니어야함!
       let cartCnt=JSON.parse(localsCart).length;//localStorage.getItem("cart-data")에서 데이터 갯수 불러옴.
       console.log("카트 데이터수:",cartCnt);
-      if(cartCnt>0){cartTemp=true}//cartCnt가 0보다크면 cartTemp를 true로 해라.//cartTemp가 true이면 cartSts=true로 되면서 <CartList/>출력됨.
+      if(cartCnt>0)cartTemp=true;//cartCnt가 0보다크면 cartTemp를 true로 해라.//cartTemp가 true이면 cartSts=true로 되면서 <CartList/>출력됨.
       //  if(cartCnt>0){setCartSts(true)}
     }
 
