@@ -1,5 +1,5 @@
 // 오피니언 페이지 컴포넌트 ///
-import { Fragment, useContext, useRef, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 
 // 사용자 기본정보 생성 함수
 import { initData } from "../func/mem_fn";
@@ -99,6 +99,9 @@ export default function Board() {
 
     // console.log("일부데이터:", selData);
 
+
+
+    ///////////코드리턴구역//////////////////////////////////////////////////////
     return selData.map((v, i) => (
       <tr key={i}>
         {/* 시작번호를 더하여 페이지별 순번을 변경 */}
@@ -215,12 +218,34 @@ export default function Board() {
 const deleteFn=()=>{
   // 삭제여부 확인
   if(window.confirm("삭제하시겠습니까?")){
-    //1. 해당항목 idx담기
+    // 1. 해당항목 idx담기
+    let currIdx=selRecord.current.idx;
+    // 2. some()로 순회하여 해당항목 삭제하기
+    // find()와 달리 some()은 결과값을 boolean값으로
+    // 리턴하여 처리한다! 이것을 이용하여 코드처리 해보자!
+    baseData.some((v,i)=>{
+      if(v.idx==currIdx){
+        // 해당순번 배열값을 삭제하다!
+        // 배열삭제는 splice(순번,1)
+        baseData.splice(i,1);
+        return true;//리턴 true할 경우 종료!
+      }////////////////////if////////////////////
+    })////////some///////////////////
+    // 3. 로컬스에 업데이트하기 //////
+    localStorage.setItem("board-data", 
+    JSON.stringify(baseData));
+
+    //4. 삭제후 리스트 리렌더링시 리스트 불일치로 인한 에러를 방지하기 위해
+    // 전체 개수를 바로 업데이트 한다!
+    totalCount.current = baseData.length;
     
-    //2. find로 순회하여 해당항목 삭제하기
+    // 4. 리스트로 돌아가기 ->리렌더링됨/////
+    // -> 모드변경! "L"
+    setMode("L");
+
   }
 
-}
+}////////삭제처리 함수/////////////
   // 서브밋 처리함수 //////////////
   const submitFn = () => {
     // 제목입력항목
@@ -239,8 +264,8 @@ const deleteFn=()=>{
     // 2. 글쓰기 서브밋 (mode=="W")
     if (mode == "W") {
     
-// 0.현재 로그인 사용자 정보 파싱하기
-let person = JSON.parse(sts);
+      // 0.현재 로그인 사용자 정보 파싱하기
+      let person = JSON.parse(sts);
       // 1. 오늘날짜 생성하기 /////
       let today = new Date();
       // yy-mm-dd 형식으로 구하기
@@ -281,6 +306,10 @@ let person = JSON.parse(sts);
 
       // 로컬스 확인!
       // console.log(localStorage.getItem("board-data"));
+      
+      // 4. 추가후 리스트 리랜더링시 리스트 불일치로 인한
+      // 에러를 방지하기 위하여 전체 개수를 바로 업데이트한다!
+      totalCount.current = baseData.length;
 
       // 5. 리스트로 돌아가기 /////
       // -> 모드변경! "L"
