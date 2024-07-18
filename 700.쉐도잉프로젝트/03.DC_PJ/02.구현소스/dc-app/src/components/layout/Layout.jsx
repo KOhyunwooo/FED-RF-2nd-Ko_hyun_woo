@@ -1,6 +1,6 @@
 // 전체 레이아웃 컴포넌트 ///
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { FooterArea } from "./FooterArea";
 import MainArea from "./MainArea";
 import { TopArea } from "./TopArea";
@@ -23,6 +23,12 @@ export default function Layout() {
   const [loginMsg, setLoginMsg] = useState(null);
   // console.log(loginMsg);
 
+  // [참조 변수] ///
+  // 1. 게시판 조회글 저장 변수: 초기값 빈배열
+  const bdRec=useRef([]);
+  // bdRec -> board Record
+
+
   // [ 공통 함수 ] ///
   // 1. 라우팅 이동함수 : 라우터 이동후크인 useNavigate는
   // 다른 useCallback() 후크로 처리할 수 없다!
@@ -41,6 +47,8 @@ export default function Layout() {
     let rdm = Math.floor(Math.random() * 5);
     // 로그인 메시지 상태변수 업데이트
     setLoginMsg(`Welcome ${name} ${usrIcon[rdm]}`);
+    // 메시지생성시 게시판 조회데이터 세션스 삭제(초기화)
+    sessionStorage.removeItem("bd-rec");
   },[]); /////// makeMsg 함수 /////////
 
   // 3. 로그아웃 함수 /////////
@@ -49,6 +57,8 @@ export default function Layout() {
     setLoginSts(null);
     // 2. 세션스 지우기 : minfo
     sessionStorage.removeItem("minfo");
+    // 추가삭제: 게시판 조회데이터 세션스
+    sessionStorage.removeItem("bd-rec");
     // 3. 로그인 메시지 초기화
     setLoginMsg(null);
     // 4. 메인 페이지로 돌아가기
@@ -84,6 +94,7 @@ export default function Layout() {
         goPage,
         makeMsg,
         logoutFn,
+        bdRec,
       }}
     >
       {/* 1.상단영역 : 메모이제이션을 위해 직접값전달! */}

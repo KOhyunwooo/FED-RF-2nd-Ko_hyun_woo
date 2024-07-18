@@ -1,6 +1,8 @@
 //클래스형으로 만들기(rcc)
 import React, { Component } from "react";
 import "../../css/weather.scss";
+//엑시우스 불러오기
+import axios from 'axios'
 
 // 여기서는 컴포넌트를 class로 만들어보자!!
 // 클래스 컴포넌트는 기본적으로 component 클래스를 상속받는다!
@@ -56,28 +58,62 @@ class Weather extends Component {
         // 소스샘플
         // https://openweathermap.org/api/one-call-3
 
-        /////////////////////////////////////////////
-        // fetch() 함수를 이용한 데이터 조회하기! /////
-        fetch(url) // 파일받기
-            .then((res) => res.json()) // json() 제이슨파일형식파싱
-            .then((wdata) => {
-                //파일파싱후후 내용읽기
-                console.log(wdata, wdata.main.temp);
-                // 상태변수인 wInfo에 값을 셋팅한다!
-                // 셋팅용 상태변수 메서드형은 setState()
-                // this키워드 사용!
+        ///////////////////////////////////////////////////////////////////
+        // fetch() 함수를 이용한 데이터 조회하기! ///////////////////////////
+        //-> 이것은 기본 브라우저 API를 사용한 방법임!
+        // fetch(url) // 파일받기
+        //     .then((res) => res.json()) // json() 제이슨파일형식파싱
+        //     .then((wdata) => {
+        //         //파일파싱후후 내용읽기
+        //         console.log(wdata, wdata.main.temp);
+        //         // 상태변수인 wInfo에 값을 셋팅한다!
+        //         // 셋팅용 상태변수 메서드형은 setState()
+        //         // this키워드 사용!
+        //         this.setState({
+        //             temp: wdata.main.temp,
+        //             desc: wdata.weather[0].description,
+        //             icon: wdata.weather[0].icon,
+        //             loading: false, // 로딩여부끝(false)
+        //             city: cityName,
+        //         });
+        //     }); /////// 마지막 then /////
+        //     // 에러시 처리
+        //     .catch(err=>console.log(err));
+        ///////////////////////////////////////////////////////////////////
+
+        //////////////////////////////////////////////////////////////////
+        // axios 라이브러리를 이용한 데이터 조회하기! ///////////////////////
+        // 먼저설치: npm i axios
+        // 엑시오스는 데이터를 프라미스로 처리하여 원하는 
+        // 결과를 보장하는 간편한 데이터 처리 라이브러리다!
+
+        // 엑시오스 사용법:
+        // 우선 상단에 import axios from 'axios' 해줌
+        // 파일 가져오기 메서드: get()
+        // 다음 실행 메서드 : then()
+        axios.get(url) // 파일로딩
+            .then(res=> { // 파일형식에 맞는 파싱 자동!
+                // console.log(res);
+                // 주의: 로그에서 확인한바와 같이
+                // data속성에 실제 데이터가 담긴다!
+                // 들어오는 변수인 res.data 해야함!
+                const wdata = res.data;
+
+                // 상태변수값에 셋팅하기 //////
                 this.setState({
                     temp: wdata.main.temp,
                     desc: wdata.weather[0].description,
                     icon: wdata.weather[0].icon,
                     loading: false, // 로딩여부끝(false)
                     city: cityName,
-                });
-            }); /////// 마지막 then /////
-        //     // 에러시 처리
-        //     .catch(err=>console.log(err));
-        /////////////////////////////////////////////
+                })
+
+            }) ///////// then //////////
+            /// 에러처리 메서드: catch()
+            .catch(err=>console.log(err));
+        ////////////////// axios 끝 /////////////////////////////////
     }
+    
 
     // 컴포넌트 결과 렌더링 메서드////////
     render() {
