@@ -6,7 +6,7 @@ import MainArea from "./MainArea";
 import { TopArea } from "./TopArea";
 
 // 컨텍스트 API 불러오기
-import { dCon } from "../func/dCon";
+import { dCon } from "../modules/dCon";
 import { useNavigate } from "react-router-dom";
 
 export default function Layout() {

@@ -6,7 +6,7 @@ import "../../css/member.scss";
 
 // 로컬 스토리지 셋팅 함수 호출!
 import { initData } from "../func/mem_fn";
-import { dCon } from "../func/dCon";
+import { dCon } from "../modules/dCon";
 
 function Login(props) {
     // 컨텍스트 사용
