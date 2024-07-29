@@ -3,7 +3,7 @@ import "../src/css/index.scss";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 //레이아웃컴포넌트 불러오기
 import Layout from "./components/layout/Layout";
 
@@ -59,15 +59,17 @@ export default function MainComponent() {
     return (
         // 라우터 루트로 라우터 구성시작
         // basename 속성은 package.json의 "homepage"속성값을
-        // 
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        //
+        // <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <HashRouter>
+            {/* basename속성을 쓰지 않는다. 해쉬라우터는 homepage속성값을 자동으로 연결해준다! */}
             <Routes>
                 {/* 중요!!! 레이아웃 컴포넌트를 루트로 설정! 
                     루트 Route는 홀로 닫지말고 반드시 다른 하위 라우트를 감싸도록한다*/}
                 <Route path="/" element={<Layout />}>
                     {/* 하위 라우트 셋팅 
                     -> path설정대신 index키워드를 쓰면 첫페이지로 구성됨
-                    =>MainArea컴포넌트<Outlet/>에 출력된다!*/}
+                =>MainArea컴포넌트<Outlet/>에 출력된다!*/}
                     <Route index element={<Main />} />
                     {/* path이름으로 부르면 element={<Character />로 호출됨 */}
                     <Route path="character" element={<Character />} />
@@ -80,12 +82,13 @@ export default function MainComponent() {
                     <Route path="video" element={<Video />} />
                     <Route path="board" element={<Board />} />
                     <Route path="detail" element={<CatDetail />} />
-                    <Route path="search" element={<SearchPage />}/>
-                    <Route path="member" element={<Member />}/>
-                    <Route path="login" element={<Login />}/>
+                    <Route path="search" element={<SearchPage />} />
+                    <Route path="member" element={<Member />} />
+                    <Route path="login" element={<Login />} />
                 </Route>
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
+        // </BrowserRouter>
     );
 }
 
