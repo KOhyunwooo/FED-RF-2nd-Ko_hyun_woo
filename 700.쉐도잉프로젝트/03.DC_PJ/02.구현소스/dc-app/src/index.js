@@ -60,8 +60,8 @@ export default function MainComponent() {
         // 라우터 루트로 라우터 구성시작
         // basename 속성은 package.json의 "homepage"속성값을
         //
-        // <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <HashRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        {/* // <HashRouter> */}
             {/* basename속성을 쓰지 않는다. 해쉬라우터는 homepage속성값을 자동으로 연결해준다! */}
             <Routes>
                 {/* 중요!!! 레이아웃 컴포넌트를 루트로 설정! 
@@ -87,7 +87,7 @@ export default function MainComponent() {
                     <Route path="login" element={<Login />} />
                 </Route>
             </Routes>
-        </HashRouter>
+        {/* </HashRouter> */}
         // </BrowserRouter>
     );
 }
