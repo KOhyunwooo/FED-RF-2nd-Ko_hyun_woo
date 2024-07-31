@@ -84,9 +84,15 @@ export default function Board() {
 
 
     //검색기능을 위한 리듀서 함수////////////
-    const reducerFn = (state, action) => {
+    const reducerFn = (gval, action) => {
+        // gval - 지가 벨류래...의 줄임말
+        // -> 리듀서변수가 들어옴 (왜 들어와??)
+        // 기존값을 활용하여 업데이트 하기 위해 들어옴
+        console.log("지발:",gval);
         // 1.구조분해 할당으로 객체 배열값 받기
-        const [key, ele] = action.type;//action.type은 리듀서 호출시 보낸 객체값(배열임!)
+        const [key, ele] = action.type;
+        // 배열값 구조:[구분문자열, 이벤트발생대상요소]
+        //action.type은 리듀서 호출시 보낸 객체값(배열임!)
 
         console.log("key:", key, "\nele:", ele);
 
@@ -115,9 +121,9 @@ export default function Board() {
                     else {
                         alert("Please enter a keyword!");
                     }
+                    //리턴 코드값은 리듀서 변수에 담긴다!
+                    return gval+'*'+txt;
                 }
-                //리턴 코드값은 리듀서 변수에 담긴다!
-                return true;
             //(2)전체 리스트 돌아가기 실행코드
             case "back":
                 {
@@ -135,11 +141,11 @@ export default function Board() {
                     setPageNum(1);
                 }
                 //리턴 코드값은 리듀서 변수에 담긴다!
-                return false;
+                return gval;
         }
     };
     // 검색기능 지원 후크 리듀서: useReducer
-    const [state, dispach] = useReducer(reducerFn, null);
+    const [memory, dispach] = useReducer(reducerFn, '');
 
 /*********************************************** 
  * [ 리듀서 후크 : useReducer ]
@@ -552,6 +558,7 @@ function 컴포넌트() {
                         sortCta={sortCta}
                         setSortCta={setSortCta}
                         dispach={dispach}
+                        memory={memory}
                     />
                 )
             }
@@ -630,7 +637,7 @@ function 컴포넌트() {
 /****************************************** 
         리스트 모드 서브 컴포넌트
 ******************************************/
-const ListMode = ({ bindList, totalCount, unitSize, pageNum, setPageNum, pgPgNum, pgPgSize, keyword, setKeyword, sort, setSort, sortCta, setSortCta, dispach }) => {
+const ListMode = ({ bindList, totalCount, unitSize, pageNum, setPageNum, pgPgNum, pgPgSize, keyword, setKeyword, sort, setSort, sortCta, setSortCta, dispach, memory }) => {
     /******************************************* 
     [ 전달변수 ] - 2~5까지 4개는 페이징전달변수
     1. bindList : 리스트 결과 요소
@@ -683,6 +690,7 @@ const ListMode = ({ bindList, totalCount, unitSize, pageNum, setPageNum, pgPgNum
                 <button
                     className="sbtn"
                     onClick={(e) => {
+                        // 리듀서 호출 메서드
                         dispach({ type: ["search", e.target] });
                     }}
                 >
@@ -694,7 +702,9 @@ const ListMode = ({ bindList, totalCount, unitSize, pageNum, setPageNum, pgPgNum
                         <button
                             className="back-total-list"
                             onClick={(e) => {
+                                //리듀서 메서드 호출
                                 dispach({ type: ["back", e.target] });
+                                // 보낼값구성: [구분문자열, 이벤트 발생요소]
                             }}
                         >
                             Back to Total List
@@ -714,6 +724,7 @@ const ListMode = ({ bindList, totalCount, unitSize, pageNum, setPageNum, pgPgNum
                     <option value="tit">
                         Title
                     </option>
+                    <b>{memory}</b>
                 </select>
             </div>
             <table className="dtbl" id="board">
