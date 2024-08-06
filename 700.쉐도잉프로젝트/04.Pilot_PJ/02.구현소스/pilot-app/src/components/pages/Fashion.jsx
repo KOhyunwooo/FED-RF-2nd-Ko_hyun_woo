@@ -6,6 +6,13 @@ import { scrolled, setPos } from "../../js/func/smoothScroll24";
 // 컨텍스트 API 불러오기
 import { pCon } from "../modules/pCon";
 
+// gnb 데이터 가져오기 
+import { gnbData } from "../../js/data/gnb";
+//리액트용 패럴랙스 - 설치 : npm i react-parallax 
+import {Parallax} from "react-parallax";
+
+
+
 // 제이쿼리 불러오기
 import $ from "jquery";
 
@@ -14,10 +21,9 @@ import "../../css/fashion.scss";
 import { SwiperBan } from "../plugin/SwiperBan";
 // SinSang 모듈 불러오기
 import SinSang from "../modules/SinSang";
+import FashionIntro from "../modules/FashionIntro";
 
-
-
-function Fashion({subCat}) {
+function Fashion({ subCat }) {
   // subCat-서브 카테고리명: men/women/style
 
   // 컨텍스트 API사용하기
@@ -77,12 +83,10 @@ function Fashion({subCat}) {
     }); ////////// click ////////////
   }, []);
 
-
-  
   // 후크 상태변수
   const [item, setItem] = useState("m1");
 
-// 신상컴포넌트에서 상세컴포넌트로 값을 전하기 위한
+  // 신상컴포넌트에서 상세컴포넌트로 값을 전하기 위한
   // 상태변수를 셋팅하여 함수로 이것을 변경하게 해준다!
   // 프롭스 펑션다운~!!
   const chgItem = (v) => {
@@ -98,20 +102,44 @@ function Fashion({subCat}) {
     <>
       {/* 1. 배너영역 */}
       <section id="ban" className="page">
-        <SwiperBan cat={subCat}/> {/* SwiperBan컴포넌트를 불러올껀데 SwiperBan({ cat })의 cat을 subCat으로 바꿔 */}
+        <SwiperBan cat={subCat} />{" "}
+        {/* SwiperBan컴포넌트를 불러올껀데 SwiperBan({ cat })의 cat을 subCat으로 바꿔 */}
       </section>
       {/* 2. 신상품영역 */}
-      <section id="c1" className="cont sc-ani c1">
-        <SinSang cat={subCat} chgItemFn={chgItem}/>
+      <section id="c1" className={"cont sc-ani c1 " + subCat}>
+        <SinSang cat={subCat} chgItemFn={chgItem} />
       </section>
       {/* 2.5. 상세보기박스 */}
       <div className="bgbx"></div>
       {/* 3. 패럴랙스 영역 : 리액트용 패럴랙스 적용 */}
-      <section id="c2" className="cont"></section>
+      <section id="c2" className="cont">
+        <Parallax
+          className="c2"
+          // 패럴랙스할 배경이미지 설정속성 bgImage
+          bgImage={
+            process.env.PUBLIC_URL +
+            "/images/sub/" +
+            subCat +
+            "/02.special.png"
+          }
+          // 패럴랙스 이동정도 조정속성 strength
+          // 수치범위 :  -500 ~ 1000 -> 높은 숫자는 반대방향
+          strength={200}
+        >
+          <h2 className="c2tit sc-ani">2024 {gnbData[subCat][1]}</h2>
+        </Parallax>
+      </section>
+
       {/* 4. 단일상품영역 */}
-      <section id="c3" className="cont c3"></section>
+      <section id="c3" className="cont c3">
+        <FashionIntro catName="sub" subCat={subCat} opt={true}  seq={0}/>
+
+      </section>
       {/* 5. 스타일상품영역 */}
-      <section id="c4" className="cont c4"></section>
+      <section id="c4" className="cont c4">
+        <FashionIntro catName="sub" subCat={subCat} opt={false}  seq={1}/>
+
+      </section>
     </>
   );
 }
