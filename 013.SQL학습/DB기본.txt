@@ -1,3 +1,5 @@
+https://www.w3schools.com/mysql/trymysql.asp?filename=trysql_select_columns
+
 [ 데이터베이스 기본 ]
 1. DB란?
 - 공유하고자 하는 데이터를 서버의 
