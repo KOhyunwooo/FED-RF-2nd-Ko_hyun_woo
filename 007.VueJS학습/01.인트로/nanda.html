@@ -32,9 +32,19 @@
             <!-- v-html디렉티브 : 태그 출력속성 -->
         </section>
         <!-- 2.배너 파트 -->
-        <section class="banner"></section>
+        <section class="banner">
+            <p class="banner" v-html="content"></p>
+        </section>
         <!-- 3.상품리스트 파트 -->
-        <section class="itemlist"></section>
+        <section class="part gwrap">
+            <ol class="glist" 
+            v-for="(아이템,idx) in itemData">
+                <li v-html="makeImg(아이템.img)"></li>
+                <li>Item : {{아이템.name}}</li>
+                <li>Price : ￦{{addCommas(아이템.price)}}</li>
+            </li>
+        </ol>
+        </section>
     </div>
     <!-- 
         기본구성: 3단구성
