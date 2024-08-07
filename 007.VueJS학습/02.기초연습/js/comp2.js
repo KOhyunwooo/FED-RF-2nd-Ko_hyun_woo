@@ -1,4 +1,5 @@
-// 01. 컴포넌트 연습1 JS
+// 02. 컴포넌트 연습2 JS - 부모변수를 자식에게 전달!
+// ->>> Props Down 프롭스 다운!!!
 
 // 뷰JS 인스턴스 생성용 함수 : x 는 대상요소
 const makeVue = (x) => new Vue({ el: x });
@@ -43,6 +44,25 @@ Vue.component("list-comp", {
         </aside>
       </div>
     `, // template ////
+
+
+  // [상위 컴포넌트 전달변수 설정속성:props]
+  props:["list-num","my-seq","end-let"],
+  // 배열형은 설정한 변수명을 문자형으로 나열만 하면 되고
+  // 만약 각 변수의 데이터형(type)을 특정하고 싶으면
+  // 객체형을 사용하여 아래와 같이 표현한다
+  // -> 오류 방지 하기위해 사용함
+  // props: {변수명:변수형}
+  // props: {
+    //   "list-num": Number,
+    //   "my-seq": Number,
+    //   "end-let": String,
+    // }, 
+    
+  // 이 변수를 사용할때는 케멀케이스 변수로 사용함!
+  // "list-num" -> this.listNum
+  //-> 내부용 변수이므로 반드시 this키워드 사용!!
+
   // 2-2. data 옵션 : 컴포넌트 내부 변수셋팅
   // 실행원리 : 컴포넌트가 빌드할때
   // data 속성의 함수를 호출한다!
@@ -53,9 +73,9 @@ Vue.component("list-comp", {
     // 객체리턴필수!!!(중요!!!)
     return {
       // 이미지 src
-      gsrc: `./images/${this.setNum()}.jpg`,
+      gsrc: `./images/${this.listNum}.jpg`,
       // 상품명
-      gname: this.setName(),
+      gname: this.setName()+" "+this.endLet+this.mySeq,
       // 상품가격
       gprice: this.setPrice(),
     };
@@ -97,12 +117,25 @@ Vue.component("ifr-comp",{
     <iframe width="49%" style="aspect-ratio: 16/9;" 
     v-bind:src="ifrSrc" title="#고윤정 과 함께 차가운 겨울을 더욱 액티브하게!  l 디스커버리 23FW #goyounjung #크롭패딩" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> 
     `, /// template ////
+    //[프롭스다운 설정하기]
+    props:["mvCode"],
+    // ->사용시 this.mvCode // this를 꼭 붙힌다!
     // 3-2. data 옵션
     data(){
         return{
-            ifrSrc: `https://www.youtube.com/embed/ZH1Y1l1OmTY?autoplay=1&mute=1&loop=1&playlist=ZH1Y1l1OmTY`,
+            ifrSrc: this.getIframeSrc(this.mvCode),
+            // ifrSrc: this.getIframeSrc('ZaQNTfKbngI'),
         };
-    },
+    },///data///
+    //3-3.methods속성
+    methods:{
+        // 동영상 정보 리턴함수
+        getIframeSrc(aaa){// 동영상코드
+
+            return `https://www.youtube.com/embed/${aaa}?autoplay=1&mute=1&loop=1&playlist=${aaa}`;
+
+        }
+    }
 });
 
 // 뷰인스턴스 생성하기 : 유튜브 동영상 컴포넌트
