@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03.쇼핑몰갤러리</title>
+    <link rel="stylesheet" href="./css/small.css" />
+    <!-- 뷰JS 스탠드얼론 버전 가져오기! -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <!-- 제이쿼리 라이브러리 CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <!-- 제이쿼리 UI CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+
+    <!-- 메인 JS -->
+    <script src="./js/small.js" type="module"></script>
+  </head>
+  <body>
+    <!-- 1.타이틀 -->
+    <h1 class="tit">
+        <!-- 타이틀 컴포넌트 -->
+        <tit-comp></tit-comp>
+    </h1>
+    <!-- 유튜브 동영상박스 -->
+    <div class="you-box">
+        <!-- 아이프레임 컴포넌트 : 주의! 문자값은 따옴표! -->
+        <ifr-comp v-bind:data-id="'ZH1Y1l1OmTY'"></ifr-comp>
+        <ifr-comp v-bind:data-id="'Whj5j3RQmFc'"></ifr-comp>
+    </div>
+
+    <!-- 2.그리드 레이아웃 박스 -->
+    <div class="grid">
+        <!-- 그리드리스트 컴포넌트
+        반복문은 상위에 해준다!
+        단순반복은 in 뒤에 숫자를 쓰면됨!
+            v-for="(일련번호,순번) in 횟수"
+            -> 순번은 0부터, 일련번호는 1부터
+    -->
+        <list-comp 
+            v-for="(n,i) in 50" 
+            v-bind:data-num="n"
+            v-bind:key="n"
+            v-bind:my-seq="i"
+            v-bind:end-let="'WT'"
+            v-on:hull="goMsg"
+            v-on:got-kimchi="overMsg"
+        ></list-comp>
+        <!-- 
+          v-bind:속성명="값"
+          쌍따옴표 안의 값은 변수가 됨!
+          만약 문자값을 보내고 싶으면 따옴표로 다시쌈!
+          예) v-bind:end-let="'WT'"
+
+          ((v-bind:key))는 무엇인가?
+          for문으로 반복하여 요소를 생성할때
+          내부적으로 요소를 구분하는 유일키를 설정할때
+          사용한다! ->> 주의: key값을 props하지 말것!
+          -> 용도가 다르므로 에러발생함!
+         -->
+    </div>
+    <!-- 상품 상세정보 박스 -->
+    <div class="pbg">
+      <win-comp></win-comp>
+    </div>
+  </body>
+</html>
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// 쇼핑몰 갤러리 JS - small.js
+
+// 템플릿 html코드 객체 JS 가져오기
+import hcode from "./hcode.js";
+
+// 뷰JS 인스턴스 생성용 함수!
+const makeVue = (x) => new Vue({ el: x });
+
+// 1. 제목에 넣을 전역컴포넌트 만들기
+Vue.component('tit-comp',{
+    // 1-1. 템플릿 셋팅
+    template: hcode.tit,
+}); ///// 전역 컴포넌트 1 /////////
+
+// 뷰인스턴스 생성하기
+makeVue('.tit');
+
+// 이미지번호 숫자증감 변수
+let inum = 0;
+
+// 세일가격 계산을 위한 임시변수
+let temp;
+
+// 상품명 배열
+const goods = ["프레이컷", "아일렛기모", "베어부클", "포멀믹스톤"];
+
+// 2. 갤러리 리스트에 넣을 전역 컴포넌트 만들기
+// ->>> 자식컴포넌트!!!
+Vue.component("list-comp", {
+  // 2-1. template 옵션 : 태그구성
+  // src속성을 셋팅된 변수를 적용하기위해
+  // 속성앞에 v-bind:을 붙여서 v-bind:src
+  // 로쓰면 값으로 문자형을 써도 그 안의
+  // 값은 변수가 된다!!!(중요!!!)
+  template: hcode.list,
+// 2-2. props 옵션 : 
+// -> 부모 인스턴스요소에서 v-bind:속성명=값 으로
+// 전달한 속성변수를 받는 옵션
+// 사용법 ->>> props: []/{} 로 받음
+// [] 배열로 받으면 변수만 쓰고
+// {} 객체로 받으면 변수를 속성에, 값은 데이터형을 씀
+props:['data-num','my-seq','end-let'],
+// props:{'data-num':Number}, -> 데이터형 일치
+// props:{'data-num':String}, -> 데이터형 불일치로 에러발생
+
+// props로 셋팅한 부모전달 속성을 this키워드와 함께
+// 변수형으로 사용하는 방법은??? 캐믈케이스로 변환사용!
+// 'data-num' -> this.dataNum 
+
+
+  // 2-3. data 옵션 : 컴포넌트 내부 변수셋팅
+  // 실행원리: 컴포넌트가 빌드할때
+  // data속성의 함수를 호출한다!
+  // 그래서 리턴되는 객체값이 컴포넌트내부에
+  // 전달된다!!!
+  data () {
+    // 템플릿에서 사용할 변수는 반드시 리턴함!
+    // 속성:값으로 구성된 객체를 리턴한다!
+    return {
+      // 1.이미지 src
+      gsrc: `images/${this.dataNum}.jpg`,
+      // 2.상품명 : data-num 값이 짝수/홀수에 따라 아이콘변경
+      gname: 'DE-'+this.setName()+this.endLet
+      +(this.dataNum%2?"😘":"👍"),
+      // 3.상품가격
+      gprice: this.setPrice(),
+      // 4.세일가격 : 상품원래가격의 30%세일(원가격*0.7) 
+      // -> 외부의 전역변수temp에 원가격있음!
+      salePrice: (temp*0.7).toFixed(0),
+      // 숫자.toFixed(자릿수) -> 소수점 아래 자리
+    };
+  },
+  // 2-4. methods 속성 : 컴포넌트 내부 메서드 셋팅
+  methods: {
+    // 자식 메서드에서 부모메서드를 호출한다!
+    goPapa(txt){
+      // this.$emit(부모이벤트명,전달값)
+      // 부모가 만든이벤트명은 여기서 hull
+      this.$emit('hull',txt);
+      // 과정: 자식이벤트인 'click'이벤트가
+      // 부모 컴포넌트에 셋팅된 'hull'이벤트로
+      // 전달되어 거기연결된 함수가 실행된다!
+    },
+    goMama(pm){ // pm - 전달변수
+      // this.$emit(부모이벤트명,전달값)
+      // 부모가 만든이벤트명은 여기서 hull
+      this.$emit('got-kimchi',pm);
+      // 과정: 자식이벤트인 'click'이벤트가
+      // 부모 컴포넌트에 셋팅된 'hull'이벤트로
+      // 전달되어 거기연결된 함수가 실행된다!
+    },
+    // 이미지번호 만들기 함수
+    // inum을 1씩증가하여 리턴함
+    setNum() {
+      inum += 1;
+      // console.log("num:", inum);
+      return inum;
+    },
+    // 상품명 만들기 함수
+    setName() {
+      // 0~3 사이난수
+      let rdm = Math.floor(Math.random() * 4);
+      // 이름리턴
+      return goods[rdm];
+    },
+    // 가격만들기 함수 : 숫자만 만들어서 리턴
+    setPrice() {
+      let rdm = Math.ceil(Math.random() * 17) + 3;
+      let retVal = 20000 * rdm;
+      // 세일가격 계산을 위한 임시변수에 할당후 리턴
+      temp = retVal;
+      return retVal;
+    },
+    // 세일여부 리턴 메서드
+    retSale(){
+      return(
+        this.dataNum == 3 ||
+        this.dataNum == 5 ||
+        this.dataNum == 14 ||
+        this.dataNum == 22 ||
+        this.dataNum == 26 ||
+        this.dataNum == 38 ||
+        this.dataNum == 45 ||
+        this.dataNum == 50
+      );
+    },
+    // 세자리콤마 함수
+    addCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    },
+  },
+}); ////////// 전역컴포넌트2 /////////////
+
+
+// 리스트뷰 인스턴스 생성하기
+// makeVue(".grid");
+// [ 부모컴포넌트에서 메서드 설정으로 해야
+// 자식컴포넌트가 호출할 수 있는 메서드를 만들어짐! ]
+// ->>> 부모컴포넌트 !!!
+new Vue({
+  el:'.grid',
+  // 부모 뷰 인스턴스 메서드구역
+  methods:{
+    // 자식 이벤트 전달후 실행메서드!
+    goMsg(txt){
+      alert('자식이 부모에게 이벤트 전달 성공!!!'+txt);
+    },
+    // 자식 컴포넌트의 오버이벤트가 전달되어 
+    // 호출하는 함수
+    overMsg(pm){ // pm - 전달변수
+      alert('오 마이 갓김치!'+pm.이름+' 나이는 '+pm.나이);
+    },
+  },
+});
+
+
+/////////// 상품상세정보 컴포넌트 ////////////
+Vue.component('win-comp',{
+  template: hcode.detail,
+}); ////////// win-comp 컴포넌트 ///////////
+
+///// win-comp 부모 컴포넌트 뷰인스턴스 생성하기 /////
+new Vue({
+  // 대상선정
+  el: ".pbg",
+  // DOM이 모두 로딩후 실행구역(리액트의 useLayoutEffect와 유사함)
+  mounted(){
+    // 제이쿼리 코드를 사용가능!
+
+    // 원래가격변수 : 각 리스트 아이템 클릭순간 셋팅
+    let orgPrice;
+
+    // 현재리스트 순번 : 양쪽 이동버튼에서 사용
+    let cIdx;
+
+
+    // 1. 갤러리 리스트 클릭시 큰 이미지박스 보이기
+    $(".grid>div").on('click',function(){
+      // console.log('대상:',this);
+
+      // 현재리스트 순번 셋팅하기
+      cIdx = $(this).index();
+      console.log('클릭된리스트순번:',cIdx);
+
+      // 클릭된 이미지 경로 읽어오기
+      let isrc = $(this).find('img').attr('src');
+      console.log('이미지경로:',isrc);
+
+      // 상세정보창 큰 이미지 변경하기
+      $('.gimg img').attr('src',isrc);
+
+      // 상품명 읽어오기
+      let cName = $('aside h2',this).html();
+      // 상품명 넣기
+      $('#gtit').html(cName);
+
+      // 가격 읽어오기
+      let cprice = $('aside h3',this).html();
+      // 가격 넣기
+      $('#gprice').html(cprice);
+      
+      // 최초 가격 총합계 넣기
+      let tprice = 
+      $('aside h3 span:last-child',this).html();
+      $('#total').html(tprice);
+      
+    
+      // 원래가격 셋팅하기: '원',',' 모두 없앰!
+      orgPrice = Number(tprice.replace('원','').replace(/,/g,''));
+      console.log('원래가격:',orgPrice);
+      // 문자열.replace(바꿀놈, 바뀔놈)
+
+
+      // 상품상세정보창 보이기
+      $('#bgbx').show();
+
+      // 개수 초기화
+      sum.val('1');
+
+    }); ////////// click ///////////
+
+    // 개수대상
+    const sum = $("#sum");
+
+    // 증감버튼 셋팅 ////
+    $('.chg_num img').click(function(){
+        // 클릭된 증감 이미지 순번
+        let idx = $(this).index();
+        console.log('순번:',idx);
+        
+
+        // 현재 개수
+        let num = Number(sum.val());
+
+        // 반영될 변경수
+        let setNum;
+
+        // 증감분기
+        if(idx===0){ // 증가
+          setNum = ++num;          
+          if(setNum>50){ setNum=50;num=50;}
+        }
+        else{
+          setNum = --num;
+          if(setNum<1){ setNum=1;num=1;}
+        } /// else ///
+
+        // 최종반영하기        
+        sum.val(setNum);
+        $('#total').html(
+          addCommas(orgPrice*setNum)+"원");
+    })
+
+    // 닫기버튼 셋팅
+    $('.cbtn').click((e)=>{
+      e.preventDefault();
+      $('#bgbx').hide()});
+
+      // 세자리콤마 함수
+    const addCommas = (x) => {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    // 이전/다음 버튼 셋팅하기
+    // 대상: .abtn
+    $('.abtn').click(function(e){
+      e.preventDefault();
+
+      // 오른쪽 버튼이면 true
+      let isR = $(this).is('.rb');
+      
+      // 방향분기 ////
+      if(isR){ // 오른쪽
+        // 다음순번
+        ++cIdx;
+        if(cIdx>49) cIdx=0;
+      }
+      else{ // 왼쪽
+        --cIdx;
+        if(cIdx<0) cIdx=49;
+      }
+
+      // 정보 타겟요소(리스트 순번으로 가져옴)
+      const target = $('.grid>div').eq(cIdx);
+      console.log('cIdx:',cIdx,'/타겟:',target);
+
+      // 처음 리스트 클릭하여 열때 셋팅한 것들을
+      // 모두 다시 셋팅한다! 단, 주인공이 target!!!
+
+      // 타겟 이미지 경로 읽어오기
+      let isrc = target.find('img').attr('src');
+      console.log('이미지경로:',isrc);
+
+      // 상세정보창 큰 이미지 변경하기
+      $('.gimg img').attr('src',isrc);
+
+      // 상품명 읽어오기
+      let cName = $('aside h2',target).html();
+      // 상품명 넣기
+      $('#gtit').html(cName);
+
+      // 가격 읽어오기
+      let cprice = $('aside h3',target).html();
+      // 가격 넣기
+      $('#gprice').html(cprice);
+      
+      // 최초 가격 총합계 넣기
+      let tprice = 
+      $('aside h3 span:last-child',target).html();
+      $('#total').html(tprice);
+      
+    
+      // 원래가격 셋팅하기: '원',',' 모두 없앰!
+      orgPrice = Number(tprice.replace('원','').replace(/,/g,''));
+      console.log('원래가격:',orgPrice);
+      // 문자열.replace(바꿀놈, 바뀔놈)
+
+      // 개수 초기화
+      sum.val('1');
+
+    }); /////////// click //////////////
+
+
+
+  }, ///// mounted ///////////
+}); //////// win-comp 인스턴스 생성 ///////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+// 쇼핑몰 갤러리 템플릿 데이터 JS - hcode.js
+
+const hcode = {
+  // 1. 타이틀
+  tit: `
+        <strong>
+            <span>👩‍🦰다이아나 쇼핑몰💕</span><br>
+            👗Diana Shopping Mall🥻
+        </strong>
+    `,
+
+  // 2. 리스트
+  list: `
+  <div>
+        <img 
+          v-bind:src="gsrc" 
+          alt="의류아이템"> 
+          <aside>
+          <h2 
+            v-text="gname"            
+            ></h2> 
+            <h3>
+              <span 
+                v-html="
+                addCommas(gprice)+'원'" 
+                v-bind:class="{del:retSale()}"
+              ></span>
+              <span 
+                v-if="retSale()"
+                v-html="
+                addCommas(salePrice)+'원'"
+                class="sale"
+              ></span>
+            </h3>
+        </aside>
+    </div>
+`,
+  // 3. 상품상세정보
+  detail: `
+  <!-- 상품상세정보 배경박스 -->
+    <div id="bgbx">
+        <!-- 오른쪽버튼 -->
+        <a href="#" class="abtn rb">
+            <span class="ir">오른쪽버튼</span>
+        </a>
+        <!-- 왼쪽버튼 -->
+        <a href="#" class="abtn lb">
+            <span class="ir">왼쪽버튼</span>
+        </a>
+        <!-- 닫기버튼 -->
+        <a href="#" class="cbtn">
+            <span class="ir">닫기버튼</span>
+        </a>
+        
+        <!-- 큰이미지 박스 -->
+        <div id="imbx">
+            <div class="inx">
+                <!-- 큰 이미지 -->
+                <section class="gimg">
+                    <img src="images/50.jpg" alt="큰 이미지">
+                </section>
+                <!-- 이미지 설명 -->
+                <section class="gdesc scbar">
+                    
+                    <!--상품 정보 영역-->
+                    <h1>HOME &gt; WOMEN &gt; DRESS</h1>
+                    <div>
+                        <ol>
+                            <li>
+                                <img src="images/dx_ico_new-28143800.gif" alt="new버튼">
+                            </li>
+                            <li id="gtit">상품명</li>
+                            <li>
+                                <img src="images/icon_type02_social01.gif" alt="페이스북"><img
+                                    src="images/icon_type02_social02.gif" alt="트위터"><img src="images/icon_mail02.gif"
+                                    alt="이메일"><img src="images/btn_source_copy.gif" alt="URL복사">
+                            </li>
+                            <li>
+                                <span>판매가</span>
+                                <span id="gprice">99,000</span>
+                            </li>
+                            <li>
+                                <span>적립금</span>
+                                <span><img src="images/icon_my_m02.gif" alt="적립금">4,950(5%적립)</span>
+                            </li>
+                            <li>
+                                <span>무이자할부</span>
+                                <span>부분 무이자 할부 혜택 <img src="images/view_btn_nointerest_card.gif" alt="무이자카드보기"></span>
+                            </li>
+                            <li>
+                                <span>상품코드</span>
+                                <span id="gcode">23fdfsdfsfsd</span>
+                            </li>
+                            <li>
+                                <span>사이즈</span>
+                                <span>95 100 105 110</span>
+                            </li>
+                            <li>
+                                <span>구매수량</span>
+                                <span>
+                                    <input type="text" id="sum" value="1">
+                                    <!--
+                                    readonly 속성은 직접입력을 막음
+                                    disable 속성은 입력창의 비활성화
+                                    -->
+                                    <b class="chg_num">
+                                        <img src="images/cnt_up.png" alt="증가">
+                                        <img src="images/cnt_down.png" alt="감소">
+                                    </b>
+                                </span>
+                            </li>
+                            <li>
+                                <span>컬러</span>
+                                <span></span>
+                            </li>
+                            <li>
+                                <span>권장계절</span>
+                                <span>여름</span>
+                            </li>
+                            <li class="tot">
+                                <span>총합계</span>
+                                <span id="total">13,000</span>
+                            </li>
+                        </ol>
+
+                    </div>
+                    <div>
+                        <!--버튼영역-->
+                        <button class="btn btn1">BUY NOW</button>
+                        <button class="btn">SHOPPING CART</button>
+                        <button class="btn">WISH LIST</button>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+`,
+    // 4. 아이프레임 동영상
+    ifr:`
+    
+    `,
+}; ////////////// hcode객체 //////////////
+
+// 객체 내보내기
+export default hcode;
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04. 뷰엑스 스토아 - 저장공간 활용하기</title>
+    <link rel="stylesheet" href="./css/vuex_store.css" />
+
+    <!-- 뷰JS 스탠드얼론 버전 가져오기! -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <!-- 뷰JS vuex CDN : 뷰JS보다 한단계위 버전 불러와야함! -->
+    <script src="https://unpkg.com/vuex@3.0.0"></script>
+
+    <!-- 뷰JS 라우터 CDN -->
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+
+    <!-- 제이쿼리 라이브러리 CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <!-- 제이쿼리 UI CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+
+    <!-- 메인 JS 불러오기 -->
+    <script src="./js/vuex_store.js" type="module"></script>
+  </head>
+  <body>
+    <!-- 뷰 인스턴스 대상 요소 -->
+    <div id="app">
+      <!-- 1. 상단영역 컴포넌트 -->
+      <top-area></top-area>
+      <!-- 2. 메인영역 컴포넌트 -->
+      <main-area></main-area>
+      <!-- 3. 하단영역 컴포넌트 -->
+      <info-area></info-area>
+
+      <!-- 4. 하단 라우터 파트 -->
+      <p class="asso">
+        <!-- 
+          [ 라우터 링크 셋팅 ]
+          router-link 속성 to 값으로 구분할 URL지정함!
+          '/' 슬래쉬는 현재페이지(Root)를 의미함!
+
+          이렇게 생성된 실제요소는 기본적으로 a요소로 나옴
+          만약 a요소가 아닌 다른 요소를 쓰고 싶으면
+          tag속성으로 변경함!
+          <router-link to="/trip" tag="button">...
+         -->
+         <router-link to="/trip" tag="button">
+          세계여행사</router-link>
+         <router-link to="/foods">
+          세계먹거리</router-link>
+         <!-- 
+          [라우터에서 연결한 컴포넌트(템플릿) 보일곳]
+          router-view를 쓴 자리에 컴포넌트 소스코드가 뿌려짐!
+          -->
+          <router-view></router-view>
+      </p>
+    </div>
+  </body>
+</html>
+
+
+///////////////////////////////////////////////////////////////////////////////
+// 뷰엑스 스토아 구현 JS 
+
+// 스토아 JS 불러오기 ////
+import store from "./store.js";
+// default로 내보내기 후 기본이름은 store임!
+
+// 라우터 템플릿 만들기
+let Trip = {
+    template: 
+    `<div class="trip router">World Trip</div>`
+}
+let Foods = {
+    template: 
+    `<div class="foods router">World Foods</div>`
+}
+// 라우터 연결 옵션 셋팅하기
+// let routes = [{},{}]
+let routes = [
+    // 첫번째 루트
+    {
+        // router-link 의 to 속성값과 동일
+        path: '/trip',
+        // 연결할 컴포넌트
+        component: Trip,
+    },
+    // 두번째 루트
+    {
+        // router-link 의 to 속성값과 동일
+        path: '/foods',
+        // 연결할 컴포넌트
+        component: Foods,
+    },
+];
+
+// 라우터 옵션 연결하여 인스턴스 생성하기!!!
+const router = new VueRouter({
+    routes // 위의 라우트 셋팅 배열변수
+});
+// [중요!!!] 뷰인스턴스에 라우터를 등록해줘야함!
+// -> new Vue({el:"",router,methods:{}})
+
+// [ 중요!!! ]
+// 뷰인스턴스에 스토아를 사용할 수 있게 등록해줘야함!
+// 등록방법: new Vue({el:"",store,methods:{}})
+// -> 스토아 변수를 그대로 써주면 된다!!!
+
+// 리스트 만들기함수
+const makeList  = x => {
+    console.log('메뉴배열:',x);
+    // x 메뉴 배열
+    return x.map(v=>`
+    <li>
+        <a href="#"
+        v-on:click="changeData('${v}')"
+        >${v=='처음'?'💒':v}</a>
+    </li>
+    `).join('');
+    // map으로 만든 배열값에 사이콤마제거는 join('')
+}; ///////// makeList함수 //////
+
+// [1] 컴포넌트 셋팅하기 //////////////
+// 1. 상단영역 컴포넌트 셋팅
+Vue.component('top-area',{
+    // (1) 템플릿 설정
+    template:`
+        <header>
+            <ul class="gnb">
+                ${makeList(
+                    Object.keys(
+                        store.state.cityData))}
+            </ul>
+
+        </header>
+    `,
+    // (2) 리턴데이터 설정
+    data(){
+        return{};
+    },
+    // (3) 메서드 설정
+    methods:{
+        // 스토아 변수 업데이트 메서드
+        changeData(pm){
+            console.log('업데이트:',pm);
+            // 여기서 바로 스토아 변수를 업데이트한다!
+
+            // 1. 이미지 변수 : imgSrc
+            // 이 위치에서 접근하려면 store.state 로 접근!
+            store.state.imgSrc = 
+            store.state.cityData[pm].이미지;
+
+            // 2. 설명 변수 : desc
+            // 이 위치에서 접근하려면 store.state 로 접근!
+            store.state.desc = 
+            store.state.cityData[pm].설명;
+
+        }, ////// changeData 메서드 //////
+    }
+});
+
+// 2. 메인영역 컴포넌트 셋팅
+Vue.component("main-area",{
+    /* 
+        컴포넌트 영역은 뷰JS에서 해석되는 부분이므로
+        뷰엑스 스토어의 변수 store를 
+        전역 표시 $store
+        라고 표기해야 유효하다!(에러없음)
+        더 정확한 문법은 this.$store 라고 써야하지만
+        이 파일이 일반 JS에서 실행되므로 변수할당된
+        뷰JS 인스턴스 영역안에서 실행되므로
+        뷰인스턴스 자신인 this를 쓰지 않아도
+        자동적으로 this로 처리된다!
+    */
+    template:`
+        <main>
+            <img 
+            v-bind:src="$store.state.imgSrc" 
+            alt="지역이미지">
+            <p
+            v-text="$store.state.desc"
+            ></p>
+        </main>
+    `,
+    data(){
+        return{
+        }
+    },
+    methods:{
+
+    }
+});
+// 3. 하단영역 컴포넌트 셋팅
+Vue.component("info-area",{
+    template:`
+        <footer>
+            <address>
+                서울시 강남구 역삼동 119 뷰엑스B
+            </address>
+        </footer>
+    `,
+    data(){
+        return{}
+    },
+    methods:{
+
+    }
+});
+
+
+
+// [2] 뷰 인스턴스 생성하기 /////////////
+// 대상요소: #app
+new Vue({
+    // 대상선정
+    el:"#app",
+    store, // 중요!!! 뷰엑스 스토아 등록!
+    router, // 중요!!! 라우터 등록!
+    data:{
+        // 변수:값
+    },
+    methods:{
+        // 메서드(){}
+    },
+    // 데이터 셋팅구역 : 인스턴스 생성직후(created)
+    created(){
+        /* 
+        스토어에 있는 initSet 메서드는 어떻게 호출하지?
+        스토어 호출 메서드가 따로 있음!
+        store.commit("메서드명",파라미터값)
+        1. 메서드명은 반드시 문자형으로 입력한다!
+        2. 파라미터는 단일값 또는 객체형식을 보낼 수 있음
+        인스턴스 내부구역 코딩시 store에 $없음!
+        */
+       store.commit('initSet',{
+        url:"https://img.freepik.com/premium-vector/city-illustration_23-2147514701.jpg",
+        txt:"도시소개에 오신것을 환영합니다!",
+       });
+
+       // ations 메서드 호출하기! : dispatch(메서드명,전달값)
+       store.dispatch('myAct','나야나!!!');
+
+    }, //// created ////
+    // DOM 생성후 실행구역(mounted) : 제이쿼리(JS) 코드
+    mounted(){
+        // 1. 메뉴클릭시 클릭된 li의 a요소에 .on주기
+        // 나머지는 .on지우고 home은 적용제외!
+        $('.gnb a').click(function(){
+            // 넣기는 첫번째껏 제외
+            if($(this).parent().index()!==0){
+                $(this).addClass('on');
+            } /// if ////
+            // 지우기는 무조건
+            $(this).parent().siblings()
+            .find('a').removeClass('on');
+
+            // 박스 나타나기 함수호출
+            showBox();
+        });
+
+        function showBox(){
+            // 이미지와 설명박스 순서대로 나타나기
+            // 대상: 
+            $('main img').css({opacity:0}).stop()
+            .delay(200).fadeTo(500,1);
+            // stop() - 기존애니메이션 지움
+            // fadeTo(시간,투명도) - opacity애니메이션
+
+            $('main p').css({opacity:0}).stop()
+            .delay(400).fadeTo(500,1);
+
+
+        } /////// showBox ////////
+
+
+    }, //// mounted /////
+
+
+});
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+// 뷰엑스 스토아 - 전역뷰데이터 저장소!!!
+
+////// 뷰엑스 스토아를 활용한 변수 셋팅하기 ///////
+// [뷰엑스 스토어 인스턴스를 생성한다!!!] //////
+
+// export const store = new Vuex.Store({
+export default new Vuex.Store({
+    // 1. 데이터 셋팅구역
+    state:{
+        // 도시 데이터 셋업
+        cityData:{
+            "처음":{
+                이미지:`https://img.freepik.com/premium-vector/city-illustration_23-2147514701.jpg`,
+                설명:`도시소개에 오신것을 환영합니다!`,
+            },
+            "서울":{
+                이미지:`https://www.shutterstock.com/image-photo/songpagu-seoul-south-korea-september-260nw-2094838786.jpg`,
+                설명:`대한민국의 수도인 서울을 지방자치단체인 특별시로 부르는 명칭이다. 한반도 중앙에 있으며, 한강을 사이에 두고 남북으로 펼쳐져 있다. 북쪽 끝은 도봉구 도봉동, 동쪽 끝은 강동구 상일동, 남쪽 끝은 서초구 원지동, 서쪽 끝은 강서구 오곡동이다. 시청은 중구 을지로1가(태평로1가 31)에 있다.`
+            },
+            "광주":{
+                이미지:`https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcQ_FFIgFdtlfVNtvwxKRfgdVythniTW6qi5D2Rh6e_7veOadgN41C7jN9MYTRBlQQf3IKTSTxy2RuJau50uXAun7xKU-2ZIdgW1C6lIkA`,
+                설명:`광주시는 대한민국 경기도 남동부에 있는 시이다. 광주산맥에 둘러싸인 분지 지형이며, 경안천이 흐른다. 동쪽으로 양평군, 여주시, 서쪽으로 성남시, 남쪽으로 용인시, 이천시, 북쪽으로 하남시, 남양주시와 접한다`
+            },
+            "부산":{
+                이미지:`https://imagescdn.gettyimagesbank.com/500/201901/jv11336724.jpg`,
+                설명:`대한민국 제2의 도시이자, 제1의 무역항이다. 동쪽과 남쪽은 바다에 면하고, 서쪽은 김해시 장유동과 창원시 진해구, 북쪽은 양산시 물금읍과 김해시 대동면, 동쪽은 울산광역시 서생면·온양읍에 접한다. 대한민국 남동단의 관문으로 서울특별시에서 남동쪽으로 약 450km, 대한해협을 끼고 일본 시모노세키[下關]와 약 250km 떨어져 있다. 1군 15구로 이루어져 있으며, 면적은 765.94㎢이다. 시청 소재지는 부산광역시 연제구 연산5동 1000번지이다.`
+            },
+            "제주":{
+                이미지:`https://www.jejusori.net/news/photo/202211/409902_416608_4312.jpg`,
+                설명:`한국·중국·일본 등 극동 지역의 중앙부에 있어 지정학적으로도 중요하며, 도 전체가 바다로 둘러싸였다. 수리적(數理的)으로는 동경 126°08'∼126°58', 북위 33°06'∼34°00'에 위치한다. 북단은 북위 34°00'의 제주시 추자면 대서리이며, 남단은 북위 33°06'의 서귀포시 대정읍 마라도다. 한국 최남단에 있는 도로서, 제주도를 포함해 9개의 유인도와 55개의 무인도로 이루어졌다. 이 가운데 유인도는 우도·상추자도·하추자도·비양도·횡간도·추포도·가파도·마라도이다. 남북 간의 거리가 약 31㎞, 동서간의 거리가 약 73㎞로 동서로 가로놓인 모양이다. 러시아·중국 등의 대륙과 일본·동남아 등지를 연결하는 요충지이며, 천혜의 자연경관이 수려한 세계적인 휴양관광지다.`
+            },
+        },// cityData
+        // 이미지정보 셋업변수 : 화면에 반영될 이미지
+        imgSrc : '',
+        // 도시설명정보 셋업변수 : 화면에 반영될 설명
+        desc: '',
+
+    },
+    // 2. 데이터 변경 메서드 구역
+    // -> 컴포넌트에서 호출시 commit() 사용!
+    mutations:{
+        // 초기 데이터 셋업 메서드
+        initSet(헐,파람){
+            // 전달변수는 두번째 변수 '파람'임
+            console.log('데이터변경!초기화!',헐,파람);
+            // 첫번째 전달변수에 state객체가 담김
+
+            // 이미지변수인 imgSrc 값 셋팅하기
+            헐.imgSrc = 파람.url;
+            // 설명변수인 desc 값 셋팅하기
+            헐.desc = 파람.txt;
+            
+
+        }, ////// initSet 메서드 /////
+
+    },
+    // 3. 비동기처리 메서드 구역
+    // -> 컴포넌트에서 호출시 dispatch() 사용!
+    actions:{
+        myAct(헝,벙){
+            console.log('나의액숀~!',헝,벙);
+        }, /////// myAct 메서드 ///////
+
+    },
+
+}); /////////// Vuex.Store ///////////////
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>05.Vue Router</title>
+    <link rel="stylesheet" href="./css/vue_router.css" />
+    <!-- 뷰JS 스탠드얼론 버전 가져오기! -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <!-- 뷰JS vuex CDN -->
+    <script src="https://unpkg.com/vuex@3.0.0"></script>
+
+    <!-- 뷰JS 라우터 CDN -->
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+
+    <!-- 제이쿼리 라이브러리 CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <!-- 제이쿼리 UI CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script src="./js/vue_router.js" type="module"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 1.상단영역 -->
+      <header class="top">
+        <div class="gnb">
+          <ul>
+            <!-- linkData 속성에 셋팅된 객체값으로 메뉴를 만들어준다 
+            첫번째 for문은 객체니까 (값,속성명) 순서임
+            -->
+            <li v-for="(val,key) in this.linkData">
+                <!-- 상위메뉴 -->
+                <router-link v-bind:to="val.link">
+                    {{key}}
+                </router-link>
+                <!-- 서브메뉴 : menu배열개수가 0아니면 출력 -->
+                <ol class="smenu"
+                v-if="val.menu.length!=0">
+                <!-- v는 객체값, k는 객체속성 -->
+                    <li v-for="(v,k) in val.menu">
+                        <router-link
+                        v-bind:to="v">
+                            {{k}}
+                        </router-link>
+                    </li>
+                </ol>
+            </li>
+
+
+
+            <!-- <li>
+              <router-link to="/trip">세계여행사</router-link>
+            </li>
+            <li>
+              <router-link to="/foods">
+                세계먹거리</router-link>
+                <ol class="smenu">
+                    <li>
+                        <router-link
+                        v-bind:to='{ 
+                            name: "umsik", 
+                            params: { item: "피자", cls: "pizza" } }'>
+                            피자
+                        </router-link>
+                    </li>
+                </ol>
+            </li> -->
+          </ul>
+        </div>
+      </header>
+      <!-- 2.메인영역 -->
+      <main class="cont">
+        <!-- 라우터 컨텐츠영역 -->
+        <router-view></router-view>
+      </main>
+      <!-- 3.하단영역 -->
+      <footer class="info">
+        주소 : 서울 강남구 테헤란로5길 24, 장연빌딩/ 3~7층
+      </footer>
+    </div>
+  </body>
+</html>
+
+
+///////////////////////////////////////////////////////////////////////////////////
+// 뷰라우터를 위한 뷰인스턴스 생성 JS - vue_router.js
+
+// 라우터 셋팅 가져오기
+import router from "./router.js";
+// import 시 중괄호{} 없이 변수쓰면 
+// 보내는 곳에서 default로 보내는 것임!
+// 중괄호를 사용하여 변수를 쓰면 여러 변수를 보낼 수 있는
+// 일반적인 export만 사용하는 경우임
+
+// 뷰 라우터에서 사용할 링크 셋팅 데이터
+const linkData = {
+    "세계여행사": { path: "/trip" },
+    "세계먹거리": { path: "/foods" },
+    "피자": { 
+        name: "umsik", 
+        params: { item: "피자", cls: "pizza" } },
+    "파스타": { 
+        name: "umsik", 
+        params: { item: "파스타", cls: "pasta" } },
+    "똠양꿍": { 
+        name: "umsik", 
+        params: { item: "똠양꿍", cls: "ddom" } },
+};
+// 실제로 사용할 것은 linkData2임! (위엣것과 비교!)
+// 하위메뉴 구조화 데이터 객체
+const linkData2 = {
+    "세계여행사": {
+        link:{ path: "/trip" },
+        menu:[]
+    },
+    "세계먹거리": {
+        link:{ path: "/foods" },
+        menu:{
+            "피자": { 
+                name: "umsik", 
+                params: { item: "피자", cls: "pizza" } },
+            "파스타": { 
+                name: "umsik", 
+                params: { item: "파스타", cls: "pasta" } },
+            "똠양꿍": { 
+                name: "umsik", 
+                params: { item: "똠양꿍", cls: "ddom" } },
+
+        }
+    },
+};
+
+// 뷰 인스턴스 객체 생성하기 ///////
+new Vue({
+    // 대상요소
+    el:"#app",
+    router, // 라우터 인스턴스에 등록필수!
+    // 데이터 영역
+    data:{
+        // 외부데이터를 뷰인스턴스 내부에 데이터화한다!
+        linkData : linkData2, // 하위 메뉴구조 데이터로 변경!
+
+    }, // data ///
+    // DOM구성후 첫페이지 라우터 설정하기
+    mounted(){
+        this.$router.push('/trip');
+        // this 는 현재 뷰인스턴스
+        // $router 는 라우터 전체객체
+        // push(경로) -> 강제로 경로이동하기
+    },
+
+
+}); ////////// 뷰 인스턴스 //////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+// 뷰라우터 인스턴스 설정파일 - router.js
+
+// 라우터 템플릿 만들기 : 내용 컴포넌트
+let Trip = {
+  template: `<div class="trip router">World Trip</div>`,
+};
+let Foods = {
+  template: `
+    <div v-bind:class="
+        'foods router '+this.$route.params.cls
+    ">
+        World Foods {{ this.$route.params.item }}
+    </div>`,
+};
+/* 
+    [파라미터로 전달된 라우터 값을 읽는 코드법]
+    this.$route.params.cls
+    1. this 는 현재 라우터를 사용하는 뷰인스턴스
+    2. $route 는 현재 연결된 라우트 정보객체
+    3. params 는 라우트 하위 파라미터 전달속성
+    4. cls / item 은 전달된 파라미터이름 (여기서 값이 나옴)
+*/
+
+// 뷰 라우터 인스턴스 생성하기 /////
+// const router = new VueRouter({
+//-> 변수에 담으면 아래쪽에별도로 export 한다!
+
+// export const router = new VueRouter({
+// -> default 없는 다중파일 export는 받는 곳에서
+// 중괄호{} 사용해야함!
+
+// 이름없이 라우터를 내보내면 받는 곳에서 router로 보통 받음!
+export default new VueRouter({
+  routes: [
+    // 첫번째 루트
+    {
+      path: "/trip",
+      component: Trip,
+    },
+    // 두번째 루트
+    {
+      path: "/foods",
+      component: Foods,
+    },
+    // 두번째 루트의 파라미터 버전 루트추가!
+    {
+        // 파라미터를 받는 같은 path의 루트는
+        // 호출과 구분을 위해 반드시 name속성을 설정해야함!
+        name: 'umsik',
+        path:'/foods:item',
+        // 경로 뒤에 콜론(:)을 쓰고 뒤에 파라미터 변수를 씀
+        component: Foods,
+    }
+  ],
+});
+
+// 변수에 담은 경우 하나 내보내기 아래쪽에 별도로함!
+// export default router;
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+CREATE TABLE `friends`(
+   fnum int NOT null AUTO_INCREMENT,
+    fname varchar(20),
+    ftel char(11),
+    faddr varchar(200),
+    fmsg text(1000),
+    fdate timestamp,
+    PRIMARY KEY (fnum)
+);
+
+-- 첫번째 레코드 입력
+INSERT INTO `friends` (`fname`,`ftel`,`faddr`,`fmsg`) 
+VALUES ("이도","01011112222","서울시 종로구","세종대왕 만만세~!!!");
+
+-- 두번째 레코드 입력
+INSERT INTO `friends` (`fname`,`ftel`,`faddr`,`fmsg`) 
+VALUES ("김종서","01011114444","서울시 은평구","임금께 충성~!!!");
+
+-- 세번째 레코드 입력
+INSERT INTO `friends` (`fname`,`ftel`,`faddr`,`fmsg`) 
+VALUES ("공유","0108887777","서울시 노원구","도깨비 만세~!!!");
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+-- 첫번째 레코드 입력
+INSERT INTO `friends` (`fname`,`ftel`,`faddr`,`fmsg`) 
+VALUES ("이도","01011112222","서울시 종로구","세종대왕 만만세~!!!");
+
+-- 두번째 레코드 입력
+INSERT INTO `friends` (`fname`,`ftel`,`faddr`,`fmsg`) 
+VALUES ("김종서","01011114444","서울시 은평구","임금께 충성~!!!");
+
+-- 세번째 레코드 입력
+INSERT INTO `friends` (`fname`,`ftel`,`faddr`,`fmsg`) 
+VALUES ("공유","0108887777","서울시 노원구","도깨비 만세~!!!");
+
+////////////////////////////////////////////////////////////////////////////////////////
+// 리턴코드값은 리듀서 변수에 할당!
+        return (
+          // 숙제: *문자열이 있으면 split으로 잘라서
+          // 배열로 만들고 배열값중 현재 입력된 txt가
+          // 배열중에 없으면 새로 등록하고 있으면
+          // 등록하지 않는다를 코드로 작성할것!
+          // 힌트1: 등록않는다는 gval만 넣으면 됨
+          // 힌트2: 배열값 중 단순비교는 includes()사용!
+          gval.indexOf("*")!==-1
+          ? gval.split("*").includes(txt)
+          ? gval
+          : gval + (gval != "" ? "*" : "") + txt
+          : gval + (gval != "" ? "*" : "") + txt
+        );
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+        <button style={{ position: "relative" }}>
+          History
+          <ol
+            style={{
+              position: "absolute",
+              lineHeight: "1.7",
+              padding: "5px 15px",
+              border: "1px solid gray",
+              borderRadius: "10px",
+              backgroundColor: "#f8f8ffcc",
+              display: "none",
+            }}
+          >
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+
+<button style={{ position: "relative" }}
+          onClick={(e)=>{
+            // 클릭시 하위 ol 보이기
+            $(e.currentTarget).find("ol").show();
+          }}
+        >
+          History
+          <ol
+            style={{
+              position: "absolute",
+              lineHeight: "1.7",
+              padding: "5px 15px",
+              border: "1px solid gray",
+              borderRadius: "10px",
+              backgroundColor: "#f8f8ffcc",
+              display: "none",
+            }}
+            onMouseLeave={(e)=>{
+              // 아웃시 숨기기
+              $(e.currentTarget).hide();
+            }}
+          >
+
+
+
+
+
+
+
+
+
+
+

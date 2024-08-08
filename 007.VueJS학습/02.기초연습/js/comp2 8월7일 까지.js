@@ -38,11 +38,9 @@ Vue.component("list-comp", {
   template: `
       <div>
         <img 
-          v-bind:src="gsrc" 
-          v-on:click="goPapa('나야나!')"
-          v-on:mouseover=
-          "goMama({이름:'김고은',나이:'34살'})"
-          alt="의류아이템"
+        v-bind:src="gsrc" 
+        v-on:click="goPapa('나야나!')"
+        alt="의류아이템"
         >
         <aside>
           <h2 v-text="gname"></h2>
@@ -54,23 +52,23 @@ Vue.component("list-comp", {
     // 바로 호출할 수 없다! 따라서 자신의 메서드를
     // 만들고 그 곳에서 호출방식에 따라 부모 메서드를 호출함!
 
-  // [ 상위 컴포넌트 전달변수 설정속성 : props ]
-  props: ["list-num","my-seq","end-let"],
 
-  // 배열형은 설정한 변수명을 문자형으로 나열만 하면되고
+  // [상위 컴포넌트 전달변수 설정속성:props]
+  props:["list-num","my-seq","end-let"],
+  // 배열형은 설정한 변수명을 문자형으로 나열만 하면 되고
   // 만약 각 변수의 데이터형(type)을 특정하고 싶으면
-  // 객체형을 사용하여 아래와 같이 표현한다!
+  // 객체형을 사용하여 아래와 같이 표현한다
+  // -> 오류 방지 하기위해 사용함
   // props: {변수명:변수형}
-
   // props: {
-  //   "list-num":Number,
-  //   "my-seq":Number,
-  //   "end-let":String
-  // },
-
-  // 이 변수를 사용할때는 캐믈케이스 변수로 사용함!
+    //   "list-num": Number,
+    //   "my-seq": Number,
+    //   "end-let": String,
+    // }, 
+    
+  // 이 변수를 사용할때는 케멀케이스 변수로 사용함!
   // "list-num" -> this.listNum
-  // -> 내부용 변수이므로 this 키워드 반드시 사용!
+  //-> 내부용 변수이므로 반드시 this키워드 사용!!
 
   // 2-2. data 옵션 : 컴포넌트 내부 변수셋팅
   // 실행원리 : 컴포넌트가 빌드할때
@@ -115,9 +113,9 @@ Vue.component("list-comp", {
 
     // (5) 부모컴포넌트 메서드 호출을 위한 함수
     goPapa(txt){
-      console.log("내꺼니까 호출가능!",txt,this);
+      console.log("내꺼니까 호출가능!",txt);
 
-      // 부모 메서드 직접 호출불가!
+          // 부모 메서드 직접 호출불가!
       // goMsg(txt);
 
       this.$emit('hull',txt);
@@ -135,35 +133,31 @@ Vue.component("list-comp", {
       // 이 이벤트명으로 특정한 일을 해주기위함이다!
       // -> 여기서 특정한 일은 부모함수의 호출!!!
     },
-    // (6) 부모 메서드 호출 함수 하나더!
-    goMama(pm){
-      console.log('갓김치 호출함수!');
-      this.$emit('oh-my-gotkimchi',pm);
-    },
   },
 }); ///// component ////////////
 
 // 뷰인스턴스 생성하기 : 리스트 컴포넌트
 // makeVue(".grid");
 
-// lise-comp라는 자식 컴포넌트의 부모컴포넌트!
+//list-comp 자식 컴포넌트의 부모 컴포넌트!
 new Vue({
-  // 1. 대상
-  el: ".grid",
-  // 2. 메서드
-  methods: {
-    // 자식 이벤트 전달후 실행메서드!
+  //1.대상
+  el:".grid",
+  //2.메서드
+  methods:{
+    //자식 이벤트 전달후 실행메서드
     goMsg(txt){
-      alert("자식이 부모에게 이벤트 전달 성공!!!"+txt);
+      alert("자식이 부모에게 이벤트 전달 성공"+txt);
     },
-    // 자식 컴포넌트의 오버 이벤트가 전달되어
-    // 호출하는 메서드
-    overMsg(pm){
-      // pm 전달받을 객체값 {이름:"어쩌구",나이:"저쩌구"}
-      console.log('오 마이 갓김치!'+pm.이름+' 나이는 '+pm.나이);
+    //자식 컴포넌트의 오버 이벤트가 전달되어
+    //호출하는 메서드
+    overMsg(pm){//pm 전달받은 객체값{이름:"어쩌구",나이:"저쩌구"}
+      alert("오 마이 갓김치"+pm.이름+"나이는"+pm.나이);
     },
-
   },
+
+
+
 });
 
 
@@ -174,22 +168,25 @@ Vue.component("ifr-comp",{
     <iframe width="49%" style="aspect-ratio: 16/9;" 
     v-bind:src="ifrSrc" title="#고윤정 과 함께 차가운 겨울을 더욱 액티브하게!  l 디스커버리 23FW #goyounjung #크롭패딩" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> 
     `, /// template ////
-    // [ 프롭스다운 설정하기 ]
-    props: ["mv-code"],
-    // -> 사용시 this.mvCode
+    //[프롭스다운 설정하기]
+    props:["mvCode"],
+    // ->사용시 this.mvCode // this를 꼭 붙힌다!
     // 3-2. data 옵션
     data(){
         return{
             ifrSrc: this.getIframeSrc(this.mvCode),
+            // ifrSrc: this.getIframeSrc('ZaQNTfKbngI'),
         };
-    }, /// data ///
-    // 3-3. methods 속성
-    methods: {
-      // 동영상 정보 리턴함수
-      getIframeSrc(code) { // 동영상코드
-        return `https://www.youtube.com/embed/${code}?autoplay=1&mute=1&loop=1&playlist=${code}`;
-      },
-    },
+    },///data///
+    //3-3.methods속성
+    methods:{
+        // 동영상 정보 리턴함수
+        getIframeSrc(aaa){// 동영상코드
+
+            return `https://www.youtube.com/embed/${aaa}?autoplay=1&mute=1&loop=1&playlist=${aaa}`;
+
+        }
+    }
 });
 
 // 뷰인스턴스 생성하기 : 유튜브 동영상 컴포넌트
