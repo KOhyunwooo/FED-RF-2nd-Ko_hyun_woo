@@ -122,12 +122,17 @@ export default function Board() {
         }
         // 리턴코드값은 리듀서 변수에 할당!
         return (
-            //숙제: 별문자열이 있으면 스플릿으로 잘라서
-            // 배열로 만들고, 배열값중 현재 입력된 txt가
-            // 배열중에 없으면 새로 등록하고 있으면 등록하지 않는다를 코드로 작성할것
-            // 힌트1:등록않는다는 gval만 넣으면 됨
-            // 힌트2: 배열값 중 단순비교는 includes()사용!
-            gval + (gval != "" ? "*" : "") + txt
+          // 숙제: *문자열이 있으면 split으로 잘라서
+          // 배열로 만들고 배열값중 현재 입력된 txt가
+          // 배열중에 없으면 새로 등록하고 있으면
+          // 등록하지 않는다를 코드로 작성할것!
+          // 힌트1: 등록않는다는 gval만 넣으면 됨
+          // 힌트2: 배열값 중 단순비교는 includes()사용!
+          gval.indexOf("*") !== -1
+            ? gval.split("*").includes(txt)
+              ? gval
+              : gval + (gval != "" ? "*" : "") + txt
+            : gval + (gval != "" ? "*" : "") + txt
         );
       }
       // (2) 전체리스트 돌아기기 실행코드
@@ -149,10 +154,10 @@ export default function Board() {
         // 리턴코드값은 리듀서 변수에 할당!
         return gval;
 
-        // (3) 기존 키워드 재검색일 경우 실행코드
+      // (3) 기존 키워드 재검색일 경우 실행코드
       case "again": {
         // 검색기준값 읽어오기
-        let creteria = $(".cta").val();
+        let creteria = $("#cta").val();
         console.log("기준값:", creteria);
         // 검색어 읽어오기
         let txt = $(ele).text();
@@ -174,7 +179,20 @@ export default function Board() {
           alert("Please enter a keyword!");
         }
         // 리턴코드값은 리듀서 변수에 할당!
-        return gval + (gval != "" ? "*" : "") + txt;
+        // 리턴코드값은 리듀서 변수에 할당!
+        return (
+          // 숙제: *문자열이 있으면 split으로 잘라서
+          // 배열로 만들고 배열값중 현재 입력된 txt가
+          // 배열중에 없으면 새로 등록하고 있으면
+          // 등록하지 않는다를 코드로 작성할것!
+          // 힌트1: 등록않는다는 gval만 넣으면 됨
+          // 힌트2: 배열값 중 단순비교는 includes()사용!
+          gval.indexOf("*") !== -1
+            ? gval.split("*").includes(txt)
+              ? gval
+              : gval + (gval != "" ? "*" : "") + txt
+            : gval + (gval != "" ? "*" : "") + txt
+        );
       }
     }
   };
@@ -793,24 +811,43 @@ const ListMode = ({
           <option value="idx">Recent</option>
           <option value="tit">Title</option>
         </select>
-        <button style={{ position: "relative" }}>
+        <button style={{ position: "relative" }}
+          onClick={(e)=>{
+            // 클릭시 하위 ol 보이기
+            $(e.currentTarget).find("ol").show();
+          }}
+        >
           History
-          <ol 
-          style={
-            {position:"absolute",lineHeight:"1.7"}}>
-          {
-            memory.indexOf("*")!==-1 &&
-            memory.split("*").map(
-              v=><li>
+          <ol
+            style={{
+              position: "absolute",
+              lineHeight: "1.7",
+              padding: "5px 15px",
+              border: "1px solid gray",
+              borderRadius: "10px",
+              backgroundColor: "#f8f8ffcc",
+              display: "none",
+            }}
+            onMouseLeave={(e)=>{
+              // 아웃시 숨기기
+              $(e.currentTarget).hide();
+            }}
+          >
+            {memory.indexOf("*") !== -1 &&
+              memory.split("*").map((v) => (
+                <li>
                   <b
-                    onClick={(e)=>{
+                    onClick={(e) => {
                       // 리듀서 메서드 호출
-            dispach({ type: ["again", e.target] });
-            // 보낼값구성 : [구분문자열, 이벤트발생요소]
+                      dispach({ type: ["again", e.target] });
+                      // 보낼값구성 : [구분문자열, 이벤트발생요소]
                     }}
-                  >{v}</b>
-                </li>)
-          }</ol>
+                  >
+                    {v}
+                  </b>
+                </li>
+              ))}
+          </ol>
         </button>
       </div>
       <table className="dtbl" id="board">
