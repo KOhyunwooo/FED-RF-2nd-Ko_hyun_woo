@@ -3,6 +3,8 @@
   <!-- 원래 루트인 #app은 대체된다! -->
   <div id="app">
     <TopArea />
+    <MainArea />
+    <FooterArea />
   </div>
 </template>
 
